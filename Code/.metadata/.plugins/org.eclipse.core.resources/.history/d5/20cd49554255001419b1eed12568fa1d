@@ -1,0 +1,27 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Verschenk's Konstanz</title>
+<meta name="description"
+	content="Die Homepage dient dazu Dinge in Konstanz zu verschenken">
+<meta name="keywords" content="Konstanz Verschenken ">
+<meta name="author" content="Dennis">
+<link rel="stylesheet" type="text/css" href="Mystyle.css">
+</head>
+<body>
+
+
+	<div id="wrapper" class="shadow">
+		<div id="header">Header</div>
+
+		<div id="menue">Menue</div>
+
+		<div id="content">content</div>
+	</div>
+	
+	<div id="footer">Meine erste Homepage</div>
+
+
+
+</body>
+</html>

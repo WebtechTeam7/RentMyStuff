@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Rent my Stuff</title>
+<meta name="description"
+	content="Die Homepage dient dazu Dinge in Konstanz zu verschenken">
+<meta name="keywords" content="Konstanz Verschenken ">
+<meta name="author" content="Dennis">
+<!--<link rel="stylesheet" type="text/css" href="Mystyle.css"> -->
+</head>
+<body>
+
+	<header>
+	<h1>Rent my Stuff</h1>
+	</header>
+
+	<nav>
+
+	<ul>
+		<li>Verleihen</li>
+		<li>Ausleihen</li>
+		<li>Suchen</li>
+	</ul>
+
+
+	<section> <article>
+	<h2>Sinn und Zweck</h2>
+	<p>Benötigen Sie etwas einmalig oder ist es Ihnen zu teuer gleich
+		etwas zu kaufen?</p>
+	<p>Dann sind Sie hier genau richtig! Denn diese Homepage dient dazu
+		Dinge in Konstanz zu verleihen</p>
+	</article> </section> <footer>
+	<p>Team 7 - Rent my Stuff &copy by Ramona Barth, Jan Gaideczka und
+		Dennis Klein</p>
+	</footer>
+</body>
+</html>
