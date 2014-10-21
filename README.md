@@ -27,7 +27,26 @@ Funktionale Anforderungen
  In dem Portal kann man auf der Welcome-Page zwischen "Angebote" und "Gesuch aufgeben" unterscheiden. Wird "Angebote" gewählt erscheint auf der Seite alle Angebote. Diese können mit verschiedenen Filtern beschränkt werden. Wird "Gesuch aufgeben" gewählt, so öffnet sich eine Eingabemaske, die es dem Nutzer ermöglicht seinen Artikel bzw. seine Dienstleistung online zu stellen. 
  
  **4. Kategorisierung**
- Der Nutzer kann in der Eingabemaske zwischen verschiedenen Kategorien auswählen. Dies dient der einfacheren Verwaltung der Daten. Ebenso kann in der Suche nur eine Kategorie angegeben werden. Zu beginn werden wir uns auf 5 Kategorien beschränken, diese lauten wie folgt: Werkzeuge, Elektronik, Kraftfahrzeug, Gartengeräte sowie Dienstleistungen.
+ Der Nutzer kann in der Eingabemaske zwischen verschiedenen Kategorien auswählen. Dies dient der einfacheren Verwaltung der Daten. Ebenso kann in der Suche nur eine Kategorie angegeben werden. Zu beginn werden wir uns auf 6 Kategorien beschränken, diese lauten wie folgt: Werkzeuge, Elektronik, Kraftfahrzeug, Gartengeräte, Dienstleistungen sowie Sonstiges.
 
 nicht funktionale Anforderungen
 -------------------------------
+
+ **1. Aussehen**
+Das Aussehen soll so gestaltet sein, dass das Portal intuitiv zu bedienen ist. 
+
+ **2. Portierbarkeit**
+Das RentMyStuff-Portal soll in allen gängigen Browsern lauffähig sein. Bevorzugt wird Google Chrome und Mozilla Firefox behandelt. 
+
+ **3. Korrektheit**
+ Die Website muss Fehlerfrei sein.
+
+
+Mockup-Screens
+==============
+![Login Screen](https://github.com/WebtechTeam7/RentMyStuff/blob/master/mockups/1.1_Login_Logout.PNG)
+
+
+
+ 
+
