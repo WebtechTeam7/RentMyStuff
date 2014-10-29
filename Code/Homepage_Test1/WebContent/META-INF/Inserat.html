@@ -2,13 +2,12 @@
 <html>
 <head>
 <title>Inserat</title>
-<meta name="description"
-	content="Die Homepage dient dazu Dinge in Konstanz zu verschenken">
 <meta name="keywords" content="Konstanz Verschenken ">
 <meta name="author" content="Jan Gaideczka">
 <!--<link rel="stylesheet" type="text/css" href="Mystyle.css"> -->
 </head>
 <body>
+
 	<a href="#x" class="overlay" id="angebot"></a>
 	<div class="popup">
 		<h2>Inserat erstellen</h2>
@@ -21,7 +20,6 @@
 		</div>
 		<div>
 			<select name="kategorie">
-
 				<option></option>
 				<!-- wenn option Leer, dann darf "speichern" button nicht enabled sein -->
 				<option value=werkzeug>Werkzeuge</option>
@@ -35,7 +33,37 @@
 		<div>
 			<textarea rows="4" cols="50" placeholder="Beschreibung einfügen"></textarea>
 		</div>
-		<div></div>
+		<div>
+
+			<style>
+#progress_bar {
+	margin: 10px 0;
+	padding: 3px;
+	border: 1px solid #000;
+	font-size: 14px;
+	clear: both;
+	opacity: 0;
+	-moz-transition: opacity 1s linear;
+	-o-transition: opacity 1s linear;
+	-webkit-transition: opacity 1s linear;
+}
+
+#progress_bar.loading {
+	opacity: 1.0;
+}
+
+#progress_bar .percent {
+	background-color: #99ccff;
+	height: auto;
+	width: 0;
+}
+</style>
+			<input type="file" id="files" name="file" />
+			<button onclick="abortRead();">Cancel read</button>
+			<div id="progress_bar">
+				<div class="percent">0%</div>
+			</div>
+		</div>
 		<div></div>
 		<input type="button" value="jetzt registrieren" /> <a class="close"
 			href="#close"></a>
