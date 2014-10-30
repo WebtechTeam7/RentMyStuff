@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Inserat</title>
+<meta name="keywords" content="Konstanz Verschenken ">
+<meta name="author" content="Jan Gaideczka">
+<!--<link rel="stylesheet" type="text/css" href="Mystyle.css"> -->
+<script type="text/javascript" src ="RentMyStuff.js"></script>
+<script type="text/javascript" src ="C:/workspace/RentMyStuff/Code/Homepage_Test1/lib/jquery-2.1.1.js"></script>
+</head>
+<body>
+
+	<a href="#x" class="overlay" id="angebot"></a>
+	<div class="popup">
+		<h2>Inserat erstellen</h2>
+		<div>
+			<form>
+				<input type="radio" name="inserat" value="angebot">Angebot 
+				<input type="radio" name="inserat" value="gesuch">Gesuch
+			</form>
+		</div>
+		<div>
+			<select name="kategorie">
+				<option></option>
+				<!-- wenn option Leer, dann darf "speichern" button nicht enabled sein -->
+				<option value=werkzeug>Werkzeuge</option>
+				<option value=fahrzeuge>Fahrzeuge</option>
+				<option value=gartengeräte>Gartengeräte</option>
+				<option value=elektronik>Elektronik</option>
+				<option value=dienstleistung>Dienstleistungen</option>
+				<option value=sonstiges>sonstiges</option>
+			</select>
+		</div>
+		<div>
+			<textarea rows="4" cols="50" placeholder="Beschreibung einfügen"></textarea>
+		</div>
+		<div>
+			<input type="file" id="files" name="file" />
+			<button onclick="abortRead();">Cancel read</button>
+			<div id="progress_bar">
+				<div class="percent">0%</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
