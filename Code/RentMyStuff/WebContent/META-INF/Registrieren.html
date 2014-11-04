@@ -11,21 +11,27 @@
 <body>
 	<a href="#x" class="overlay" id="join_form"></a>
 	<div class="popup">
-		<h2>Neu registrieren</h2>
-		<div>
-			<input type="text" id="email" placeholder="Login (Email)" value="" />
-		</div>
-		<div>
-			<input type="password" id="password" placeholder="Password" value="" />
-		</div>
-		<div>
-			<input type="text" id="vorname" placeholder="Vorname" value="" />
-		</div>
-		<div>
-			<input type="text" id="nachname" placeholder="Nachname" value="" />
-		</div>
-		<input type="button" value="jetzt registrieren" /> <a class="close"
-			href="#close"></a>
+		<form>
+			<h2>Neu registrieren</h2>
+			<div>
+				<input type="email" id="email" placeholder="Login (Email)" required
+					autofocus value="" />
+			</div>
+			<div>
+				<input type="password" id="password" placeholder="Password" required
+					value="" />
+			</div>
+			<div>
+				<input type="text" id="vorname" placeholder="Vorname" required
+					value="" />
+			</div>
+			<div>
+				<input type="text" id="nachname" placeholder="Nachname" required
+					value="" />
+			</div>
+			<input type="submit" value="jetzt registrieren" /> <a class="close"
+				href="#close"></a>
+		</form>
 	</div>
 </body>
 </html>
