@@ -1,3 +1,37 @@
 header {background-color: grey;}
 body{background-color: #BDBDBD;}
 footer {background-color: grey;}
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+.navbar{
+
+	-webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+}
+
+
+
+.indexheader{
+	margin-top: 70px;
+	margin-left: 50px;
+	margin-right: 50px;
+}
+
+#footertext{
+	text-align: center;
+	color:white;
+	}
+	
+#footerbox{
+	background-color: #222222;
+	margin-top: 70px;
+}
+.panel{
+	-webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+}
