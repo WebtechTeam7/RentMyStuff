@@ -8,18 +8,27 @@ img {
 
 .navbar{
 
-	-webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+-webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
 -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
 box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
 }
 
 
 
-.indexheader{
+.Indexcontainer{
 	margin-top: 70px;
 	margin-left: 50px;
 	margin-right: 50px;
 }
+
+.secondbox{
+	text-align: center;
+}
+
+.img-preview{
+	max-width: 50%;
+	height: auto;
+	}
 
 #footertext{
 	text-align: center;
@@ -35,3 +44,4 @@ box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
 -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
 box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
 }
+
