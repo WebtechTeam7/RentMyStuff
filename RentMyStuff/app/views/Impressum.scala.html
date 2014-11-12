@@ -1,70 +1,103 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
 <title>Impressum</title>
+
+<meta charset="utf-8">
 <meta name="description"
 	content="Die Homepage dient dazu Dinge in Konstanz zu verschenken">
 <meta name="keywords" content="Konstanz Verschenken ">
 <meta name="author" content="Dennis">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!--<link rel="stylesheet" type="text/css" href="Mystyle.css"> -->
+<!-- Play Routes: -->
+
+<link rel="stylesheet" href=@routes.Assets.at("stylesheets/bootstrap.min.css")>
+<link rel="stylesheet" href=@routes.Assets.at("stylesheets/main.css")>
+<link rel="stylesheet" href=@routes.Assets.at("shop-item.css")>
+
+<!-- Bisherige Pfade -->
+
+<link rel="stylesheet"
+	href="C:\Users\Dennis\Studium\Semester 7\Web Technologien\Projekt\RentMyStuff\RentMyStuff\public\stylesheets\bootstrap.min.css">
+<link rel="stylesheet"
+	href="C:\Users\Dennis\Studium\Semester 7\Web Technologien\Projekt\RentMyStuff\RentMyStuff\public\stylesheets\main.css">
+
 </head>
+
 <body>
 
-	<header> <img
-		src="https://raw.githubusercontent.com/WebtechTeam7/RentMyStuff/master/Image/RentMyStuff_Logo.png"
-		alt="Logo"> </header>
+	<!-- Navigation -->
+
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+
+		<!-- Brand and toggle get grouped for better mobile display -->
+
+		<div class="navbar-header">
+			<img
+				src="https://raw.githubusercontent.com/WebtechTeam7/RentMyStuff/master/Image/RentMyStuff_Logo.png"
+				alt="Logo">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+
+			</button>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+
+		<div class="collapse navbar-collapse"
+			id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li><a href="#">Eigene Eintr√§ge</a></li>
+				<li><a href="#">Angebote</a></li>
+				<li><a href="#">Gesuche</a></li>
+				<li><a href="#">logout</a></li>
+			</ul>
+		</div>
+		<!-- /.navbar-collapse -->
+	</div>
+	<!-- /.container --> </nav>
+
+	<div class="Indexcontainer">
+		<div class="row">
+			<h1>Impressum</h1>
+			<h2>Angaben gem√§√ü ¬ß5 TMG:</h2>
+			<p>
+				Dennis Klein<br /> Tribethalden 14<br /> 88682
+				Salem-Mittelstenweiler <br/>
+				Telefon: +4917672436823 <br/>
+				E-Mail:
+			</p><hr>
+			
+			<p>
+				Jan Gaideczka<br /> Friedrichstra√üe 10C<br /> 78464 Konstanz <br/>
+				Telefon: +4915143249618 <br/>
+				E-Mail:
+			</p><hr>
+			
+			<p>
+				Ramona Barth<br /> Stra√üe<br /> PLZ Ort <br/>
+				Telefon:  <br/>
+				E-Mail:
+			</p>
+		</div>
+	</div>
+
+	<footer>
+
+	<div id="footerbox" class="col-md-12 panel panel-default">
+		<div id="footertext" class="panel-body">
+			<a id="footertext" href="@routes.Assets.at("app/views/Impressum.scala.html")">Impressum</a>
+			<a id="footertext" href="Kontakt.html">Kontakt</a>
+		</div>
+	</div>
 
 
-	<h1>Impressum</h1>
-	<h2>Angaben gem‰ﬂ ß 5 TMG:</h2>
-	<p>
-		Dennis Klein<br /> Tribethalden 14<br /> 88682
-		Salem-Mittelstenweiler
-	</p>
-
-	<table>
-		<tr>
-			<td>Telefon:</td>
-			<td>+4917672436823</td>
-		</tr>
-		<tr>
-			<td>E-Mail:</td>
-			<td>dennis.jens.klein@gmail.com</td>
-		</tr>
-	</table>
-	<p>
-		Jan Gaideczka<br /> Friedrichstraﬂe 10C<br /> 78464
-		Konstanz
-	</p>
-	<table>
-		<tr>
-			<td>Telefon:</td>
-			<td>+4915143249618</td>
-		</tr>
-		<tr>
-			<td>E-Mail:</td>
-			<td>jgaideczka@gmail.com</td>
-		</tr>
-	</table>
-		<p>
-		Ramona Barth<br /> Straﬂe<br /> PLZ
-		Ort
-	</p>
-	<table>
-		<tr>
-			<td>Telefon:</td>
-			<td>Nummer</td>
-		</tr>
-		<tr>
-			<td>E-Mail:</td>
-			<td>Adresse</td>
-		</tr>
-	</table>
-	
-	
-	</section>
-	<footer> <a href="Impressum.html">Impressum</a> <a
-		href="Kontakt.html">Kontakt</a> </footer>
+	</footer>
 </body>
 </html>
