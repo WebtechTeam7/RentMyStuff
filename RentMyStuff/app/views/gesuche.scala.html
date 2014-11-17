@@ -11,13 +11,13 @@
 	href="C:\Webtech\RentMyStuff\RentMyStuff\public\stylesheets\bootstrap.min.css">
 <link rel="stylesheet"
 	href="C:\Webtech\RentMyStuff\RentMyStuff\public\stylesheets\main.css">
-	
+<script type="text/javascript" src="C:\Webtech\RentMyStuff\RentMyStuff\public\javascripts\rentmystuff.js"></script>
 </head>
 <body>
 
-	<header>
-	<img src= "https://raw.githubusercontent.com/WebtechTeam7/RentMyStuff/master/Image/RentMyStuff_Logo.png" alt="Logo">
-	</header>
+	<header> <img
+		src="https://raw.githubusercontent.com/WebtechTeam7/RentMyStuff/master/Image/RentMyStuff_Logo.png"
+		alt="Logo"> </header>
 
 	<!-- Navigation -->
 
@@ -55,36 +55,53 @@
 	<!-- /.container --> </nav>
 
 	<p>
-	
-	<section> <article>
-	<h2>Gesuche  <button type="button" class="btn btn-warning">Gesuch erstellen</button></h2>  
-	
-	<p>
-	
-	<div class="btn-group-vertical" role="group" aria-label="...">
-  	<button type="button" class="btn btn-default">Werkzeuge</button>
-  	<button type="button" class="btn btn-default">Fahrzeuge</button>
- 	<button type="button" class="btn btn-default">Gartengeräte</button>
-   	<button type="button" class="btn btn-default">Dienstleistungen</button>
-    <button type="button" class="btn btn-default">Elektronik</button>
-    <button type="button" class="btn btn-default">Sonstiges</button>
-	</div>
-		
-	<p>
-		
-	</article> </section> 
-	
-	<footer>
 
-	<div id="footerbox" class="col-md-12 panel panel-default">
-		<div id="footertext" class="panel-body">
-			<a id="footertext" href="@routes.Assets.at("app/views/Impressum.scala.html")">Impressum</a>
-			<a id="footertext" href="Kontakt.html">Kontakt</a>
+		<section> <article>
+		<h2>
+			Gesuche
+			<button type="button" class="btn btn-warning"
+				onclick="popup('file:///C:/Webtech/RentMyStuff/RentMyStuff/app/views/inserat.scala.html')">Gesuch
+				erstellen</button>
+		</h2>
+
+		<p>
+		<div class="row">
+		<div class="col-xs-6 col-sm-3">
+			<div class="btn-group-vertical" role="group" aria-label="...">
+
+				<button type="button" class="btn btn-default">Werkzeuge</button>
+				<button type="button" class="btn btn-default">Fahrzeuge</button>
+				<button type="button" class="btn btn-default">Gartengeräte</button>
+				<button type="button" class="btn btn-default">Dienstleistungen</button>
+				<button type="button" class="btn btn-default">Elektronik</button>
+				<button type="button" class="btn btn-default">Sonstiges</button>
+
+			</div>
+
 		</div>
+		<div class="col-md-6">
+			<img
+				src="C:\Users\Dennis\Studium\Semester 7\Web Technologien\Projekt\RentMyStuff\RentMyStuff\public\images\Rasenmäher.jpg"
+				alt="Angebot1" class="img-rounded img-preview">
+			<hr>
+		</div>
+
+		<div class="col-xs-6 col-sm-3"></div>
 	</div>
 
+		<p>
+		</article> </section>
 
-	</footer>
-	
+		<footer>
+
+		<div id="footerbox" class="col-md-12 panel panel-default">
+			<div id="footertext" class="panel-body">
+				<a id="footertext" href="@routes.Assets.at("app/views/Impressum.scala.html")">Impressum</a>
+				<a id="footertext" href="Kontakt.html">Kontakt</a>
+			</div>
+		</div>
+
+
+		</footer>
 </body>
 </html>
