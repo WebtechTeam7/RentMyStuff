@@ -7,14 +7,13 @@
 <meta name="keywords" content="Konstanz Verschenken ">
 <meta name="author" content="Jan Gaideczka">
 
-<link rel="stylesheet" href="C:\Webtech\RentMyStuff\RentMyStuff\public\stylesheets\bootstrap.min.css">
+<link rel="stylesheet" href=@routes.Assets.at("stylesheets/bootstrap.min.css")>
+<link rel="stylesheet" href=@routes.Assets.at("stylesheets/main.css")>
 
 </head>
 <body>
-
-
 	<a href="#x" class="overlay" id="join_form"></a>
-	<div class="popup">
+	<div class="popup" id="popup">
 	
 		<form>
 			<h2>Neu registrieren</h2>
@@ -27,7 +26,7 @@
 					value="" />
 			</div>
 			
-			<button type="button" class="btn btn-warning" onclick="window.location.href='Index.html'">jetzt Registrieren</button>
+			<button type="button" class="btn btn-warning" onclick="window.location.href='@routes.Application.index()'">jetzt Registrieren</button>
 		</form>
 		
 	</div>

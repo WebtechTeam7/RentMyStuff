@@ -1,102 +1,35 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-
-<title>Kontakt</title>
-
-<meta charset="utf-8">
-<meta name="description" content="Die Homepage dient dazu Dinge in Konstanz zu verschenken">
-<meta name="keywords" content="Konstanz Verschenken ">
-<meta name="author" content="Dennis">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<!-- Play Routes: -->
-
-<link rel="stylesheet" href= @routes.Assets.at("stylesheets/bootstrap.min.css")>
-<link rel="stylesheet" href= @routes.Assets.at("stylesheets/main.css")> 
-<link rel="stylesheet" href= @routes.Assets.at("shop-item.css")>
- 
- <!-- Bisherige Pfade -->
- 
-<link rel="stylesheet" href="C:\Webtech\RentMyStuff\RentMyStuff\public\stylesheets\bootstrap.min.css">
-<link rel="stylesheet" href="C:\Webtech\RentMyStuff\RentMyStuff\public\stylesheets\main.css">
-	
-</head>
-
-<body>
-
-	<!-- Navigation -->
-		    
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-          
-            <!-- Brand and toggle get grouped for better mobile display -->
-            
-            <div class="navbar-header">               
-                <img src="https://raw.githubusercontent.com/WebtechTeam7/RentMyStuff/master/Image/RentMyStuff_Logo.png"	alt="Logo">
-				 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-              
-                </button>            
-            </div>
-           
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">Eigene Einträge</a>
-                    </li>
-                    <li>
-                        <a href="#">Angebote</a>
-                    </li>
-                    <li>
-                        <a href="#">Gesuche</a>
-                    </li>
-                     <li>
-                        <a href="#">logout</a>
-                    </li>
-                </ul> 
-                     </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+@main("Kontakt"){
 
 	<div class="contact">
-	<h1>Kontakt</h1>
+		<h1>Kontakt</h1>
 
-	<form id="kontaktformular" name="kontaktformular" action="">
-		<div class>
-			<label for="absender">Ihre E-Mail-Adresse:</label> 
-			<input type="text" id="absender" name="absender" />
+		<div class="row">
+			<div class="col-xs-6 col-md-4">
+				<form id="kontaktformular" role="form" name="kontaktformular"
+					action="">
+
+					<div class="form-group">
+						<input type="email" class="form-control" id="beispielFeldEmail1"
+							placeholder="Email-Adresse">
+					</div>
+
+					<div>
+						<textarea class="form-control" rows="5" id="comment"
+							placeholder="Ihre Nachricht"></textarea>
+					</div>
+					<div>
+						<button type="button" value="Abschicken" class="btn btn-warning">Abschicken</button>
+					</div>
+				</form>
+			</div>
+			<div class="col-xs-6 col-md-4"></div>
+			<div class="col-xs-6 col-md-4"></div>
 		</div>
-		<div>
-			<label for="nachricht">Ihre Nachricht:</label>
-			<textarea id="nachricht" name="nachricht" cols="40" rows="5"></textarea>
-		</div>
-		<div>
-			<input type="submit" value="Abschicken" />
-		</div>
-	</form>
+
+
 
 	</div>
-	
+
 	<!-- /container -->
 	</section>
-	
-	
-	<!-- Footer -->
-	
-	<footer>
-	<div id="footerbox" class="col-md-12 panel panel-default"><div id="footertext" class="panel-body"><a id="footertext" href="@routes.Assets.at("app/views/Impressum.scala.html")">Impressum</a> <a id="footertext" href="Kontakt.html">Kontakt</a></div>
-	</div> 
-	
-	
-	</footer>
-	
-</body>
-</html>
+}
