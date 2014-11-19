@@ -2,39 +2,39 @@ package controllers;
 
 import play.*;
 import play.mvc.*;
-
 import views.html.*;
 
 public class Application extends Controller {
 
 	public static Result index() {
-        return ok(index.render());
-    }
-	
-	public static Result login(){
+		return ok(index.render());
+	}
+
+	public static Result login() {
 		return ok(login.render());
 	}
 
-	public static Result angebote(){
+	public static Result angebote() {
 		return ok(angebote.render());
 	}
-	public static Result gesuche(){
+
+	public static Result gesuche() {
 		return ok(gesuche.render());
 	}
-	
-	public static Result kontakt(){
+
+	public static Result kontakt() {
 		return ok(kontakt.render());
 	}
-	
-	public static Result impressum(){
+
+	public static Result impressum() {
 		return ok(impressum.render());
 	}
-	
-	public static Result inserat(){
+
+	public static Result inserat() {
 		return ok(inserat.render());
 	}
-	
-	public static Result registrieren(){
+
+	public static Result registrieren() {
 		return ok(registrieren.render());
 	}
 
