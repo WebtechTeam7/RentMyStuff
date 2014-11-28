@@ -3,9 +3,9 @@ package models;
 import play.*;
 
 
-public class advert {
+public class Advert {
 
-	public advert(){
+	public Advert(){
 		
 	}
 	

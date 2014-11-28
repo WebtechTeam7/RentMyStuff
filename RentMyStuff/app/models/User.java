@@ -3,9 +3,9 @@ package models;
 import play.*;
 
 
-public class user {
+public class User {
 	
-	public user{
+	public User(){
 		
 	}
 	
