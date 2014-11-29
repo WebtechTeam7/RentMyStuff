@@ -9,6 +9,12 @@ public class Advert {
 		
 	}
 	
+	public Advert(String kind, String category, String description){
+		this.kind = kind;
+		this.category = category;
+		this.description = description;
+	}
+	
 	private String kind;
 	private	String category;
 	private String description;
