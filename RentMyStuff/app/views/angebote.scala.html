@@ -1,15 +1,24 @@
+@(AdvertList :List[Advert]) 
 @main("Angebote"){
 <p>
 
 	<section class="boxformat">
 		<article>
-
+@if(!AdvertList.isEmpty()) {
 			<h2>
 				Angebote
 				<button type="button" class="btn btn-warning"
 					onclick="popup('@routes.Application.inserat()')">Angebot
 					erstellen</button>
 			</h2>
+
+			
+
+			<script type="text/javascript">
+				$(function() {
+					$('#advert').modal("show")
+				});
+			</script>
 
 			<p>
 			<div class="row">
@@ -26,17 +35,21 @@
 					</div>
 
 				</div>
-				<div class="col-md-6">
-					<img src=@routes.Assets.at(
-						"images/Rasenmaeher.jpg")
-						alt="Angebot1"
-						class="img-rounded img-preview">
-					<hr>
+				<div class="col-md-6">					
+					@for(advert <- AdvertList){	
+							<div class="box">
+								<img class="rasemaeher" src=@routes.Assets.at("images/Rasenmaeher.jpg") /> <span
+								class="kind">@advert.getKind() <span>: </span> </span> <span class="kind">@advert.getCategory()</span><br> 
+								<span class="kind">@advert.getDescription()</span>
+								<hr>
+							</div>
+						}
 				</div>
 
 				<div class="col-xs-6 col-sm-3"></div>
 			</div>
 			<p>
+			}
 		</article>
 	</section>
 	}

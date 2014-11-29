@@ -23,6 +23,9 @@ public class Model {
 			"Ich verleihe meine Bohrmaschine mit sämtlichem Zubehör");
 	static Advert advert2 = new Advert("Gesuch", "Dienstleistung",
 			"Hallo zusammen, ich suche eine Bohrmaschine");
+	
+	static Advert advert3 = new Advert("Angebot", "Fahrzeug",
+			"Hallo zusammen, ich vermiete für eine Woche meien Golf V. Da ich im Urlaub bin. Liebe Grüße Jan");
 
 	public static List<User> getUserList() {
 		return userList;
@@ -40,13 +43,15 @@ public class Model {
 		Model.advertList = advertList;
 	}
 
-	public static void createDummyObjects() {
+	public static void createObject() {
 		userList.add(user1);
 		userList.add(user2);
 		userList.add(user3);
 
 		advertList.add(advert1);
 		advertList.add(advert2);
+		advertList.add(advert3);
+		
 	}
 
 }
