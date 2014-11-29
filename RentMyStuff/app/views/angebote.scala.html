@@ -40,7 +40,8 @@
 							<div class="box">
 								<img class="rasemaeher" src=@routes.Assets.at("images/Rasenmaeher.jpg") /> <span
 								class="kind">@advert.getKind() <span>: </span> </span> <span class="kind">@advert.getCategory()</span><br> 
-								<span class="kind">@advert.getDescription()</span>
+								<span class="kind">@advert.getDescription()</span> <br>
+								<label>User:</label><span class="kind">@advert.getUser().getFirstname()</span>
 								<hr>
 							</div>
 						}

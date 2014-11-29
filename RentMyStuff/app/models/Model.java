@@ -20,12 +20,12 @@ public class Model {
 			"jan.gaideczka@htwg-konstanz.de", "user3");
 
 	static Advert advert1 = new Advert("Angebot", "Elektronik",
-			"Ich verleihe meine Bohrmaschine mit sämtlichem Zubehör");
+			"Ich verleihe meine Bohrmaschine mit sämtlichem Zubehör", user2);
 	static Advert advert2 = new Advert("Gesuch", "Dienstleistung",
-			"Hallo zusammen, ich suche eine Bohrmaschine");
+			"Hallo zusammen, ich suche eine Bohrmaschine", user1);
 	
 	static Advert advert3 = new Advert("Angebot", "Fahrzeug",
-			"Hallo zusammen, ich vermiete für eine Woche meien Golf V. Da ich im Urlaub bin. Liebe Grüße Jan");
+			"Hallo zusammen, ich vermiete für eine Woche meien Golf V. Da ich im Urlaub bin. Liebe Grüße Jan", user3);
 
 	public static List<User> getUserList() {
 		return userList;
