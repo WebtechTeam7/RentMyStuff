@@ -27,7 +27,7 @@
 
 						<button type="button" class="btn btn-default">Werkzeuge</button>
 						<button type="button" class="btn btn-default">Fahrzeuge</button>
-						<button type="button" class="btn btn-default">Gartengeräte</button>
+						<button type="button" class="btn btn-default">GartengerÃ¤te</button>
 						<button type="button" class="btn btn-default">Dienstleistungen</button>
 						<button type="button" class="btn btn-default">Elektronik</button>
 						<button type="button" class="btn btn-default">Sonstiges</button>
@@ -41,7 +41,7 @@
 								<img class="rasemaeher" src=@routes.Assets.at("images/Rasenmaeher.jpg") /> <span
 								class="kind">@advert.getKind() <span>: </span> </span> <span class="kind">@advert.getCategory()</span><br> 
 								<span class="kind">@advert.getDescription()</span> <br>
-								<label>User:</label><span class="kind">@advert.getUser().getFirstname()</span>
+								<label>mailto:</label><span class="kind">@advert.getUser().getEmail()</span>
 								<hr>
 							</div>
 						}
