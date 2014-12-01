@@ -46,5 +46,9 @@ public class User {
 		this.password = password;
 	}
 	
+	public String getFullName(){
+		return firstname + " " + lastname;
+	}
+	
 
 }

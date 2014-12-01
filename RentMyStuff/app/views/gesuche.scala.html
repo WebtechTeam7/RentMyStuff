@@ -1,3 +1,4 @@
+@(AdvertList :List[Advert])
 @main("Gesuche"){
 <p>
 
@@ -26,8 +27,21 @@
 
 				</div>
 				<div class="col-md-6">
-					<p>Hallo zusammen, suche dringend einen Rasenmäher....
-					<hr>
+					@for(advert <- AdvertList){
+						@if(advert.getKind().equals("Gesuch")){
+
+						<div class="box">
+							<h3>@advert.getKind von @advert.getUser().getFullName()</h3>
+							<div class = "gesuche">
+								<!-- <img class="rasemaeher" src=@routes.Assets.at( "images/Rasenmaeher.jpg") /> -->
+								<span class="kind">Kategorie: @advert.getCategory()</span><br> <span
+									class="kind">@advert.getDescription()</span> <br> <label>mailto:</label><span
+									class="kind">@advert.getUser().getEmail()</span>
+							</div>
+							<hr>
+						</div>
+						} 
+					}
 				</div>
 
 				<div class="col-xs-6 col-sm-3"></div>

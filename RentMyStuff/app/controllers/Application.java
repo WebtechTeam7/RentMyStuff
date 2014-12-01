@@ -10,14 +10,14 @@ public class Application extends Controller {
 	private static boolean dummyInitialize = false;
 
 	public static Result index() {
+		return ok(index.render(Model.getAdvertList()));
+	}
+
+	public static Result login() {
 		if (dummyInitialize == false) {
 			Model.createObject();
 			dummyInitialize = true;
 		} 
-		return ok(index.render());
-	}
-
-	public static Result login() {
 		return ok(login.render());
 	}
 
@@ -26,7 +26,7 @@ public class Application extends Controller {
 	}
 
 	public static Result gesuche() {
-		return ok(gesuche.render());
+		return ok(gesuche.render(Model.getAdvertList()));
 	}
 
 	public static Result kontakt() {

@@ -13,7 +13,7 @@ public class Advert {
 		this.kind = kind;
 		this.category = category;
 		this.description = description;
-		this.setUser(user);
+		this.user = user;
 	}
 	
 	private String kind;
