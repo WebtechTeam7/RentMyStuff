@@ -44,5 +44,11 @@ public class Application extends Controller {
 	public static Result registrieren() {
 		return ok(registrieren.render());
 	}
+	
+	public static Result newAdvert(String option,String kategorie, String comment){
+		Advert advert = new Advert(option, kategorie, comment, new User("Test", "adfnj", "j@g.de", "123"));
+		Model.getAdvertList().add(advert);
+		return ok(index.render(Model.getAdvertList()));
+	}
 
 }

@@ -32,64 +32,68 @@
 
 	<a href="#x" class="overlay" id="angebot"></a>
 	<div class="popup" id="popup">
-		<h2>Inserat erstellen</h2>
-		<div>
+		<form action="newAdvert" method="Get">
+			<h2>Inserat erstellen</h2>
+			
+			<div id = "option" name="option">
 
-
-			<form>
-				<label class="radio-inline"><input type="radio" name="optradio">Angebot</label> 
-				<label class="radio-inline"><input type="radio" name="optradio">Gesuch</label>
-			</form>
-		</div>
-
-
-
-		<div class="row">
-			<div class="col-xs-6 col-md-4">
-
-				<select class="form-control" id="kategorie" onchange="optionValue()">
-					<option value=""></option>
-					<option value="werkzeuge">Werkzeuge</option>
-					<option value="fahrzeuge">Fahrzeuge</option>
-					<option value="gartenger�te">Gartengeräte</option>
-					<option value="elektronik">Elektronik</option>
-					<option value="dienstleistungen">Dienstleistungen</option>
-					<option value="sonstiges">Sonstiges</option>
-				</select>
-
-
+				<label class="radio-inline">
+				<input type="radio"	name="optradio">Angebot</label> 
+				<label class="radio-inline">
+				<input type="radio" name="optradio">Gesuch</label>
 
 			</div>
-			<div class="col-xs-6 col-md-4"></div>
-			<div class="col-xs-6 col-md-4"></div>
-		</div>
 
-		<br>
+ 
 
-		<div class="row">
-			<div class="col-md-6">
-				<div class="form-group">
+			<div class="row">
+				<div class="col-xs-6 col-md-4">
 
-					<textarea class="form-control" rows="5" id="comment"
-						placeholder="Beschreibung"></textarea>
+					<select class="form-control" id="kategorie" name="kategorie"
+						onchange="optionValue()">
+						<option value=""></option>
+						<option value="werkzeuge">Werkzeuge</option>
+						<option value="fahrzeuge">Fahrzeuge</option>
+						<option value="gartengeräte">Gartengeräte</option>
+						<option value="elektronik">Elektronik</option>
+						<option value="dienstleistungen">Dienstleistungen</option>
+						<option value="sonstiges">Sonstiges</option>
+					</select>
+				</div>
+				<div class="col-xs-6 col-md-4"></div>
+				<div class="col-xs-6 col-md-4"></div>
+			</div>
+
+			<br>
+
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+
+						<textarea class="form-control" rows="5" id="comment" name="comment"
+							placeholder="Beschreibung"></textarea>
+					</div>
+				</div>
+				<div class="col-md-6"></div>
+			</div>
+
+
+			<!--  <input type="file" id="files" name="file" />-->
+
+
+
+			<div class="row">
+				<div class="col-xs-6 col-md-4">
+					<button type="button" class="btn btn-default"
+						onclick="abortRead();">Abbrechen</button>
+				</div>
+				<div class="col-xs-6 col-md-4"></div>
+				<div class="col-xs-6 col-md-4">
+					<button type="submit" class="btn btn-warning" id="speichern">Speichern</button>
 				</div>
 			</div>
-			<div class="col-md-6"></div>
-		</div>
 
-
-		<!--  <input type="file" id="files" name="file" />-->
-
-
-
-		<div class="row">
-			<div class="col-xs-6 col-md-4">
-				<button type="button" class="btn btn-default" onclick="abortRead();">Abbrechen</button>
-			</div>
-			<div class="col-xs-6 col-md-4"></div>
-			<div class="col-xs-6 col-md-4">
-				<button type="button" class="btn btn-warning" id="speichern">Speichern</button>
-			</div>
+		</form>
 		</div>
 </body>
 </html>
