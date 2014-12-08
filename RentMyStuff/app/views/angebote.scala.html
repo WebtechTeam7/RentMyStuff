@@ -3,7 +3,7 @@
 
 	<section class="boxformat">
 		<article>
-			@if(!AdvertList.isEmpty()) {
+
 			<h2>
 				Angebote
 				<button type="button" class="btn btn-warning"
@@ -11,26 +11,24 @@
 					erstellen</button>
 			</h2>
 
-
-
-			 <script type="text/javascript">
-				function changeCategory(value){
-					
-				}
-			</script>
-			
-
+			@if(!AdvertList.isEmpty()) {
 			<p>
 			<div class="row">
 				<div class="col-xs-6 col-sm-3">
 					<div class="btn-group-vertical" role="group" aria-label="...">
 
-						<button type="button" class="btn btn-default" onclick="changeCategory('Werkzeuge')">Werkzeuge</button>
-						<button type="button" class="btn btn-default" onclick="changeCategory('Fahrzeuge')">Fahrzeuge</button>
-						<button type="button" class="btn btn-default" onclick="changeCategory('Gartengeräte')">Gartengeräte</button>
-						<button type="button" class="btn btn-default" onclick="changeCategory('Dienstleistungen')">Dienstleistungen</button>
-						<button type="button" class="btn btn-default" onclick="changeCategory('Elektronik')">Elektronik</button>
-						<button type="button" class="btn btn-default" onclick="changeCategory('Sonstiges')">Sonstiges</button>
+						<button type="button" class="btn btn-default"
+							onclick="changeCategory('Werkzeuge')">Werkzeuge</button>
+						<button type="button" class="btn btn-default"
+							onclick="changeCategory('Fahrzeuge')">Fahrzeuge</button>
+						<button type="button" class="btn btn-default"
+							onclick="changeCategory('Gartengeräte')">Gartengeräte</button>
+						<button type="button" class="btn btn-default"
+							onclick="changeCategory('Dienstleistungen')">Dienstleistungen</button>
+						<button type="button" class="btn btn-default"
+							onclick="changeCategory('Elektronik')">Elektronik</button>
+						<button type="button" class="btn btn-default"
+							onclick="changeCategory('Sonstiges')">Sonstiges</button>
 
 					</div>
 
@@ -43,9 +41,11 @@
 						<h3>@advert.getKind von @advert.getUser().getFullName()</h3>
 						<div>
 							<!-- <img class="rasemaeher" src=@routes.Assets.at( "images/Rasenmaeher.jpg") /> -->
-							<span class="kind">Kategorie: @advert.getCategory()</span><br> <span
-								class="kind">@advert.getDescription()</span> <br> <label>mailto:</label><span
-								class="kind">@advert.getUser().getEmail()</span>
+							<span class="kind">Kategorie: @advert.getCategory()</span><br>
+							<span class="kind">@advert.getDescription()</span> <br> <label>mailto:</label><span
+								class="kind">@advert.getUser().getEmail()</span> <i
+								class="fa fa-map-marker"
+								onclick="addressDetails('@advert.getAddress().getStreet()','@advert.getAddress().getPostcode()', '@advert.getAddress().getCity()')"></i>
 						</div>
 						<hr>
 					</div>
@@ -54,7 +54,37 @@
 
 				<div class="col-xs-6 col-sm-3"></div>
 			</div>
-			<p>}
+			<p>} else {
+			<p>
+			<div class="row">
+				<div class="col-xs-6 col-sm-3">
+					<div class="btn-group-vertical" role="group" aria-label="...">
+
+						<button type="button" class="btn btn-default"
+							onclick="changeCategory('Werkzeuge')">Werkzeuge</button>
+						<button type="button" class="btn btn-default"
+							onclick="changeCategory('Fahrzeuge')">Fahrzeuge</button>
+						<button type="button" class="btn btn-default"
+							onclick="changeCategory('Gartengeräte')">Gartengeräte</button>
+						<button type="button" class="btn btn-default"
+							onclick="changeCategory('Dienstleistungen')">Dienstleistungen</button>
+						<button type="button" class="btn btn-default"
+							onclick="changeCategory('Elektronik')">Elektronik</button>
+						<button type="button" class="btn btn-default"
+							onclick="changeCategory('Sonstiges')">Sonstiges</button>
+
+					</div>
+
+				</div>
+				<div class="col-md-6">
+					<h1>Es tut uns Leid, aktuell sind keine Angebote verfügbar!</h1>
+				</div>
+
+				<div class="col-xs-6 col-sm-3"></div>
+			</div>
+
+
+			}
 		</article>
 	</section>
 	}

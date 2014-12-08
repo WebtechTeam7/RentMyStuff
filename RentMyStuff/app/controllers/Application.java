@@ -45,8 +45,13 @@ public class Application extends Controller {
 		return ok(registrieren.render());
 	}
 	
-	public static Result newAdvert(String optradio,String kategorie, String comment){
-		Advert advert = new Advert(optradio, kategorie, comment, Model.getUserList().get(1));
+	public static Result map(){
+		return ok(map.render());
+	}
+	
+	public static Result newAdvert(String optradio,String kategorie, String comment, String street, String postcode, String city){
+		Address address = new Address(street, postcode, city);
+		Advert advert = new Advert(optradio, kategorie, comment, address, Model.getUserList().get(1));
 		Model.getAdvertList().add(advert);
 		return ok(index.render(Model.getAdvertList()));
 	}

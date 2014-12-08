@@ -13,19 +13,19 @@ public class Model {
 	private static List<Advert> advertList = new ArrayList<Advert>();
 
 	static User user1 = new User("Dennis", "Klein",
-			"dennis.klein@htwg-konstanz.de", "user1");
+			"dennis.klein@htwg-konstanz.de", "user1", false);
 	static User user2 = new User("Ramona", "Barth",
-			"ramona.barth@htwg-konstanz.de", "user2");
+			"ramona.barth@htwg-konstanz.de", "user2", false);
 	static User user3 = new User("Jan", "Gaideczka",
-			"jan.gaideczka@htwg-konstanz.de", "user3");
+			"jan.gaideczka@htwg-konstanz.de", "user3", true);
 
 	static Advert advert1 = new Advert("Angebot", "Elektronik",
-			"Ich verleihe meine Bohrmaschine mit sämtlichem Zubehör", user2);
+			"Ich verleihe meine Bohrmaschine mit sämtlichem Zubehör", new Address("Friedrichstrasse 10C", "78464", "Konstanz"), user2);
 	static Advert advert2 = new Advert("Gesuch", "Elektronik",
-			"Hallo zusammen, ich suche eine Bohrmaschine", user1);
+			"Hallo zusammen, ich suche eine Bohrmaschine", new Address("Friedrichstrasse 10C", "78464", "Konstanz"), user1);
 	
 	static Advert advert3 = new Advert("Angebot", "Fahrzeuge",
-			"Hallo zusammen, ich vermiete für eine Woche meien Golf V. Da ich im Urlaub bin. Liebe Grüße Jan", user3);
+			"Hallo zusammen, ich vermiete für eine Woche meien Golf V. Da ich im Urlaub bin. Liebe Grüße Jan", new Address("Friedrichstrasse 10C", "78464", "Konstanz"), user3);
 
 	public static List<User> getUserList() {
 		return userList;
