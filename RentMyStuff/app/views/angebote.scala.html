@@ -45,7 +45,7 @@
 							<span class="kind">@advert.getDescription()</span> <br> <label>mailto:</label><span
 								class="kind">@advert.getUser().getEmail()</span> <i
 								class="fa fa-map-marker"
-								onclick="addressDetails('@advert.getAddress().getStreet()','@advert.getAddress().getPostcode()', '@advert.getAddress().getCity()')"></i>
+								onclick href="@routes.Application.map()"></i>
 						</div>
 						<hr>
 					</div>
