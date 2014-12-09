@@ -1,6 +1,10 @@
 package controllers;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
 import play.*;
+import play.db.*;
 import play.mvc.*;
 import views.html.*;
 import models.*;
@@ -8,12 +12,14 @@ import models.*;
 public class Application extends Controller {
 
 	private static boolean dummyInitialize = false;
-
+	private static Connection connection;
+	
 	public static Result index() {
 		return ok(index.render(Model.getAdvertList()));
 	}
 
 	public static Result login() {
+		connection = DB.getConnection();
 		if (dummyInitialize == false) {
 			Model.createObject();
 			dummyInitialize = true;
@@ -34,6 +40,12 @@ public class Application extends Controller {
 	}
 
 	public static Result impressum() {
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return ok(impressum.render());
 	}
 
