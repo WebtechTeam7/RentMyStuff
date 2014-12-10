@@ -2,9 +2,6 @@ package controllers;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-
-import play.*;
-import play.db.*;
 import play.mvc.*;
 import views.html.*;
 import models.*;
@@ -19,11 +16,7 @@ public class Application extends Controller {
 	}
 
 	public static Result login() {
-		connection = DB.getConnection();
-		if (dummyInitialize == false) {
-			Model.createObject();
-			dummyInitialize = true;
-		} 
+		
 		return ok(login.render());
 	}
 
