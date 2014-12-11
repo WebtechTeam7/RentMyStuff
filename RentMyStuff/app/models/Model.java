@@ -33,6 +33,7 @@ public class Model {
 				user.setLastname(resultset.getString("Lastname"));
 				user.setPassword(resultset.getString("Password"));
 				user.setEmail(resultset.getString("Email"));
+				user.setUserID(resultset.getInt("UserID"));
 				userList.add(user);
 			}
 		} catch (SQLException e) {
@@ -60,6 +61,7 @@ public class Model {
 				advert.setCategory(resultset.getString("Category"));
 				advert.setUser(getUserById(resultset.getString("AdvertUserID")));
 				advert.setDescription(resultset.getString("Description"));
+				advert.setId(resultset.getInt("AdvertID"));
 				advertList.add(advert);
 			}
 		} catch (SQLException e) {
@@ -88,13 +90,49 @@ public class Model {
 			e.printStackTrace();
 		}
 	}
-	
+
+	public static void deleteAdvert(int id, int userID) {
+		boolean allowed = false;
+		try {
+			allowed = checkAuthorization(id, userID);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		if (allowed) {
+			try {
+				PreparedStatement preparedStatement = connection
+						.prepareStatement("DELETE FROM Advert WHERE AdvertID = "
+								+ id);
+				preparedStatement.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} else {
+			System.out.println("User not authorized");
+		}
+	}
+
+	public static void createUser(String firstname, String lastname,
+			String email, String password) {
+		try {
+			PreparedStatement preparedStatement = connection
+					.prepareStatement("INSERT INTO User(Firstname, Lastname, Email, Password)"
+							+ "VALUES(?,?,?,?)");
+			preparedStatement.setString(1, firstname);
+			preparedStatement.setString(2, lastname);
+			preparedStatement.setString(3, email);
+			preparedStatement.setString(4, password);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	/**
 	 * 
 	 * @param id
-	 * @return user
+	 * @return user passend zur ID
 	 * @author Jan
-	 * Es wird der user passend der ID ausgegeben.
 	 * 
 	 */
 	public static User getUserById(String id) {
@@ -117,27 +155,49 @@ public class Model {
 
 		return null;
 	}
-	
+
 	/**
 	 * 
 	 * @param user
-	 * @return UserID 
+	 * @return UserID wird über die E-Mail Adresse gefunden
 	 * @throws SQLException
 	 * @author Jan
-	 * Die ID wird über die Email-Adresse des Users gefunden
 	 */
-	
-	public static int getUserIdByEmail(User user) throws SQLException{
+
+	public static int getUserIdByEmail(User user) throws SQLException {
 		int id = 0;
 		String email = user.getEmail();
 		System.out.println(email);
-		PreparedStatement preparedStatement = connection.prepareStatement("SELECT UserID FROM User WHERE Email = '" + email + "'");
+		PreparedStatement preparedStatement = connection
+				.prepareStatement("SELECT UserID FROM User WHERE Email = '"
+						+ email + "'");
 		ResultSet resultset = preparedStatement.executeQuery();
-		while (resultset.next()){
+		while (resultset.next()) {
 			id = resultset.getInt("UserId");
 		}
 		return id;
 	}
-	
+
+	/**
+	 * 
+	 * @param id
+	 * @param userID
+	 * @return true wenn User seine eigenen Angebote/Gesuche löscht
+	 * @author Jan
+	 * @throws SQLException 
+	 */
+	public static boolean checkAuthorization(int id, int userID) throws SQLException {
+
+		PreparedStatement preparedStatement = connection
+				.prepareStatement("SELECT * FROM Advert WHERE AdvertId = " + id
+						+ " AND AdvertUserID =" + userID);
+		ResultSet resultset = preparedStatement.executeQuery();
+		if (resultset != null) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
 
 }

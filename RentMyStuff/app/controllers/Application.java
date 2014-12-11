@@ -1,5 +1,6 @@
 package controllers;
 
+import play.*;
 import play.mvc.*;
 import views.html.*;
 import models.*;
@@ -10,6 +11,7 @@ public class Application extends Controller {
 
 	private static boolean dummyInitialize = false;
 	private static User currentUser;
+
 	public static Result index() {
 
 		if (angemeldet == true) {
@@ -21,15 +23,15 @@ public class Application extends Controller {
 
 	public static Result login() {
 
-		if (angemeldet==true){
-			angemeldet=false;
+		if (angemeldet == true) {
+			angemeldet = false;
 			System.out.println("abmelden hat fuktioniert");
 		}
 		return ok(login.render());
 	}
 
 	public static Result angebote() {
-		
+
 		if (angemeldet == true) {
 			return ok(angebote.render(Model.getAdvertList()));
 		} else {
@@ -38,7 +40,7 @@ public class Application extends Controller {
 	}
 
 	public static Result gesuche() {
-		
+
 		if (angemeldet == true) {
 			return ok(gesuche.render(Model.getAdvertList()));
 		} else {
@@ -51,7 +53,7 @@ public class Application extends Controller {
 	}
 
 	public static Result impressum() {
-		
+
 		return ok(impressum.render());
 	}
 
@@ -63,9 +65,15 @@ public class Application extends Controller {
 		return ok(registrieren.render());
 	}
 
-	public static Result newAdvert(String optradio, String kategorie,String comment) {
-		
+	public static Result newAdvert(String optradio, String kategorie,
+			String comment) {
+
 		Model.createAdvert(optradio, kategorie, comment, currentUser);
+		return ok(index.render(Model.getAdvertList()));
+	}
+
+	public static Result deleteAdvert(int id, int userId) {
+		Model.deleteAdvert(id, userId);
 		return ok(index.render(Model.getAdvertList()));
 	}
 
@@ -85,7 +93,5 @@ public class Application extends Controller {
 
 		return ok(login.render());
 	}
-	
-	
-	
+
 }

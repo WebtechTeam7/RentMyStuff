@@ -1,4 +1,5 @@
-@(AdvertList :List[Advert]) @main("Angebote"){
+@(AdvertList :List[Advert])
+@main("Angebote"){
 <p>
 
 	<section class="boxformat">
@@ -14,9 +15,7 @@
 
 
 			 <script type="text/javascript">
-				function changeCategory(value){
-					
-				}
+				
 			</script>
 			
 
@@ -40,12 +39,14 @@
 					@if(advert.getKind().equals("Angebot")){
 
 					<div class="box">
-						<h3>@advert.getKind von @advert.getUser().getFullName()</h3>
+						<h3>@advert.getKind von @advert.getUser().getFullName()</h3> 
 						<div>
+						
 							<!-- <img class="rasemaeher" src=@routes.Assets.at( "images/Rasenmaeher.jpg") /> -->
 							<span class="kind">Kategorie: @advert.getCategory()</span><br> <span
 								class="kind">@advert.getDescription()</span> <br> <label>mailto:</label><span
 								class="kind">@advert.getUser().getEmail()</span>
+							<a href="@routes.Application.deleteAdvert(advert.getId(), advert.getUser().getUserID())"><i class="fa fa-trash"></i></a>
 						</div>
 						<hr>
 					</div>
