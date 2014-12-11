@@ -9,7 +9,7 @@ public class Application extends Controller {
 	static Boolean angemeldet = false;
 
 	private static boolean dummyInitialize = false;
-	
+	private static User currentUser;
 	public static Result index() {
 
 		if (angemeldet == true) {
@@ -63,11 +63,9 @@ public class Application extends Controller {
 		return ok(registrieren.render());
 	}
 
-	public static Result newAdvert(String optradio, String kategorie,
-			String comment) {
-		Advert advert = new Advert(optradio, kategorie, comment, Model
-				.getUserList().get(1));
-		Model.getAdvertList().add(advert);
+	public static Result newAdvert(String optradio, String kategorie,String comment) {
+		
+		Model.createAdvert(optradio, kategorie, comment, currentUser);
 		return ok(index.render(Model.getAdvertList()));
 	}
 
@@ -79,6 +77,7 @@ public class Application extends Controller {
 				System.out.println("geht");
 				angemeldet = true;
 				System.out.println("hat funktioniert");
+				currentUser = user;
 				return ok(index.render(Model.getAdvertList()));
 			}
 			System.out.println("geht nicht");
