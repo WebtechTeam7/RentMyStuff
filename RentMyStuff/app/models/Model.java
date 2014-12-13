@@ -18,7 +18,8 @@ public class Model {
 	private static Connection connection = DB.getConnection();
 	private static List<User> userList = new ArrayList<User>();
 	private static List<Advert> advertList = new ArrayList<Advert>();
-
+	private static List<Advert> userAdvertList = new ArrayList<Advert>();
+	
 	public static List<User> getUserList() {
 
 		try {
@@ -41,6 +42,31 @@ public class Model {
 		}
 
 		return userList;
+	}
+	
+	public static void createUser(String firstname, String lastname,
+			String email, String password) {
+		try {
+			PreparedStatement preparedStatement = connection
+					.prepareStatement("INSERT INTO User(Firstname, Lastname, Email, Password)"
+							+ "VALUES(?,?,?,?)");
+			preparedStatement.setString(1, firstname);
+			preparedStatement.setString(2, lastname);
+			preparedStatement.setString(3, email);
+			preparedStatement.setString(4, password);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void deleteUser(int userId){
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM User WHERE UserID = " + userId);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void setUserList(List<User> userList) {
@@ -70,10 +96,32 @@ public class Model {
 
 		return advertList;
 	}
-
-	public static void setAdvertList(List<Advert> advertList) {
-		Model.advertList = advertList;
+	
+	
+	public static List <Advert> getUserAdvertList(int userId){
+		
+		userAdvertList.clear();
+		
+		try {
+			PreparedStatement preparedStatement = connection
+					.prepareStatement("SELECT * FROM Advert WHERE AdvertUserID = " + userId);
+			ResultSet resultset = preparedStatement.executeQuery();
+			while (resultset.next()) {
+				Advert advert = new Advert();
+				advert.setKind(resultset.getString("Kind"));
+				advert.setCategory(resultset.getString("Category"));
+				advert.setUser(getUserById(resultset.getString("AdvertUserID")));
+				advert.setDescription(resultset.getString("Description"));
+				advert.setId(resultset.getInt("AdvertID"));
+				userAdvertList.add(advert);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return userAdvertList;
 	}
+	
 
 	public static void createAdvert(String optradio, String kategorie,
 			String comment, User user) {
@@ -112,21 +160,10 @@ public class Model {
 		}
 	}
 
-	public static void createUser(String firstname, String lastname,
-			String email, String password) {
-		try {
-			PreparedStatement preparedStatement = connection
-					.prepareStatement("INSERT INTO User(Firstname, Lastname, Email, Password)"
-							+ "VALUES(?,?,?,?)");
-			preparedStatement.setString(1, firstname);
-			preparedStatement.setString(2, lastname);
-			preparedStatement.setString(3, email);
-			preparedStatement.setString(4, password);
-			preparedStatement.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public static void setAdvertList(List<Advert> advertList) {
+		Model.advertList = advertList;
 	}
+
 
 	/**
 	 * 
@@ -184,9 +221,10 @@ public class Model {
 	 * @param userID
 	 * @return true wenn User seine eigenen Angebote/Gesuche löscht
 	 * @author Jan
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
-	public static boolean checkAuthorization(int id, int userID) throws SQLException {
+	public static boolean checkAuthorization(int id, int userID)
+			throws SQLException {
 
 		PreparedStatement preparedStatement = connection
 				.prepareStatement("SELECT * FROM Advert WHERE AdvertId = " + id
@@ -198,6 +236,10 @@ public class Model {
 			return false;
 		}
 
+	}
+
+	public static void setUserAdvertList(List<Advert> userAdvertList) {
+		Model.userAdvertList = userAdvertList;
 	}
 
 }

@@ -1,5 +1,6 @@
 package controllers;
 
+
 import play.*;
 import play.mvc.*;
 import views.html.*;
@@ -8,14 +9,12 @@ import models.*;
 public class Application extends Controller {
 
 	static Boolean angemeldet = false;
-
-	private static boolean dummyInitialize = false;
 	private static User currentUser;
 
 	public static Result index() {
 
 		if (angemeldet == true) {
-			return ok(index.render(Model.getAdvertList()));
+			return ok(index.render(Model.getUserAdvertList(currentUser.getUserID())));
 		} else {
 			return ok(login.render());
 		}
@@ -69,12 +68,12 @@ public class Application extends Controller {
 			String comment) {
 
 		Model.createAdvert(optradio, kategorie, comment, currentUser);
-		return ok(index.render(Model.getAdvertList()));
+		return ok(index.render(Model.getUserAdvertList(currentUser.getUserID())));
 	}
 
 	public static Result deleteAdvert(int id, int userId) {
 		Model.deleteAdvert(id, userId);
-		return ok(index.render(Model.getAdvertList()));
+		return ok(index.render(Model.getUserAdvertList(currentUser.getUserID())));
 	}
 
 	public static Result anmelden(String email, String password) {
@@ -86,11 +85,17 @@ public class Application extends Controller {
 				angemeldet = true;
 				System.out.println("hat funktioniert");
 				currentUser = user;
-				return ok(index.render(Model.getAdvertList()));
+				return ok(index.render(Model.getUserAdvertList(currentUser.getUserID())));
 			}
 			System.out.println("geht nicht");
 		}
 
+		return ok(login.render());
+	}
+	
+	public static Result deleteUser(int userId){
+		Model.deleteUser(userId);
+		angemeldet = false;
 		return ok(login.render());
 	}
 
