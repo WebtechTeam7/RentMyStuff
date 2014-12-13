@@ -32,6 +32,7 @@
 						<!-- <img class="rasemaeher" src=@routes.Assets.at( "images/Rasenmaeher.jpg") /> -->
 						<span class="kind">Kategorie: @advert.getCategory()</span><br> 
 						<span class="kind">@advert.getDescription()</span>
+						<a href="@routes.Application.deleteAdvert(advert.getId(), advert.getUser().getUserID())"><i class="fa fa-trash"></i></a>
 						<hr>
 					</div>
 					} 					
@@ -50,6 +51,7 @@
 							<!-- <img class="rasemaeher" src=@routes.Assets.at( "images/Rasenmaeher.jpg") /> -->
 							<span class="kind">Kategorie: @advert.getCategory()</span><br> 
 							<span class="kind">@advert.getDescription()</span>
+							<a href="@routes.Application.deleteAdvert(advert.getId(), advert.getUser().getUserID())"><i class="fa fa-trash"></i></a>
 						</div>
 						<hr>
 					</div>
