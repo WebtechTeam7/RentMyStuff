@@ -1,7 +1,13 @@
 package models;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import play.db.DB;
 
 public class Model {
 
@@ -9,26 +15,58 @@ public class Model {
 
 	}
 
+	private static Connection connection = DB.getConnection();
 	private static List<User> userList = new ArrayList<User>();
 	private static List<Advert> advertList = new ArrayList<Advert>();
-
-	static User user1 = new User("Dennis", "Klein",
-			"dennis.klein@htwg-konstanz.de", "user1");
-	static User user2 = new User("Ramona", "Barth",
-			"ramona.barth@htwg-konstanz.de", "user2");
-	static User user3 = new User("Jan", "Gaideczka",
-			"jan.gaideczka@htwg-konstanz.de", "user3");
-
-	static Advert advert1 = new Advert("Angebot", "Elektronik",
-			"Ich verleihe meine Bohrmaschine mit sämtlichem Zubehör", user2);
-	static Advert advert2 = new Advert("Gesuch", "Elektronik",
-			"Hallo zusammen, ich suche eine Bohrmaschine", user1);
+	private static List<Advert> userAdvertList = new ArrayList<Advert>();
 	
-	static Advert advert3 = new Advert("Angebot", "Fahrzeuge",
-			"Hallo zusammen, ich vermiete für eine Woche meien Golf V. Da ich im Urlaub bin. Liebe Grüße Jan", user3);
-
 	public static List<User> getUserList() {
+
+		try {
+			// Get all Users from the database
+			PreparedStatement preparedStatement = connection
+					.prepareStatement("SELECT * FROM User");
+
+			ResultSet resultset = preparedStatement.executeQuery();
+			while (resultset.next()) {
+				User user = new User();
+				user.setFirstname(resultset.getString("Firstname"));
+				user.setLastname(resultset.getString("Lastname"));
+				user.setPassword(resultset.getString("Password"));
+				user.setEmail(resultset.getString("Email"));
+				user.setUserID(resultset.getInt("UserID"));
+				userList.add(user);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		return userList;
+	}
+	
+	public static void createUser(String firstname, String lastname,
+			String email, String password) {
+		try {
+			PreparedStatement preparedStatement = connection
+					.prepareStatement("INSERT INTO User(Firstname, Lastname, Email, Password)"
+							+ "VALUES(?,?,?,?)");
+			preparedStatement.setString(1, firstname);
+			preparedStatement.setString(2, lastname);
+			preparedStatement.setString(3, email);
+			preparedStatement.setString(4, password);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void deleteUser(int userId){
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM User WHERE UserID = " + userId);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void setUserList(List<User> userList) {
@@ -36,22 +74,172 @@ public class Model {
 	}
 
 	public static List<Advert> getAdvertList() {
+
+		advertList.clear();
+
+		try {
+			PreparedStatement preparedStatement = connection
+					.prepareStatement("SELECT * FROM Advert");
+			ResultSet resultset = preparedStatement.executeQuery();
+			while (resultset.next()) {
+				Advert advert = new Advert();
+				advert.setKind(resultset.getString("Kind"));
+				advert.setCategory(resultset.getString("Category"));
+				advert.setUser(getUserById(resultset.getString("AdvertUserID")));
+				advert.setDescription(resultset.getString("Description"));
+				advert.setId(resultset.getInt("AdvertID"));
+				advertList.add(advert);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		return advertList;
+	}
+	
+	
+	public static List <Advert> getUserAdvertList(int userId){
+		
+		userAdvertList.clear();
+		
+		try {
+			PreparedStatement preparedStatement = connection
+					.prepareStatement("SELECT * FROM Advert WHERE AdvertUserID = " + userId);
+			ResultSet resultset = preparedStatement.executeQuery();
+			while (resultset.next()) {
+				Advert advert = new Advert();
+				advert.setKind(resultset.getString("Kind"));
+				advert.setCategory(resultset.getString("Category"));
+				advert.setUser(getUserById(resultset.getString("AdvertUserID")));
+				advert.setDescription(resultset.getString("Description"));
+				advert.setId(resultset.getInt("AdvertID"));
+				userAdvertList.add(advert);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return userAdvertList;
+	}
+	
+
+	public static void createAdvert(String optradio, String kategorie,
+			String comment, User user) {
+		try {
+			PreparedStatement preparedStatement = connection
+					.prepareStatement("INSERT INTO Advert (AdvertUserID, Kind, Category, Description)"
+							+ "VALUES(?,?,?,?)");
+			preparedStatement.setInt(1, getUserIdByEmail(user));
+			preparedStatement.setString(2, optradio);
+			preparedStatement.setString(3, kategorie);
+			preparedStatement.setString(4, comment);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void deleteAdvert(int id, int userID) {
+		boolean allowed = false;
+		try {
+			allowed = checkAuthorization(id, userID);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		if (allowed) {
+			try {
+				PreparedStatement preparedStatement = connection
+						.prepareStatement("DELETE FROM Advert WHERE AdvertID = "
+								+ id);
+				preparedStatement.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} else {
+			System.out.println("User not authorized");
+		}
 	}
 
 	public static void setAdvertList(List<Advert> advertList) {
 		Model.advertList = advertList;
 	}
 
-	public static void createObject() {
-		userList.add(user1);
-		userList.add(user2);
-		userList.add(user3);
 
-		advertList.add(advert1);
-		advertList.add(advert2);
-		advertList.add(advert3);
-		
+	/**
+	 * 
+	 * @param id
+	 * @return user passend zur ID
+	 * @author Jan
+	 * 
+	 */
+	public static User getUserById(String id) {
+		PreparedStatement preparedStatement;
+		try {
+			preparedStatement = connection
+					.prepareStatement("SELECT * FROM User WHERE UserId = " + id);
+			ResultSet resultset = preparedStatement.executeQuery();
+			User user;
+			while (resultset.next()) {
+				user = new User();
+				user.setEmail(resultset.getString("Email"));
+				user.setFirstname(resultset.getString("Firstname"));
+				user.setLastname(resultset.getString("Lastname"));
+				return user;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	/**
+	 * 
+	 * @param user
+	 * @return UserID wird über die E-Mail Adresse gefunden
+	 * @throws SQLException
+	 * @author Jan
+	 */
+
+	public static int getUserIdByEmail(User user) throws SQLException {
+		int id = 0;
+		String email = user.getEmail();
+		System.out.println(email);
+		PreparedStatement preparedStatement = connection
+				.prepareStatement("SELECT UserID FROM User WHERE Email = '"
+						+ email + "'");
+		ResultSet resultset = preparedStatement.executeQuery();
+		while (resultset.next()) {
+			id = resultset.getInt("UserId");
+		}
+		return id;
+	}
+
+	/**
+	 * 
+	 * @param id
+	 * @param userID
+	 * @return true wenn User seine eigenen Angebote/Gesuche löscht
+	 * @author Jan
+	 * @throws SQLException
+	 */
+	public static boolean checkAuthorization(int id, int userID)
+			throws SQLException {
+
+		PreparedStatement preparedStatement = connection
+				.prepareStatement("SELECT * FROM Advert WHERE AdvertId = " + id
+						+ " AND AdvertUserID =" + userID);
+		ResultSet resultset = preparedStatement.executeQuery();
+		if (resultset != null) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+	public static void setUserAdvertList(List<Advert> userAdvertList) {
+		Model.userAdvertList = userAdvertList;
 	}
 
 }

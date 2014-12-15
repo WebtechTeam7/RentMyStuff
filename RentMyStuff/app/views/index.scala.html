@@ -1,4 +1,4 @@
-@(AdvertList :List[Advert])
+@(UserAdvertList :List[Advert])
 @()
 @main("Index"){
 
@@ -25,17 +25,14 @@
 
 			<div class="col-md-2  secondbox">
 				<h3>Angebote:</h3>
-				@for(advert <- AdvertList){
+				@for(advert <- UserAdvertList){
 					@if(advert.getKind().equals("Angebot")){
 
-					<div class="box">
-						<h3>@advert.getKind von @advert.getUser().getFullName()</h3>
-						<div>
-							<!-- <img class="rasemaeher" src=@routes.Assets.at( "images/Rasenmaeher.jpg") /> -->
-							<span class="kind">Kategorie: @advert.getCategory()</span><br> <span
-								class="kind">@advert.getDescription()</span> <br> <label>mailto:</label><span
-								class="kind">@advert.getUser().getEmail()</span>
-						</div>
+					<div class="box">						
+						<!-- <img class="rasemaeher" src=@routes.Assets.at( "images/Rasenmaeher.jpg") /> -->
+						<span class="kind">Kategorie: @advert.getCategory()</span><br> 
+						<span class="kind">@advert.getDescription()</span>
+						<a href="@routes.Application.deleteAdvert(advert.getId(), advert.getUser().getUserID())"><i class="fa fa-trash"></i></a>
 						<hr>
 					</div>
 					} 					
@@ -46,16 +43,15 @@
 
 				<h3>Gesuche:</h3>
 
-				@for(advert <- AdvertList){
+				@for(advert <- UserAdvertList){
 					@if(advert.getKind().equals("Gesuch")){
 
 					<div class="box">
-						<h3>@advert.getKind von @advert.getUser().getFullName()</h3>
 						<div class = "gesuche">
 							<!-- <img class="rasemaeher" src=@routes.Assets.at( "images/Rasenmaeher.jpg") /> -->
-							<span class="kind">Kategorie: @advert.getCategory()</span><br> <span
-								class="kind">@advert.getDescription()</span> <br> <label>mailto:</label><span
-								class="kind">@advert.getUser().getEmail()</span>
+							<span class="kind">Kategorie: @advert.getCategory()</span><br> 
+							<span class="kind">@advert.getDescription()</span>
+							<a href="@routes.Application.deleteAdvert(advert.getId(), advert.getUser().getUserID())"><i class="fa fa-trash"></i></a>
 						</div>
 						<hr>
 					</div>

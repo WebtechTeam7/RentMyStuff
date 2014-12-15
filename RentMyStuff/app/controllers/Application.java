@@ -1,10 +1,7 @@
 package controllers;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 
 import play.*;
-import play.db.*;
 import play.mvc.*;
 import views.html.*;
 import models.*;
@@ -12,35 +9,28 @@ import models.*;
 public class Application extends Controller {
 
 	static Boolean angemeldet = false;
+	private static User currentUser;
 
-	private static boolean dummyInitialize = false;
-	private static Connection connection;
-	
 	public static Result index() {
 
 		if (angemeldet == true) {
-			return ok(index.render(Model.getAdvertList()));
+			return ok(index.render(Model.getUserAdvertList(currentUser.getUserID())));
 		} else {
 			return ok(login.render());
 		}
 	}
 
 	public static Result login() {
-		connection = DB.getConnection();
-		if (dummyInitialize == false) {
-			Model.createObject();
-			dummyInitialize = true;
-		}
 
-		if (angemeldet==true){
-			angemeldet=false;
+		if (angemeldet == true) {
+			angemeldet = false;
 			System.out.println("abmelden hat fuktioniert");
 		}
 		return ok(login.render());
 	}
 
 	public static Result angebote() {
-		
+
 		if (angemeldet == true) {
 			return ok(angebote.render(Model.getAdvertList()));
 		} else {
@@ -49,7 +39,7 @@ public class Application extends Controller {
 	}
 
 	public static Result gesuche() {
-		
+
 		if (angemeldet == true) {
 			return ok(gesuche.render(Model.getAdvertList()));
 		} else {
@@ -62,12 +52,7 @@ public class Application extends Controller {
 	}
 
 	public static Result impressum() {
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		return ok(impressum.render());
 	}
 
@@ -81,10 +66,14 @@ public class Application extends Controller {
 
 	public static Result newAdvert(String optradio, String kategorie,
 			String comment) {
-		Advert advert = new Advert(optradio, kategorie, comment, Model
-				.getUserList().get(1));
-		Model.getAdvertList().add(advert);
-		return ok(index.render(Model.getAdvertList()));
+
+		Model.createAdvert(optradio, kategorie, comment, currentUser);
+		return ok(index.render(Model.getUserAdvertList(currentUser.getUserID())));
+	}
+
+	public static Result deleteAdvert(int id, int userId) {
+		Model.deleteAdvert(id, userId);
+		return ok(index.render(Model.getUserAdvertList(currentUser.getUserID())));
 	}
 
 	public static Result anmelden(String email, String password) {
@@ -95,7 +84,8 @@ public class Application extends Controller {
 				System.out.println("geht");
 				angemeldet = true;
 				System.out.println("hat funktioniert");
-				return ok(index.render(Model.getAdvertList()));
+				currentUser = user;
+				return ok(index.render(Model.getUserAdvertList(currentUser.getUserID())));
 			}
 			System.out.println("geht nicht");
 		}
@@ -103,6 +93,10 @@ public class Application extends Controller {
 		return ok(login.render());
 	}
 	
-	
-	
+	public static Result deleteUser(int userId){
+		Model.deleteUser(userId);
+		angemeldet = false;
+		return ok(login.render());
+	}
+
 }

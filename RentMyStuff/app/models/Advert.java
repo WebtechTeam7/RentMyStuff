@@ -15,7 +15,7 @@ public class Advert {
 		this.description = description;
 		this.user = user;
 	}
-	
+	private int id;
 	private String kind;
 	private	String category;
 	private String description;
@@ -53,6 +53,14 @@ public class Advert {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	
