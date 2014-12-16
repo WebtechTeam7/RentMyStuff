@@ -11,16 +11,24 @@ import play.db.DB;
 
 public class Model {
 
-	public Model() {
+	private static Model instance;
 
+	private Model() {
 	}
 
-	private static Connection connection = DB.getConnection();
-	private static List<User> userList = new ArrayList<User>();
-	private static List<Advert> advertList = new ArrayList<Advert>();
-	private static List<Advert> userAdvertList = new ArrayList<Advert>();
-	
-	public static List<User> getUserList() {
+	public static Model getInstance() {
+		if (Model.instance == null) {
+			Model.instance = new Model();
+		}
+		return Model.instance;
+	}
+
+	private Connection connection = DB.getConnection();
+	private List<User> userList = new ArrayList<User>();
+	private List<Advert> advertList = new ArrayList<Advert>();
+	private List<Advert> userAdvertList = new ArrayList<Advert>();
+
+	public List<User> getUserList() {
 
 		try {
 			// Get all Users from the database
@@ -43,8 +51,8 @@ public class Model {
 
 		return userList;
 	}
-	
-	public static void createUser(String firstname, String lastname,
+
+	public void createUser(String firstname, String lastname,
 			String email, String password) {
 		try {
 			PreparedStatement preparedStatement = connection
@@ -59,21 +67,23 @@ public class Model {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void deleteUser(int userId){
+
+	public void deleteUser(int userId) {
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM User WHERE UserID = " + userId);
+			PreparedStatement preparedStatement = connection
+					.prepareStatement("DELETE FROM User WHERE UserID = "
+							+ userId);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static void setUserList(List<User> userList) {
-		Model.userList = userList;
+	public void setUserList(List<User> userList) {
+		Model.getInstance().userList = userList;
 	}
 
-	public static List<Advert> getAdvertList() {
+	public List<Advert> getAdvertList() {
 
 		advertList.clear();
 
@@ -96,15 +106,15 @@ public class Model {
 
 		return advertList;
 	}
-	
-	
-	public static List <Advert> getUserAdvertList(int userId){
-		
+
+	public List<Advert> getUserAdvertList(int userId) {
+
 		userAdvertList.clear();
-		
+
 		try {
 			PreparedStatement preparedStatement = connection
-					.prepareStatement("SELECT * FROM Advert WHERE AdvertUserID = " + userId);
+					.prepareStatement("SELECT * FROM Advert WHERE AdvertUserID = "
+							+ userId);
 			ResultSet resultset = preparedStatement.executeQuery();
 			while (resultset.next()) {
 				Advert advert = new Advert();
@@ -118,12 +128,11 @@ public class Model {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return userAdvertList;
 	}
-	
 
-	public static void createAdvert(String optradio, String kategorie,
+	public void createAdvert(String optradio, String kategorie,
 			String comment, User user) {
 		try {
 			PreparedStatement preparedStatement = connection
@@ -139,7 +148,7 @@ public class Model {
 		}
 	}
 
-	public static void deleteAdvert(int id, int userID) {
+	public void deleteAdvert(int id, int userID) {
 		boolean allowed = false;
 		try {
 			allowed = checkAuthorization(id, userID);
@@ -161,9 +170,8 @@ public class Model {
 	}
 
 	public static void setAdvertList(List<Advert> advertList) {
-		Model.advertList = advertList;
+		Model.getInstance().advertList = advertList;
 	}
-
 
 	/**
 	 * 
@@ -172,7 +180,7 @@ public class Model {
 	 * @author Jan
 	 * 
 	 */
-	public static User getUserById(String id) {
+	public User getUserById(String id) {
 		PreparedStatement preparedStatement;
 		try {
 			preparedStatement = connection
@@ -201,7 +209,7 @@ public class Model {
 	 * @author Jan
 	 */
 
-	public static int getUserIdByEmail(User user) throws SQLException {
+	public int getUserIdByEmail(User user) throws SQLException {
 		int id = 0;
 		String email = user.getEmail();
 		System.out.println(email);
@@ -223,7 +231,7 @@ public class Model {
 	 * @author Jan
 	 * @throws SQLException
 	 */
-	public static boolean checkAuthorization(int id, int userID)
+	public boolean checkAuthorization(int id, int userID)
 			throws SQLException {
 
 		PreparedStatement preparedStatement = connection
@@ -238,8 +246,8 @@ public class Model {
 
 	}
 
-	public static void setUserAdvertList(List<Advert> userAdvertList) {
-		Model.userAdvertList = userAdvertList;
+	public void setUserAdvertList(List<Advert> userAdvertList) {
+		Model.getInstance().userAdvertList = userAdvertList;
 	}
 
 }
