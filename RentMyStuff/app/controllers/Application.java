@@ -2,6 +2,8 @@ package controllers;
 
 
 import play.*;
+import play.data.DynamicForm;
+import play.data.Form;
 import play.mvc.*;
 import views.html.*;
 import models.*;
@@ -50,6 +52,10 @@ public class Application extends Controller {
 	public static Result kontakt() {
 		return ok(kontakt.render());
 	}
+	
+	public static Result fehler() {
+		return ok(fehler.render());
+	}
 
 	public static Result impressum() {
 
@@ -76,7 +82,12 @@ public class Application extends Controller {
 		return ok(index.render(Model.getUserAdvertList(currentUser.getUserID())));
 	}
 
-	public static Result anmelden(String email, String password) {
+	public static Result anmelden() {
+		
+		DynamicForm dynamicForm=Form.form().bindFromRequest();
+		
+		String email= dynamicForm.get("email");
+		String password= dynamicForm.get("password");
 
 		for (User user : Model.getUserList()) {
 			if (email.equals(user.getEmail())
@@ -87,10 +98,12 @@ public class Application extends Controller {
 				currentUser = user;
 				return ok(index.render(Model.getUserAdvertList(currentUser.getUserID())));
 			}
-			System.out.println("geht nicht");
+			System.out.println("geht nicht");	
+			
 		}
 
-		return ok(login.render());
+		//return ok(login.render());
+		return ok(fehler.render());
 	}
 	
 	public static Result deleteUser(int userId){
