@@ -1,11 +1,13 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="description" content="Die Homepage dient dazu Dinge in Konstanz zu verschenken">
+<meta name="description"
+	content="Die Homepage dient dazu Dinge in Konstanz zu verschenken">
 <meta name="keywords" content="Konstanz Verschenken ">
 <meta name="author" content="Dennis">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+<link
+	href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
 	rel="stylesheet">
 <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
 <link rel="stylesheet" href=@routes.Assets.at("stylesheets/bootstrap.min.css")>
@@ -30,7 +32,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">Registrieren</div>
 				<div class="panel-body">
-					<form role="form">
+					<form role="form" action="createUser" method="Post">
 						<div class="row">
 							<div class="col-xs-6 col-sm-6 col-md-6">
 								<div class="form-group">
@@ -68,12 +70,13 @@
 						</div>
 
 
-<input type="submit" value="Register" class="btn btn-info btn-block">
+						<input type="submit" value="Register"
+							class="btn btn-info btn-block">
 
-</form>
-</div>
-</div>
-</div>
-</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 </html>

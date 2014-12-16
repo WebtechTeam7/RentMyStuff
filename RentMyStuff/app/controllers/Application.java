@@ -1,6 +1,5 @@
 package controllers;
 
-
 import play.*;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -52,7 +51,7 @@ public class Application extends Controller {
 	public static Result kontakt() {
 		return ok(kontakt.render());
 	}
-	
+
 	public static Result fehler() {
 		return ok(fehler.render());
 	}
@@ -83,11 +82,11 @@ public class Application extends Controller {
 	}
 
 	public static Result anmelden() {
-		
-		DynamicForm dynamicForm=Form.form().bindFromRequest();
-		
-		String email= dynamicForm.get("email");
-		String password= dynamicForm.get("password");
+
+		DynamicForm dynamicForm = Form.form().bindFromRequest();
+
+		String email = dynamicForm.get("email");
+		String password = dynamicForm.get("password");
 
 		for (User user : Model.getInstance().getUserList()) {
 			if (email.equals(user.getEmail())
@@ -97,15 +96,38 @@ public class Application extends Controller {
 				System.out.println("hat funktioniert");
 				currentUser = user;
 				return ok(index.render(Model.getInstance().getUserAdvertList(currentUser.getUserID())));
+
 			}
-			System.out.println("geht nicht");	
-			
+			System.out.println("geht nicht");
+
 		}
 
-		//return ok(login.render());
+		// return ok(login.render());
 		return ok(fehler.render());
 	}
-	
+
+	public static Result createUser() {
+
+		DynamicForm dynamicForm = Form.form().bindFromRequest();
+
+		String firstname = dynamicForm.get("first_name");
+		String lastname = dynamicForm.get("last_name");
+		String email = dynamicForm.get("email");
+		String password = dynamicForm.get("password");
+		String password_confirmation = dynamicForm.get("password_confirmation");
+
+		if (password.equals(password_confirmation)) {
+			User user = new User(firstname, lastname, email, password);
+			Model.getInstance().createUser(firstname, lastname, email, password);
+			currentUser = user;
+
+			return ok(index.render(Model.getInstance().getUserAdvertList(currentUser.getUserID())));
+		} else {
+			return ok(fehler.render());
+		}
+
+	}
+
 	public static Result deleteUser(int userId){
 		Model.getInstance().deleteUser(userId);
 		angemeldet = false;
