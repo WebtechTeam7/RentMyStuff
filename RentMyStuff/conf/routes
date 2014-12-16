@@ -14,6 +14,7 @@ GET		/registrieren				controllers.Application.registrieren()
 GET		/fehler						controllers.Application.fehler()
 GET		/newAdvert					controllers.Application.newAdvert(optradio,kategorie,comment)
 POST		/anmelden					controllers.Application.anmelden()
+POST	/createUser					controllers.Application.createUser()
 GET		/deleteAdvert				controllers.Application.deleteAdvert(id: Integer, userId: Integer)
 GET		/deleteUser					controllers.Application.deleteUser(userId: Integer)
 # Map static resources from the /public folder to the /assets URL path

@@ -1,6 +1,5 @@
 package controllers;
 
-
 import play.*;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -16,7 +15,8 @@ public class Application extends Controller {
 	public static Result index() {
 
 		if (angemeldet == true) {
-			return ok(index.render(Model.getUserAdvertList(currentUser.getUserID())));
+			return ok(index.render(Model.getUserAdvertList(currentUser
+					.getUserID())));
 		} else {
 			return ok(login.render());
 		}
@@ -52,7 +52,7 @@ public class Application extends Controller {
 	public static Result kontakt() {
 		return ok(kontakt.render());
 	}
-	
+
 	public static Result fehler() {
 		return ok(fehler.render());
 	}
@@ -74,20 +74,22 @@ public class Application extends Controller {
 			String comment) {
 
 		Model.createAdvert(optradio, kategorie, comment, currentUser);
-		return ok(index.render(Model.getUserAdvertList(currentUser.getUserID())));
+		return ok(index
+				.render(Model.getUserAdvertList(currentUser.getUserID())));
 	}
 
 	public static Result deleteAdvert(int id, int userId) {
 		Model.deleteAdvert(id, userId);
-		return ok(index.render(Model.getUserAdvertList(currentUser.getUserID())));
+		return ok(index
+				.render(Model.getUserAdvertList(currentUser.getUserID())));
 	}
 
 	public static Result anmelden() {
-		
-		DynamicForm dynamicForm=Form.form().bindFromRequest();
-		
-		String email= dynamicForm.get("email");
-		String password= dynamicForm.get("password");
+
+		DynamicForm dynamicForm = Form.form().bindFromRequest();
+
+		String email = dynamicForm.get("email");
+		String password = dynamicForm.get("password");
 
 		for (User user : Model.getUserList()) {
 			if (email.equals(user.getEmail())
@@ -96,17 +98,42 @@ public class Application extends Controller {
 				angemeldet = true;
 				System.out.println("hat funktioniert");
 				currentUser = user;
-				return ok(index.render(Model.getUserAdvertList(currentUser.getUserID())));
+				return ok(index.render(Model.getUserAdvertList(currentUser
+						.getUserID())));
 			}
-			System.out.println("geht nicht");	
-			
+			System.out.println("geht nicht");
+
 		}
 
-		//return ok(login.render());
+		// return ok(login.render());
 		return ok(fehler.render());
 	}
+
+	public static Result createUser() {
+
+		DynamicForm dynamicForm = Form.form().bindFromRequest();
+
+		String firstname = dynamicForm.get("first_name");
+		String lastname = dynamicForm.get("last_name");
+		String email = dynamicForm.get("email");
+		String password = dynamicForm.get("password");
+		String password_confirmation = dynamicForm.get("password_confirmation");
+
+		if (password.equals(password_confirmation)) {
+			User user = new User(firstname, lastname, email, password);
+			Model.createUser(firstname, lastname, email, password);
+			currentUser = user;
+
+			return ok(index.render(Model.getUserAdvertList(currentUser.getUserID())));
+		} else {
+			return ok(fehler.render());
+		}
+
+	}
+
 	
-	public static Result deleteUser(int userId){
+	
+	public static Result deleteUser(int userId) {
 		Model.deleteUser(userId);
 		angemeldet = false;
 		return ok(login.render());
