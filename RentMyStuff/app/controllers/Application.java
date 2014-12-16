@@ -16,7 +16,7 @@ public class Application extends Controller {
 	public static Result index() {
 
 		if (angemeldet == true) {
-			return ok(index.render(Model.getUserAdvertList(currentUser.getUserID())));
+			return ok(index.render(Model.getInstance().getUserAdvertList(currentUser.getUserID())));
 		} else {
 			return ok(login.render());
 		}
@@ -34,7 +34,7 @@ public class Application extends Controller {
 	public static Result angebote() {
 
 		if (angemeldet == true) {
-			return ok(angebote.render(Model.getAdvertList()));
+			return ok(angebote.render(Model.getInstance().getAdvertList()));
 		} else {
 			return ok(login.render());
 		}
@@ -43,7 +43,7 @@ public class Application extends Controller {
 	public static Result gesuche() {
 
 		if (angemeldet == true) {
-			return ok(gesuche.render(Model.getAdvertList()));
+			return ok(gesuche.render(Model.getInstance().getAdvertList()));
 		} else {
 			return ok(login.render());
 		}
@@ -73,13 +73,13 @@ public class Application extends Controller {
 	public static Result newAdvert(String optradio, String kategorie,
 			String comment) {
 
-		Model.createAdvert(optradio, kategorie, comment, currentUser);
-		return ok(index.render(Model.getUserAdvertList(currentUser.getUserID())));
+		Model.getInstance().createAdvert(optradio, kategorie, comment, currentUser);
+		return ok(index.render(Model.getInstance().getUserAdvertList(currentUser.getUserID())));
 	}
 
 	public static Result deleteAdvert(int id, int userId) {
-		Model.deleteAdvert(id, userId);
-		return ok(index.render(Model.getUserAdvertList(currentUser.getUserID())));
+		Model.getInstance().deleteAdvert(id, userId);
+		return ok(index.render(Model.getInstance().getUserAdvertList(currentUser.getUserID())));
 	}
 
 	public static Result anmelden() {
@@ -89,14 +89,14 @@ public class Application extends Controller {
 		String email= dynamicForm.get("email");
 		String password= dynamicForm.get("password");
 
-		for (User user : Model.getUserList()) {
+		for (User user : Model.getInstance().getUserList()) {
 			if (email.equals(user.getEmail())
 					&& password.equals(user.getPassword())) {
 				System.out.println("geht");
 				angemeldet = true;
 				System.out.println("hat funktioniert");
 				currentUser = user;
-				return ok(index.render(Model.getUserAdvertList(currentUser.getUserID())));
+				return ok(index.render(Model.getInstance().getUserAdvertList(currentUser.getUserID())));
 			}
 			System.out.println("geht nicht");	
 			
@@ -107,7 +107,7 @@ public class Application extends Controller {
 	}
 	
 	public static Result deleteUser(int userId){
-		Model.deleteUser(userId);
+		Model.getInstance().deleteUser(userId);
 		angemeldet = false;
 		return ok(login.render());
 	}
