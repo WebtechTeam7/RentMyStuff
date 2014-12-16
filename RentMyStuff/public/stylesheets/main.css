@@ -3,7 +3,11 @@ body{background-color: #BDBDBD;}
 img {
 	max-width: 100%;
 	height: auto;
+	margin: auto;
+    text-align: center;
 }
+  
+
 .navbar{
 
 -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
@@ -34,14 +38,19 @@ box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
 	
 #footerbox{
 	background-color: #222222;
-	margin-top: 70px;
+	margin-top: 70px;	
 }
 
-.boxformat{
+.boxformat{	
+	margin-top: 300px;
+	margin-left: 200px;
+	}
 	
-	margin-top: 70px;
+#angebote{	
+	margin-top: 500px;
 	margin-left: 70px;
 	}
+	
 	
 #popup{
 	margin-top: 50px;
@@ -64,3 +73,4 @@ box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
 #anmeldung{
 	background-color: #222222;
 }
+
