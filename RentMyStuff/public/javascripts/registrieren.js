@@ -1,29 +1,20 @@
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="description" content="Die Homepage dient dazu Dinge in Konstanz zu verschenken">
-<meta name="keywords" content="Konstanz Verschenken ">
-<meta name="author" content="Dennis">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
-	rel="stylesheet">
-<link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-<link rel="stylesheet" href=@routes.Assets.at("stylesheets/bootstrap.min.css")>
-<link rel="stylesheet" href=@routes.Assets.at("stylesheets/bootstrap.css")>
-<link rel="stylesheet" href=@routes.Assets.at("stylesheets/main.css")>
-<link rel="stylesheet" href=@routes.Assets.at("stylesheets/registrieren.css")>
-<script src=@routes.Assets.at(
-	"javascripts/jquery-2.1.1.js") type="text/javascript"></script>
-<script src=@routes.Assets.at(
-	"javascripts/rentmystuff.js") type="text/javascript"></script>
-<script src=@routes.Assets.at(
-	"javascripts/bootstrap-3.2.0-dist/js/bootstrap.js") type="text/javascript"></script>
-<script src=@routes.Assets.at(
-	"javascripts/bootstrap-3.2.0-dist/js/bootstrap.min.js") type="text/javascript"></script>
-<script src=@routes.Assets.at(
-	"javascripts/bootstrap-3.2.0-dist/js/jquery.js") type="text/javascript"></script>
-</head>
-<div class="container">
+function austausch(){
+	
+	var xmlhttp;
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	
+	xmlhttp.onreadystatechange=function()
+	  {
+	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+	    {
+	    document.getElementById("anmeldung").innerHTML="<div class="container">
 	<div class="row centered-form">
 		<div
 			class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
@@ -75,5 +66,11 @@
 </div>
 </div>
 </div>
-</div>
-</html>
+</div>"
+	    }
+	  }
+	xmlhttp.open("GET","URL",true);
+	xmlhttp.send();
+	}
+
+}
