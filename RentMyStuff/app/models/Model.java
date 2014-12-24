@@ -32,8 +32,9 @@ public class Model {
 
 		try {
 			// Get all Users from the database
+			String statement = "SELECT * FROM User";
 			PreparedStatement preparedStatement = connection
-					.prepareStatement("SELECT * FROM User");
+					.prepareStatement(statement);
 
 			ResultSet resultset = preparedStatement.executeQuery();
 			while (resultset.next()) {
@@ -52,12 +53,13 @@ public class Model {
 		return userList;
 	}
 
-	public void createUser(String firstname, String lastname,
-			String email, String password) {
+	public void createUser(String firstname, String lastname, String email,
+			String password) {
 		try {
+			String statement = "INSERT INTO User(Firstname, Lastname, Email, Password)"
+					+ "VALUES(?,?,?,?)";
 			PreparedStatement preparedStatement = connection
-					.prepareStatement("INSERT INTO User(Firstname, Lastname, Email, Password)"
-							+ "VALUES(?,?,?,?)");
+					.prepareStatement(statement);
 			preparedStatement.setString(1, firstname);
 			preparedStatement.setString(2, lastname);
 			preparedStatement.setString(3, email);
@@ -70,9 +72,11 @@ public class Model {
 
 	public void deleteUser(int userId) {
 		try {
+			String statement = "DELETE FROM User WHERE UserID = ?";
 			PreparedStatement preparedStatement = connection
-					.prepareStatement("DELETE FROM User WHERE UserID = "
-							+ userId);
+					.prepareStatement(statement);
+			String id = String.valueOf(userId);
+			preparedStatement.setString(1, id);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -88,8 +92,9 @@ public class Model {
 		advertList.clear();
 
 		try {
+			String statement = "SELECT * FROM Advert";
 			PreparedStatement preparedStatement = connection
-					.prepareStatement("SELECT * FROM Advert");
+					.prepareStatement(statement);
 			ResultSet resultset = preparedStatement.executeQuery();
 			while (resultset.next()) {
 				Advert advert = new Advert();
@@ -112,9 +117,10 @@ public class Model {
 		userAdvertList.clear();
 
 		try {
+			String statement = "SELECT * FROM Advert WHERE AdvertUserID = ?";
 			PreparedStatement preparedStatement = connection
-					.prepareStatement("SELECT * FROM Advert WHERE AdvertUserID = "
-							+ userId);
+					.prepareStatement(statement);
+			preparedStatement.setInt(1, userId);
 			ResultSet resultset = preparedStatement.executeQuery();
 			while (resultset.next()) {
 				Advert advert = new Advert();
@@ -132,12 +138,13 @@ public class Model {
 		return userAdvertList;
 	}
 
-	public void createAdvert(String optradio, String kategorie,
-			String comment, User user) {
+	public void createAdvert(String optradio, String kategorie, String comment,
+			User user) {
 		try {
+			String statement = "INSERT INTO Advert (AdvertUserID, Kind, Category, Description)"
+					+ "VALUES(?,?,?,?)";
 			PreparedStatement preparedStatement = connection
-					.prepareStatement("INSERT INTO Advert (AdvertUserID, Kind, Category, Description)"
-							+ "VALUES(?,?,?,?)");
+					.prepareStatement(statement);
 			preparedStatement.setInt(1, getUserIdByEmail(user));
 			preparedStatement.setString(2, optradio);
 			preparedStatement.setString(3, kategorie);
@@ -157,9 +164,10 @@ public class Model {
 		}
 		if (allowed) {
 			try {
+				String statement = "DELETE FROM Advert WHERE AdvertID = ?";
 				PreparedStatement preparedStatement = connection
-						.prepareStatement("DELETE FROM Advert WHERE AdvertID = "
-								+ id);
+						.prepareStatement(statement);
+				preparedStatement.setInt(1, id);
 				preparedStatement.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -183,8 +191,9 @@ public class Model {
 	public User getUserById(String id) {
 		PreparedStatement preparedStatement;
 		try {
-			preparedStatement = connection
-					.prepareStatement("SELECT * FROM User WHERE UserId = " + id);
+			String statement = "SELECT * FROM User WHERE UserId = ?";
+			preparedStatement = connection.prepareStatement(statement);
+			preparedStatement.setString(1, id);
 			ResultSet resultset = preparedStatement.executeQuery();
 			User user;
 			while (resultset.next()) {
@@ -210,12 +219,12 @@ public class Model {
 	 */
 
 	public int getUserIdByEmail(User user) throws SQLException {
+		String statement = "SELECT UserID FROM User WHERE Email = ?";
 		int id = 0;
 		String email = user.getEmail();
-		System.out.println(email);
 		PreparedStatement preparedStatement = connection
-				.prepareStatement("SELECT UserID FROM User WHERE Email = '"
-						+ email + "'");
+				.prepareStatement(statement);
+		preparedStatement.setString(1, email);
 		ResultSet resultset = preparedStatement.executeQuery();
 		while (resultset.next()) {
 			id = resultset.getInt("UserId");
@@ -231,12 +240,13 @@ public class Model {
 	 * @author Jan
 	 * @throws SQLException
 	 */
-	public boolean checkAuthorization(int id, int userID)
-			throws SQLException {
+	public boolean checkAuthorization(int id, int userID) throws SQLException {
 
+		String statement = "SELECT * FROM Advert WHERE AdvertId = ? AND AdvertUserID = ?";
 		PreparedStatement preparedStatement = connection
-				.prepareStatement("SELECT * FROM Advert WHERE AdvertId = " + id
-						+ " AND AdvertUserID =" + userID);
+				.prepareStatement(statement);
+		preparedStatement.setInt(1, id);
+		preparedStatement.setInt(2, userID);
 		ResultSet resultset = preparedStatement.executeQuery();
 		if (resultset != null) {
 			return true;
