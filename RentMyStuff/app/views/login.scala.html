@@ -1,24 +1,35 @@
-@main("Welcome"){
+ @main("Welcome"){
+
 <div class="row">
 	<div class="col-md-4"></div>
 	<div class="col-md-4">
+
 		<section>
+
+			<!-- Anmeldung:  -->
+
 			<h2>Anmeldung</h2>
-			<div class="Indexcontainer">
-				<form class="form-signin" role="form">
-					<h3 class="form-signin-heading">Bitte melde dich an</h3>
+
+			
+
+
+			<div class="Indexcontainer anmeldung">
+				<form class="form-signin" role="form" action="anmelden" method="Post">
+					<h3 class="form-signin-heading" color="#ff8040">Bitte melde dich an</h3>
 					<a href="" onclick="popup('@routes.Application.registrieren()')">neu
-						registrieren</a> <input type="email" class="form-control"
-						placeholder="Email-Adresse" required autofocus> <input
-						type="password" class="form-control" placeholder="Passwort"
-						required>
+						registrieren</a> <input type="email" id="email" name="email" class="form-control"
+						placeholder="Email-Adresse" required autofocus> <input id="password"
+						name="password" type="password" class="form-control"
+						placeholder="Passwort" required>
+
 					<button class="btn btn-lg btn-primary btn-block" id="anmeldung"
 						type="submit">Anmelden</button>
 				</form>
 			</div>
-			<!-- /container -->
+
 		</section>
 	</div>
 	<div class="col-md-4"></div>
 </div>
+
 }

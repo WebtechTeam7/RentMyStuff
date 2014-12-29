@@ -18,7 +18,7 @@
 	function optionValue() {
 
 		select = $('#kategorie').val();
-
+		
 		if (select != "") {
 			$('#speichern').attr("disabled", false);
 		} else {
@@ -37,17 +37,13 @@
 			<h2>Inserat erstellen</h2>
 			
 			<div id = "option" name="option">
-
 				<label class="radio-inline">
-				<input type="radio"	name="optradio" value ="Angebot">Angebot</label> 
+				<input type="radio"	name="optradio" value ="Angebot" checked>Angebot</label> 
 				<label class="radio-inline">
 				<input type="radio" name="optradio" value="Gesuch">Gesuch</label>
-
 			</div>
 
- 
-
-			<div class="row">
+ 			<div class="row">
 				<div class="col-xs-6 col-md-4">
 
 					<select class="form-control" id="kategorie" name="kategorie"
@@ -101,7 +97,7 @@
 				</div>
 				<div class="col-xs-6 col-md-4"></div>
 				<div class="col-xs-6 col-md-4">
-					<button type="submit" class="btn btn-warning" id="speichern">Speichern</button>
+					<button type="submit" class="btn btn-warning" id="speichern" onclick="window.close(); alert('Ihre Daten wurden gespeichert');">Speichern</button>
 				</div>
 			</div>
 
