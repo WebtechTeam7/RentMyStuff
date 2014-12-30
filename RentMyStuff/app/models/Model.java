@@ -111,6 +111,30 @@ public class Model {
 
 		return advertList;
 	}
+	
+	public List<Advert> getAdvertList(String category){
+		advertList.clear();
+		
+		try {
+			String statement = "SELECT * FROM Advert WHERE Category = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(statement);
+			preparedStatement.setString(1, category);
+			ResultSet resultset = preparedStatement.executeQuery();
+			while(resultset.next()){
+				Advert advert = new Advert();
+				advert.setKind(resultset.getString("Kind"));
+				advert.setCategory(resultset.getString("Category"));
+				advert.setUser(getUserById(resultset.getString("AdvertUserID")));
+				advert.setDescription(resultset.getString("Description"));
+				advert.setId(resultset.getInt("AdvertID"));
+				advertList.add(advert);			
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return advertList;
+	}
 
 	public List<Advert> getUserAdvertList(int userId) {
 
