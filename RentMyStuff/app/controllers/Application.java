@@ -9,13 +9,46 @@ import models.*;
 
 public class Application extends Controller {
 
-	static Boolean angemeldet = false;
-	private static User currentUser;
+	// static Boolean angemeldet = false;
+	// private static User currentUser;
+
+	public static User getUserFromSession() {
+		String userCode = "";
+		userCode = session("USER");
+		try {
+			if (userCode.equals("")) {
+				return null;
+			} else {
+				Integer userid = new Integer(userCode);
+
+				for (User user : Model.getInstance().getUserList()) {
+					if (user.getUserID() == userid) {
+						System.out.println("getUserFromSession: get "
+								+ user.getFirstname() + " User from Session");
+						return user;
+					}
+				}
+			}
+		} catch (NullPointerException e) {
+			System.out.println("getUserFromSession: " + e
+					+ " because of no User loged in");
+		}
+
+		return null;
+	}
+
+	public static void addUserToSession(User user) {
+		Integer userid = new Integer(user.getUserID());
+		System.out.println("addUserToSession: Add User " + userid
+				+ " to session");
+		session("USER", userid.toString());
+	}
 
 	public static Result index() {
 
-		if (angemeldet == true) {
-			return ok(index.render(Model.getInstance().getUserAdvertList(currentUser.getUserID())));
+		if (isUserInSession()) {
+			return ok(index.render(Model.getInstance().getUserAdvertList(
+					getUserFromSession().getUserID())));
 		} else {
 			return ok(login.render());
 		}
@@ -23,8 +56,8 @@ public class Application extends Controller {
 
 	public static Result login() {
 
-		if (angemeldet == true) {
-			angemeldet = false;
+		if (isUserInSession()) {
+			session().clear();
 			System.out.println("abmelden hat funktioniert");
 		}
 		return ok(login.render());
@@ -32,7 +65,7 @@ public class Application extends Controller {
 
 	public static Result angebote() {
 
-		if (angemeldet == true) {
+		if (isUserInSession()) {
 			return ok(angebote.render(Model.getInstance().getAdvertList()));
 		} else {
 			return ok(login.render());
@@ -41,7 +74,7 @@ public class Application extends Controller {
 
 	public static Result gesuche() {
 
-		if (angemeldet == true) {
+		if (isUserInSession()) {
 			return ok(gesuche.render(Model.getInstance().getAdvertList()));
 		} else {
 			return ok(login.render());
@@ -72,13 +105,16 @@ public class Application extends Controller {
 	public static Result newAdvert(String optradio, String kategorie,
 			String comment) {
 
-		Model.getInstance().createAdvert(optradio, kategorie, comment, currentUser);
-		return ok(index.render(Model.getInstance().getUserAdvertList(currentUser.getUserID())));
+		Model.getInstance().createAdvert(optradio, kategorie, comment,
+				getUserFromSession());
+		return ok(index.render(Model.getInstance().getUserAdvertList(
+				getUserFromSession().getUserID())));
 	}
 
 	public static Result deleteAdvert(int id, int userId) {
 		Model.getInstance().deleteAdvert(id, userId);
-		return ok(index.render(Model.getInstance().getUserAdvertList(currentUser.getUserID())));
+		return ok(index.render(Model.getInstance().getUserAdvertList(
+				getUserFromSession().getUserID())));
 	}
 
 	public static Result anmelden() {
@@ -92,10 +128,12 @@ public class Application extends Controller {
 			if (email.equals(user.getEmail())
 					&& password.equals(user.getPassword())) {
 				System.out.println("Benutzername und Passwort stimmen");
-				angemeldet = true;
+				addUserToSession(user);
+				;
 				System.out.println("anmelden hat funktioniert");
-				currentUser = user;
-				return ok(index.render(Model.getInstance().getUserAdvertList(currentUser.getUserID())));
+
+				return ok(index.render(Model.getInstance().getUserAdvertList(
+						getUserFromSession().getUserID())));
 
 			}
 			System.out.println("geht nicht");
@@ -117,21 +155,44 @@ public class Application extends Controller {
 		String password_confirmation = dynamicForm.get("password_confirmation");
 
 		if (password.equals(password_confirmation)) {
-			User user = new User(firstname, lastname, email, password);
-			Model.getInstance().createUser(firstname, lastname, email, password);
-			currentUser = user;
+			// User user = new User(firstname, lastname, email, password);
+			Model.getInstance()
+					.createUser(firstname, lastname, email, password);
 
-			return ok(index.render(Model.getInstance().getUserAdvertList(currentUser.getUserID())));
+			for (User user : Model.getInstance().getUserList()) {
+				if (email.equals(user.getEmail())
+						&& password.equals(user.getPassword())) {
+					addUserToSession(user);
+					System.out.println("addUser: " + session().get("USER")
+							+ " User from Session");
+					
+					return ok(index.render(Model.getInstance().getUserAdvertList(
+							getUserFromSession().getUserID())));
+				}
+			}
+			return ok(fehler.render());
+			
 		} else {
 			return ok(fehler.render());
 		}
 
 	}
 
-	public static Result deleteUser(int userId){
+	public static Result deleteUser(int userId) {
 		Model.getInstance().deleteUser(userId);
-		angemeldet = false;
+		session().clear();
 		return ok(login.render());
+	}
+
+	public static boolean isUserInSession() {
+		User user = getUserFromSession();
+		if (user == null) {
+			return false;
+		} else {
+
+			return true;
+		}
+
 	}
 
 }
