@@ -39,8 +39,13 @@
 							<div class="gesuche">
 								<!-- <img class="rasemaeher" src=@routes.Assets.at( "images/Rasenmaeher.jpg") /> -->
 								<span class="kind">Kategorie: @advert.getCategory()</span><br>
-								<span class="kind">@advert.getDescription()</span> <br> <label>mailto:</label><span
-									class="kind">@advert.getUser().getEmail()</span>
+								<span class="kind">@advert.getDescription()</span> <br>
+								<a class="btn btn-default btn-sm" href="mailto:@advert.getUser.getEmail()?subject=Ihre Anzeige bei RentMyStuff">
+  									<i class="fa fa-envelope"></i> Mail to
+  								</a>
+								<a class="btn btn-default btn-sm" href="@routes.Application.map()">
+  									<i class="fa fa-map-marker"></i> Show Address
+  								</a>
 							</div>
 							<hr>
 						</div>
