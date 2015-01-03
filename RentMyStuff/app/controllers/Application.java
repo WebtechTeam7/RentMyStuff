@@ -25,7 +25,7 @@ public class Application extends Controller {
 
 		if (angemeldet == true) {
 			angemeldet = false;
-			System.out.println("abmelden hat fuktioniert");
+			System.out.println("abmelden hat funktioniert");
 		}
 		return ok(login.render());
 	}
@@ -91,9 +91,9 @@ public class Application extends Controller {
 		for (User user : Model.getInstance().getUserList()) {
 			if (email.equals(user.getEmail())
 					&& password.equals(user.getPassword())) {
-				System.out.println("geht");
+				System.out.println("Benutzername und Passwort stimmen");
 				angemeldet = true;
-				System.out.println("hat funktioniert");
+				System.out.println("anmelden hat funktioniert");
 				currentUser = user;
 				return ok(index.render(Model.getInstance().getUserAdvertList(currentUser.getUserID())));
 
