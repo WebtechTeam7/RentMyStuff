@@ -4,18 +4,17 @@
 	<section class="boxformat">
 		<article>
 			<div class="Indexcontainer">
-				@if(!AdvertList.isEmpty()) {
 				<div class="row">
 					<div class="col-md-3">
 						<button type="button" class="btn btn-warning"
-						onclick="popup('@routes.Application.inserat()')">Angebot
-						erstellen</button>
+							onclick="popup('@routes.Application.inserat()')">Angebot
+							erstellen</button>
 					</div>
 					<div class="col-md-9">
 						<img src=@routes.Assets.at(
-						"images/Angebote.png") alt="Angebote_Logo">
+							"images/Angebote.png") alt="Angebote_Logo">
 					</div>
-				</div>				
+				</div>
 				<div class="row">
 					<div class="col-xs-6 col-sm-3">
 						<div class="btn-group-vertical" role="group" aria-label="...">
@@ -54,7 +53,7 @@
 
 					<div class="col-xs-6 col-sm-3"></div>
 				</div>
-				}
+
 			</div>
 		</article>
 	</section>
