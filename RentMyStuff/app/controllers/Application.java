@@ -1,5 +1,7 @@
 package controllers;
 
+import org.mindrot.jbcrypt.*;
+
 import play.*;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -126,10 +128,10 @@ public class Application extends Controller {
 
 		for (User user : Model.getInstance().getUserList()) {
 			if (email.equals(user.getEmail())
-					&& password.equals(user.getPassword())) {
+					&& BCrypt.checkpw(password, user.getPassword())) {
 				System.out.println("Benutzername und Passwort stimmen");
 				addUserToSession(user);
-				;
+
 				System.out.println("anmelden hat funktioniert");
 
 				return ok(index.render(Model.getInstance().getUserAdvertList(
@@ -156,22 +158,33 @@ public class Application extends Controller {
 
 		if (password.equals(password_confirmation)) {
 			// User user = new User(firstname, lastname, email, password);
-			Model.getInstance()
-					.createUser(firstname, lastname, email, password);
 
+			String hashPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+			
+				
+			Model.getInstance()
+					.createUser(firstname, lastname, email, hashPassword);
+			
+			
 			for (User user : Model.getInstance().getUserList()) {
+				
+				
 				if (email.equals(user.getEmail())
-						&& password.equals(user.getPassword())) {
+						&& BCrypt.checkpw(password, user.getPassword())){
+					
+					
 					addUserToSession(user);
+					
 					System.out.println("addUser: " + session().get("USER")
 							+ " User from Session");
-					
-					return ok(index.render(Model.getInstance().getUserAdvertList(
-							getUserFromSession().getUserID())));
-				}
+
+					return ok(index
+							.render(Model.getInstance().getUserAdvertList(
+									getUserFromSession().getUserID())));
+				} 
 			}
 			return ok(fehler.render());
-			
+
 		} else {
 			return ok(fehler.render());
 		}
