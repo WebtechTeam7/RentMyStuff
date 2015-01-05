@@ -41,11 +41,11 @@
 								<span class="kind">Kategorie: @advert.getCategory()</span><br>
 								<span class="kind">@advert.getDescription()</span> <br>
 								<a class="btn btn-default btn-sm" href="mailto:@advert.getUser.getEmail()?subject=Ihre Anzeige bei RentMyStuff">
-  									<i class="fa fa-envelope"></i> Mail to
+  									<i class="fa fa-envelope"></i> Nachricht senden
   								</a>
 								
   								<a class="btn btn-default btn-sm" href="@routes.Application.map(advert.getAddress().getStreet(),advert.getAddress().getCity(),advert.getAddress().getPostcode(),advert.getAddress().getCountry())">
-  									<i class="fa fa-map-marker"></i> Show Address
+  									<i class="fa fa-map-marker"></i> Standort anzeigen
   								</a>
   							
 							</div>
