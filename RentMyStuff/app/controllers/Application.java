@@ -69,15 +69,15 @@ public class Application extends Controller {
 		return ok(registrieren.render());
 	}
 	
-	public static Result map(){
-		return ok(map.render());
+	public static Result map(String street, String city, String postcode, String country){
+		return ok(map.render(street, city, postcode, country));
 	}
 
 
 	public static Result newAdvert(String optradio, String kategorie,
-			String comment) {
+			String comment, String street, String postcode, String city, String country) {
 
-		Model.getInstance().createAdvert(optradio, kategorie, comment, currentUser);
+		Model.getInstance().createAdvert(optradio, kategorie, comment, currentUser, street, postcode, city, country);
 		return ok(index.render(Model.getInstance().getUserAdvertList(currentUser.getUserID())));
 	}
 

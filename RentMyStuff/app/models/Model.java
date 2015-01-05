@@ -103,12 +103,32 @@ public class Model {
 				advert.setUser(getUserById(resultset.getString("AdvertUserID")));
 				advert.setDescription(resultset.getString("Description"));
 				advert.setId(resultset.getInt("AdvertID"));
+				advert.setAddress(getAddress(advert.getId()));
 				advertList.add(advert);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return advertList;
+	}
+
+	private Address getAddress(int advertID) throws SQLException {
+		
+		String statement = "SELECT ad.Street, ad.Postcode, ad.City, ad.Country, aa.Address FROM Address ad, AdvertAddress aa WHERE aa.Advert = ? AND aa.Address = ad.AddressID";
+		PreparedStatement preparedStatement = connection
+				.prepareStatement(statement);
+		preparedStatement.setInt(1, advertID);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		while (resultSet.next()) {
+			Address address = new Address();
+			address.setStreet(resultSet.getString("Street"));
+			address.setPostcode(resultSet.getString("Postcode"));
+			address.setCity(resultSet.getString("City"));
+			address.setCountry(resultSet.getString("Country"));
+			return address;
+		}
+
+		return null;
 	}
 
 	public List<Advert> getUserAdvertList(int userId) {
@@ -138,20 +158,77 @@ public class Model {
 	}
 
 	public void createAdvert(String optradio, String kategorie, String comment,
-			User user) {
+			User user, String street, String postcode, String city,
+			String country) {
+
 		try {
-			String statement = "INSERT INTO Advert (AdvertUserID, Kind, Category, Description)"
-					+ "VALUES(?,?,?,?)";
-			PreparedStatement preparedStatement = connection
-					.prepareStatement(statement);
-			preparedStatement.setInt(1, getUserIdByEmail(user));
-			preparedStatement.setString(2, optradio);
-			preparedStatement.setString(3, kategorie);
-			preparedStatement.setString(4, comment);
-			preparedStatement.executeUpdate();
+			int addressID = address(street, postcode, city, country);
+			int advertID = advert(user, optradio, kategorie, comment);
+			advertAddress(addressID, advertID);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private void advertAddress(int addressID, int advertID) throws SQLException {
+		String statement = "INSERT INTO AdvertAddress(Address, Advert)"
+				+ "VALUES(?,?)";
+		PreparedStatement preparedStatement = connection
+				.prepareStatement(statement);
+		preparedStatement.setInt(1, addressID);
+		preparedStatement.setInt(2, advertID);
+		preparedStatement.executeUpdate();
+
+	}
+
+	private int address(String street, String postcode, String city,
+			String country) throws SQLException {
+		String statement = "INSERT INTO ADDRESS (Street, Postcode, City, Country)"
+				+ "VALUES(?,?,?,?)";
+		PreparedStatement preparedStatement = connection
+				.prepareStatement(statement);
+		preparedStatement.setString(1, street);
+		preparedStatement.setString(2, postcode);
+		preparedStatement.setString(3, city);
+		preparedStatement.setString(4, country);
+		preparedStatement.executeUpdate();
+
+		// now return the ID
+		int id;
+		statement = "SELECT * FROM Address ORDER BY AddressID DESC LIMIT 1";
+		preparedStatement = connection.prepareStatement(statement);
+		ResultSet resultset = preparedStatement.executeQuery();
+		while (resultset.next()) {
+			id = resultset.getInt("AddressID");
+			return id;
+		}
+		return 0;
+
+	}
+
+	private int advert(User user, String optradio, String kategorie,
+			String comment) throws SQLException {
+		String statement = "INSERT INTO Advert (AdvertUserID, Kind, Category, Description)"
+				+ "VALUES(?,?,?,?)";
+		PreparedStatement preparedStatement = connection
+				.prepareStatement(statement);
+		preparedStatement.setInt(1, getUserIdByEmail(user));
+		preparedStatement.setString(2, optradio);
+		preparedStatement.setString(3, kategorie);
+		preparedStatement.setString(4, comment);
+		preparedStatement.executeUpdate();
+
+		// now return the ID
+		int id;
+		statement = "SELECT * FROM Advert ORDER BY AdvertID DESC LIMIT 1";
+		preparedStatement = connection.prepareStatement(statement);
+		ResultSet resultset = preparedStatement.executeQuery();
+		while (resultset.next()) {
+			id = resultset.getInt("AdvertID");
+			return id;
+		}
+		return 0;
+
 	}
 
 	public void deleteAdvert(int id, int userID) {

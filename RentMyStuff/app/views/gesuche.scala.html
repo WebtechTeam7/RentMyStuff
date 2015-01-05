@@ -43,9 +43,11 @@
 								<a class="btn btn-default btn-sm" href="mailto:@advert.getUser.getEmail()?subject=Ihre Anzeige bei RentMyStuff">
   									<i class="fa fa-envelope"></i> Mail to
   								</a>
-								<a class="btn btn-default btn-sm" href="@routes.Application.map()">
+								
+  								<a class="btn btn-default btn-sm" href="@routes.Application.map(advert.getAddress().getStreet(),advert.getAddress().getCity(),advert.getAddress().getPostcode(),advert.getAddress().getCountry())">
   									<i class="fa fa-map-marker"></i> Show Address
   								</a>
+  							
 							</div>
 							<hr>
 						</div>
