@@ -240,17 +240,43 @@ public class Model {
 		}
 		if (allowed) {
 			try {
+				int addressID = getAddressID(id);
+				//delete the advert
 				String statement = "DELETE FROM Advert WHERE AdvertID = ?";
 				PreparedStatement preparedStatement = connection
 						.prepareStatement(statement);
 				preparedStatement.setInt(1, id);
 				preparedStatement.executeUpdate();
+				
+				//delete AdvertAddress
+				statement = "DELETE FROM AdvertAddress WHERE Advert = ?";
+				preparedStatement = connection.prepareStatement(statement);
+				preparedStatement.setInt(1, id);
+				preparedStatement.executeUpdate();
+				
+				statement = "DELETE FROM Address WHERE AddressID = ?";
+				preparedStatement = connection.prepareStatement(statement);
+				preparedStatement.setInt(1, addressID);
+				preparedStatement.executeUpdate();
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		} else {
 			System.out.println("User not authorized");
 		}
+	}
+
+	private int getAddressID(int id) throws SQLException {
+		String statement = "SELECT Address FROM AdvertAddress WHERE Advert = ?";
+		PreparedStatement preparedStatement = connection.prepareStatement(statement);
+		preparedStatement.setInt(1, id);
+		ResultSet resultset = preparedStatement.executeQuery();
+		while (resultset.next()) {
+			id = resultset.getInt("Address");
+			return id;
+		}
+		return 0;
 	}
 
 	public static void setAdvertList(List<Advert> advertList) {
