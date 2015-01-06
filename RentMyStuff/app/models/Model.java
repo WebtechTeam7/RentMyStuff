@@ -254,6 +254,7 @@ public class Model {
 				preparedStatement.setInt(1, id);
 				preparedStatement.executeUpdate();
 				
+				//delete Address
 				statement = "DELETE FROM Address WHERE AddressID = ?";
 				preparedStatement = connection.prepareStatement(statement);
 				preparedStatement.setInt(1, addressID);
