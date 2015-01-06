@@ -1,7 +1,5 @@
 @(AdvertList :List[Advert]) @main("Gesuche"){
 <p>
-
-	<section class="boxformat">
 		<article>
 			<div class="Indexcontainer">
 				<div class="row">
@@ -36,7 +34,6 @@
 
 						<div class="box">
 							<h3>@advert.getKind von @advert.getUser().getFullName()</h3>
-							<div class="gesuche">
 								<!-- <img class="rasemaeher" src=@routes.Assets.at( "images/Rasenmaeher.jpg") /> -->
 								<span class="kind">Kategorie: @advert.getCategory()</span><br>
 								<span class="kind">@advert.getDescription()</span> <br>
@@ -46,9 +43,7 @@
 								
   								<a class="btn btn-default btn-sm" href="@routes.Application.map(advert.getAddress().getStreet(),advert.getAddress().getCity(),advert.getAddress().getPostcode(),advert.getAddress().getCountry())">
   									<i class="fa fa-map-marker"></i> Standort anzeigen
-  								</a>
-  							
-							</div>
+  								</a>  							
 							<hr>
 						</div>
 						} }
@@ -59,5 +54,4 @@
 
 			</div>
 		</article>
-	</section>
 	}

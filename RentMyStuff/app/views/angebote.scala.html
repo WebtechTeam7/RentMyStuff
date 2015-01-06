@@ -1,7 +1,5 @@
 @(AdvertList :List[Advert]) @main("Angebote"){
 <p>
-
-	<section class="boxformat">
 		<article>
 			<div class="Indexcontainer">
 				<div class="row">
@@ -39,7 +37,6 @@
 
 						<div class="box">
 							<h3>@advert.getKind von @advert.getUser().getFullName()</h3>
-							<div>
 								<span class="kind">Kategorie: @advert.getCategory()</span><br>
 								<span class="kind">@advert.getDescription()</span> <br> 
 								<a class="btn btn-default btn-sm" href="mailto:@advert.getUser.getEmail()?subject=Ihre Anzeige bei RentMyStuff">
@@ -49,9 +46,6 @@
   								<a class="btn btn-default btn-sm" href="@routes.Application.map(advert.getAddress().getStreet(),advert.getAddress().getCity(),advert.getAddress().getPostcode(),advert.getAddress().getCountry())">
   									<i class="fa fa-map-marker"></i> Standort anzeigen
   								</a>
-  								
-								
-							</div>
 							<hr>
 						</div>
 						} }
@@ -62,5 +56,4 @@
 
 			</div>
 		</article>
-	</section>
 	}

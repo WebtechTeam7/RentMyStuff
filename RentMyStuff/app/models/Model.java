@@ -70,13 +70,13 @@ public class Model {
 		}
 	}
 
-	public void deleteUser(int userId) {
+	public void deleteUser(String email, String password) {
 		try {
-			String statement = "DELETE FROM User WHERE UserID = ?";
+			String statement = "DELETE FROM User WHERE Email = ? AND Password = ?";
 			PreparedStatement preparedStatement = connection
 					.prepareStatement(statement);
-			String id = String.valueOf(userId);
-			preparedStatement.setString(1, id);
+			preparedStatement.setString(1, email);
+			preparedStatement.setString(2, password);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

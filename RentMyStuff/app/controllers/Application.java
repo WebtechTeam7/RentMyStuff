@@ -133,10 +133,33 @@ public class Application extends Controller {
 
 	}
 
-	public static Result deleteUser(int userId){
-		Model.getInstance().deleteUser(userId);
-		angemeldet = false;
-		return ok(login.render());
+//	public static Result deleteUser(int userId){
+//		Model.getInstance().deleteUser(userId);
+//		angemeldet = false;
+//		return ok(login.render());
+//	}
+	
+	public static Result account(){
+		return ok(account.render());
+	}
+	
+	public static Result loeschen(){
+		DynamicForm dynamicForm = Form.form().bindFromRequest();
+
+		String email = dynamicForm.get("email");
+		String password = dynamicForm.get("password");
+
+		for (User user : Model.getInstance().getUserList()) {
+			if (email.equals(user.getEmail())
+					&& password.equals(user.getPassword())) {
+				Model.getInstance().deleteUser(user.getEmail(), user.getPassword());
+				return ok(login.render());
+
+			}
+			System.out.println("geht nicht");
+
+		}
+		return ok(fehler.render());
 	}
 
 }

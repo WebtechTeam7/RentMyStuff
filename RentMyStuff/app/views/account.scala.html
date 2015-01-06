@@ -1,0 +1,43 @@
+ @main("Account löschen"){
+<script type="text/javascript">
+
+$( document ).ready(function() {
+	$('form[name="loeschenForm"] input:reset').click(function () {
+	    $('form[name="loeschenForm"]')
+	        .find(':radio, :checkbox').removeAttr('checked').end()
+	        .find('textarea, :text, select').val('')
+
+	    return false;
+	});
+});
+
+</script>
+<div class="row">
+	<div class="col-md-4"></div>
+	<div class="col-md-4">
+
+		<section>
+
+			<h2>Account löschen</h2>
+
+			<div class="Indexcontainer anmeldung">
+				<form class="form-signin" role="form" action="loeschen"
+					method="Post" name="loeschenForm">
+					<p>Bitte gib dein EMail Adresse sowie dein Passwort ein. Dann
+						kannst du deinen Account löschen!</p>
+					<input type="email" id="email" name="email" class="form-control"
+						placeholder="Email-Adresse" required> <input id="password"
+						name="password" type="password" class="form-control"
+						placeholder="Passwort" required>
+
+					<button class="btn btn-lg btn-danger btn-block" id="loeschen"
+						type="submit">Account löschen!</button>
+				</form>
+			</div>
+
+		</section>
+	</div>
+	<div class="col-md-4"></div>
+</div>
+
+}
