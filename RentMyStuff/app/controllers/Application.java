@@ -1,7 +1,6 @@
 package controllers;
 
 import org.mindrot.jbcrypt.*;
-
 import play.*;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -90,10 +89,28 @@ public class Application extends Controller {
 	public static Result fehler() {
 		return ok(fehler.render());
 	}
-
+	
+	
 	public static Result impressum() {
 
 		return ok(impressum.render());
+	}
+	
+	/*public static Result ajaxEigeneAngebote() {
+
+		return ok(ajaxEigeneAngebote.render(Model.getInstance().getUserAdvertList(
+				getUserFromSession().getUserID()));
+	}*/
+	
+	public static Result ownAdvertTest(){
+//		return ok(ajaxEigeneAngebote.render(Model.getInstance().getUserAdvertList(
+//				getUserFromSession().getUserID()));
+		return ok(index.render(Model.getInstance().getUserAdvertList(getUserFromSession().getUserID())));
+		
+	}
+	
+	public static Result getAdvertList(){
+		return ok (ReloadAdvert.render(Model.getInstance().getAdvertList()));
 	}
 
 	public static Result inserat() {

@@ -1,63 +1,79 @@
-@(UserAdvertList :List[Advert])
-@()
-@main("Index"){
+@(UserAdvertList :List[Advert]) @main("Index"){
 
-	<!-- Content -->
+<!-- Content -->
 
-	<div class="Indexcontainer">
+<div class="Indexcontainer">
 
-		<div class="row">
+	<div class="row">
 
-			<div class="col-md-6 firstbox ">
+		<div class="col-md-6 firstbox ">
 
-				<h1>Worum geht es hier eigentlich?</h1>
-				<p>Jeder kennt es vermutlich. Man zieht in eine neue Stadt um
-					dort zu studieren oder eben aus anderen Gründen.</p>
-				<p>Doch spätestens beim Aufbau der Möbel stößt man auf die
-					ersten Probleme. Bohrmaschine, Schraubenzieher irgendetwas fehlt
-					immer.</p>
-				<p>Da wäre es doch sinnvoll eine Plattform zu haben, auf der man
-					das benötigte Werkzeug suchen kann und es von jemandem der es
-					Anbietet ausleihen kann.</p>
-				<p>Genau das soll das "RentMyStuff" - Portal ermöglichen.</p>
-
-			</div>
-			
-<!-- Angebote --> 
-			
-			<div class="col-md-2  secondbox">
-				<h3>Angebote:</h3>
-					<div class="box">	
-						<div class="angebote">	
-						<!-- Ajax Inhalt -->	
-						<p><span id="Angebote"> </span> </p>
-						<button type="button" id="btAngebote" onclick="ownAdvert()">Lade Angebote</button>		
-						</div>
-						<hr>
-					</div>
-			</div>
-			
-<!-- Gesuche --> 
-			
-			<div class="col-md-2 col-md-offset-1  secondbox">
-				<h3>Gesuche:</h3>
-					<div class="box">
-						<div class = "gesuche" id="Gesuche">
-						<!-- Ajax Inhalt -->
-						<button type="button" id="btGesuche" onclick="ownSearch()">Lade Gesuche</button>
-						</div>
-						<hr>
-					</div>
-			</div>
-
-
+			<h1>Worum geht es hier eigentlich?</h1>
+			<p>Jeder kennt es vermutlich. Man zieht in eine neue Stadt um
+				dort zu studieren oder eben aus anderen Gründen.</p>
+			<p>Doch spätestens beim Aufbau der Möbel stößt man auf die
+				ersten Probleme. Bohrmaschine, Schraubenzieher irgendetwas fehlt
+				immer.</p>
+			<p>Da wäre es doch sinnvoll eine Plattform zu haben, auf der man
+				das benötigte Werkzeug suchen kann und es von jemandem der es
+				Anbietet ausleihen kann.</p>
+			<p>Genau das soll das "RentMyStuff" - Portal ermöglichen.</p>
 
 		</div>
+
+		<!-- Angebote -->
+
+		<div class="col-md-2  secondbox">
+			<h3>Angebote:</h3>
+			@for(advert <- UserAdvertList){
+			<div class="box">
+				<div class="angebote">
+					<!-- Ajax Inhalt -->
+					<p>
+						<span id="Angebote"> </span>
+					</p>
+										
+					@if(advert.getKind().equals("Angebot")){ <span class="kind">Kategorie:
+						@advert.getCategory()</span> <br> <span class="kind">@advert.getDescription()</span>
+					<a
+						href="@routes.Application.deleteAdvert(advert.getId(), advert.getUser().getUserID())"><i
+						class="fa fa-trash"></i></a> }
+				</div>
+				<hr>
+			</div>
+			}
+		</div>
+
+		<!-- Gesuche -->
+
+		<div class="col-md-2 col-md-offset-1  secondbox">
+			<h3>Gesuche:</h3>
+			@for(advert <- UserAdvertList){
+			<div class="box">
+				<div class="gesuche" id="Gesuche">
+					<!-- Ajax Inhalt -->
+					<button type="button" id="btGesuche" onclick="ownSearch()">Lade
+						Gesuche</button>
+					
+					@if(advert.getKind().equals("Gesuch")){ <span class="kind">Kategorie:
+						@advert.getCategory()</span> <br> <span class="kind">@advert.getDescription()</span>
+					<a
+						href="@routes.Application.deleteAdvert(advert.getId(), advert.getUser().getUserID())"><i
+						class="fa fa-trash"></i></a> }
+				</div>
+				<hr>
+			</div>
+			}
+		</div>
+
+
+
 	</div>
+</div>
 
-	<!-- Footer -->
+<!-- Footer -->
 
-	<!-- <footer>
+<!-- <footer>
 	<div id="footerbox" class="col-md-12 panel panel-default">
 		<div id="footertext" class="panel-body">
 			<a id="footertext" href="@routes.Assets.at("app/views/Impressum.scala.html")">Impressum</a>
@@ -66,7 +82,7 @@
 	</div>
 
 
-	</footer> -->	
+	</footer> -->
 
 
 </body>
