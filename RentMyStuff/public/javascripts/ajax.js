@@ -40,3 +40,15 @@ function reloadAdverts() {
 	requestObj.open("GET","getAdvertList", true);
 	requestObj.send();
 }
+
+function reloadSearch() {
+	var requestObj = new XMLHttpRequest();
+	requestObj.onreadystatechange = function() {
+		if (requestObj.readyState == 4 && requestObj.status == 200) {
+			document.getElementById("Gesuche").innerHTML = requestObj.responseText;
+			requestObj = null;
+		}
+	}
+	requestObj.open("GET","getSearchList", true);
+	requestObj.send();
+}

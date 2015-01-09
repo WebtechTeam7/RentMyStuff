@@ -103,6 +103,9 @@ public class Application extends Controller {
 	public static Result getAdvertList() {
 		return ok(ReloadAdvert.render(Model.getInstance().getAdvertList()));
 	}
+	public static Result getSearchList() {
+		return ok(searchAdvert.render(Model.getInstance().getAdvertList()));
+	}
 
 	public static Result registrieren() {
 		return ok(registrieren.render());
