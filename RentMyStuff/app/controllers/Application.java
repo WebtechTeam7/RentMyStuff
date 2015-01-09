@@ -49,8 +49,8 @@ public class Application extends Controller {
 	public static Result index() {
 
 		if (isUserInSession()) {
-			return ok(index.render(Model.getInstance().getUserAdvertList(
-					getUserFromSession().getUserID())));
+			User user = getUserFromSession();
+			return ok(index.render(Model.getInstance().getUserAdvertList(getUserFromSession().getUserID()), user));
 		} else {
 			return ok(login.render());
 		}
@@ -109,14 +109,16 @@ public class Application extends Controller {
 
 		Model.getInstance().createAdvert(optradio, kategorie, comment,
 				getUserFromSession());
+		User user = getUserFromSession();
 		return ok(index.render(Model.getInstance().getUserAdvertList(
-				getUserFromSession().getUserID())));
+				getUserFromSession().getUserID()), user));
 	}
 
 	public static Result deleteAdvert(int id, int userId) {
 		Model.getInstance().deleteAdvert(id, userId);
+		User user = getUserFromSession();
 		return ok(index.render(Model.getInstance().getUserAdvertList(
-				getUserFromSession().getUserID())));
+				getUserFromSession().getUserID()), user));
 	}
 
 	public static Result anmelden() {
@@ -133,9 +135,9 @@ public class Application extends Controller {
 				addUserToSession(user);
 
 				System.out.println("anmelden hat funktioniert");
-
+				
 				return ok(index.render(Model.getInstance().getUserAdvertList(
-						getUserFromSession().getUserID())));
+						getUserFromSession().getUserID()), user));
 
 			}
 			System.out.println("geht nicht");
@@ -177,10 +179,10 @@ public class Application extends Controller {
 					
 					System.out.println("addUser: " + session().get("USER")
 							+ " User from Session");
-
+					
 					return ok(index
 							.render(Model.getInstance().getUserAdvertList(
-									getUserFromSession().getUserID())));
+									getUserFromSession().getUserID()), user));
 				} 
 			}
 			return ok(fehler.render());
