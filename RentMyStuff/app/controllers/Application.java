@@ -103,15 +103,20 @@ public class Application extends Controller {
 	public static Result registrieren() {
 		return ok(registrieren.render());
 	}
+	
+	public static Result map(String street, String city, String postcode, String country){
+		return ok(map.render(street, city, postcode, country));
+	}
+
 
 	public static Result newAdvert(String optradio, String kategorie,
-			String comment) {
+			String comment, String street, String postcode, String city, String country) {
 
-		Model.getInstance().createAdvert(optradio, kategorie, comment,
-				getUserFromSession());
 		User user = getUserFromSession();
+		Model.getInstance().createAdvert(optradio, kategorie, comment, user, street, postcode, city, country);
 		return ok(index.render(Model.getInstance().getUserAdvertList(
-				getUserFromSession().getUserID()), user));
+				user.getUserID()), user));
+
 	}
 
 	public static Result deleteAdvert(int id, int userId) {
@@ -207,11 +212,30 @@ public class Application extends Controller {
 
 	}
 
-	public static Result deleteUser(int userId) {
-		Model.getInstance().deleteUser(userId);
-		session().clear();
-		return ok(login.render());
+
+	public static Result account(){
+		return ok(account.render());
 	}
+	
+//	public static Result loeschen(){
+//		DynamicForm dynamicForm = Form.form().bindFromRequest();
+//
+//		String email = dynamicForm.get("email");
+//		String password = dynamicForm.get("password");
+//
+//		for (User user : Model.getInstance().getUserList()) {
+//			if (email.equals(user.getEmail())
+//					&& BCrypt.checkpw(password, user.getPassword())) {
+//				Model.getInstance().deleteUser(user.getEmail(), user.getPassword());
+//				session().clear();
+//				return ok(login.render());
+//
+//			}
+//			System.out.println("geht nicht Zeile 234");
+//
+//		}
+//		return ok(fehler.render());
+//	}
 
 	public static boolean isUserInSession() {
 		User user = getUserFromSession();

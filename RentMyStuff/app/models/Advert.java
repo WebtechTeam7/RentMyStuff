@@ -9,11 +9,12 @@ public class Advert {
 		
 	}
 	
-	public Advert(String kind, String category, String description, User user){
+	public Advert(String kind, String category, String description,Address address, User user){
 		this.kind = kind;
 		this.category = category;
 		this.description = description;
 		this.user = user;
+		this.address = address;
 	}
 	private int id;
 	private String kind;
@@ -21,6 +22,7 @@ public class Advert {
 	private String description;
 	private boolean file_existing;
 	private User user;
+	private Address address;
 	
 	public String getKind() {
 		return kind;
@@ -55,6 +57,14 @@ public class Advert {
 		this.user = user;
 	}
 
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+		
 	public int getId() {
 		return id;
 	}
