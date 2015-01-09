@@ -100,6 +100,10 @@ public class Application extends Controller {
 		return ok(inserat.render());
 	}
 
+	public static Result getAdvertList() {
+		return ok(ReloadAdvert.render(Model.getInstance().getAdvertList()));
+	}
+
 	public static Result registrieren() {
 		return ok(registrieren.render());
 	}
@@ -160,28 +164,24 @@ public class Application extends Controller {
 			// User user = new User(firstname, lastname, email, password);
 
 			String hashPassword = BCrypt.hashpw(password, BCrypt.gensalt());
-			
-				
-			Model.getInstance()
-					.createUser(firstname, lastname, email, hashPassword);
-			
-			
+
+			Model.getInstance().createUser(firstname, lastname, email,
+					hashPassword);
+
 			for (User user : Model.getInstance().getUserList()) {
-				
-				
+
 				if (email.equals(user.getEmail())
-						&& BCrypt.checkpw(password, user.getPassword())){
-					
-					
+						&& BCrypt.checkpw(password, user.getPassword())) {
+
 					addUserToSession(user);
-					
+
 					System.out.println("addUser: " + session().get("USER")
 							+ " User from Session");
 
 					return ok(index
 							.render(Model.getInstance().getUserAdvertList(
 									getUserFromSession().getUserID())));
-				} 
+				}
 			}
 			return ok(fehler.render());
 
