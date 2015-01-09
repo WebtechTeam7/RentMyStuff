@@ -28,10 +28,14 @@ public class Model {
 	private List<Advert> advertList = new ArrayList<Advert>();
 	private List<Advert> userAdvertList = new ArrayList<Advert>();
 
+	/**
+	 * 
+	 * @return alle User aus der Datenbank
+	 */
 	public List<User> getUserList() {
 
 		try {
-			// Get all Users from the database
+			
 			String statement = "SELECT * FROM User";
 			PreparedStatement preparedStatement = connection
 					.prepareStatement(statement);
@@ -53,6 +57,14 @@ public class Model {
 		return userList;
 	}
 
+	/**
+	 * Legt einen neuen User in der Datenbank an.
+	 * @param firstname
+	 * @param lastname
+	 * @param email
+	 * @param password
+	 *  
+	 */
 	public void createUser(String firstname, String lastname, String email,
 			String password) {
 		try {
@@ -70,6 +82,12 @@ public class Model {
 		}
 	}
 
+	
+	/**
+	 * Loescht den User aus der Datenbank
+	 * @param userId
+	 * 
+	 */
 	public void deleteUser(int userId) {
 		try {
 			String statement = "DELETE FROM User WHERE UserID = ?";
@@ -86,6 +104,11 @@ public class Model {
 	public void setUserList(List<User> userList) {
 		Model.getInstance().userList = userList;
 	}
+	
+	/**
+	 * 
+	 * @return alle Angebote/Gesuche
+	 */
 
 	public List<Advert> getAdvertList() {
 
@@ -111,7 +134,41 @@ public class Model {
 
 		return advertList;
 	}
+	
+	/**
+	 * 
+	 * @param category
+	 * @return alle Angebote/Gesuche mit der uebergebenen Kategorie
+	 */
+	public List<Advert> getAdvertList(String category){
+		advertList.clear();
+		
+		try {
+			String statement = "SELECT * FROM Advert WHERE Category = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(statement);
+			preparedStatement.setString(1, category);
+			ResultSet resultset = preparedStatement.executeQuery();
+			while(resultset.next()){
+				Advert advert = new Advert();
+				advert.setKind(resultset.getString("Kind"));
+				advert.setCategory(resultset.getString("Category"));
+				advert.setUser(getUserById(resultset.getString("AdvertUserID")));
+				advert.setDescription(resultset.getString("Description"));
+				advert.setId(resultset.getInt("AdvertID"));
+				advertList.add(advert);			
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return advertList;
+	}
 
+	/**
+	 * 
+	 * @param userId
+	 * @return dem User zugehoerige Angebote/Gesuche
+	 */
 	public List<Advert> getUserAdvertList(int userId) {
 
 		userAdvertList.clear();
@@ -138,6 +195,14 @@ public class Model {
 		return userAdvertList;
 	}
 
+	/**
+	 * Erzeugt eine neue Anzeige in der Datenbank
+	 * @param optradio
+	 * @param kategorie
+	 * @param comment
+	 * @param user
+	 * 
+	 */
 	public void createAdvert(String optradio, String kategorie, String comment,
 			User user) {
 		try {
@@ -155,6 +220,13 @@ public class Model {
 		}
 	}
 
+	/**
+	 * Loescht die Anzeige aus der Datenbank
+	 * @param id
+	 * @param userID
+	 * @author Jan
+	 * 
+	 */
 	public void deleteAdvert(int id, int userID) {
 		boolean allowed = false;
 		try {

@@ -1,7 +1,7 @@
 package controllers;
 
 import org.mindrot.jbcrypt.*;
-
+import java.util.List;
 import play.*;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -144,6 +144,20 @@ public class Application extends Controller {
 
 		// return ok(login.render());
 		return ok(fehler.render());
+	}
+	
+	public static Result getAngebotList(){
+		DynamicForm dynamicForm = Form.form().bindFromRequest();
+		String category = dynamicForm.get("category");
+		List<Advert> list = Model.getInstance().getAdvertList(category);
+		return ok(angebote.render(list));
+	}
+	
+	public static Result getGesuchList(){
+		DynamicForm dynamicForm = Form.form().bindFromRequest();
+		String category = dynamicForm.get("category");
+		List<Advert> list = Model.getInstance().getAdvertList(category);
+		return ok (gesuche.render(list));
 	}
 
 	public static Result createUser() {
