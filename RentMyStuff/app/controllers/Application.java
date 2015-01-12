@@ -1,7 +1,7 @@
 package controllers;
 
 import org.mindrot.jbcrypt.*;
-
+import java.util.List;
 import play.*;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -49,8 +49,8 @@ public class Application extends Controller {
 	public static Result index() {
 
 		if (isUserInSession()) {
-			return ok(index.render(Model.getInstance().getUserAdvertList(
-					getUserFromSession().getUserID())));
+			User user = getUserFromSession();
+			return ok(index.render(Model.getInstance().getUserAdvertList(getUserFromSession().getUserID()), user));
 		} else {
 			return ok(login.render());
 		}
@@ -103,20 +103,27 @@ public class Application extends Controller {
 	public static Result registrieren() {
 		return ok(registrieren.render());
 	}
+	
+	public static Result map(String street, String city, String postcode, String country){
+		return ok(map.render(street, city, postcode, country));
+	}
+
 
 	public static Result newAdvert(String optradio, String kategorie,
-			String comment) {
+			String comment, String street, String postcode, String city, String country) {
 
-		Model.getInstance().createAdvert(optradio, kategorie, comment,
-				getUserFromSession());
+		User user = getUserFromSession();
+		Model.getInstance().createAdvert(optradio, kategorie, comment, user, street, postcode, city, country);
 		return ok(index.render(Model.getInstance().getUserAdvertList(
-				getUserFromSession().getUserID())));
+				user.getUserID()), user));
+
 	}
 
 	public static Result deleteAdvert(int id, int userId) {
 		Model.getInstance().deleteAdvert(id, userId);
+		User user = getUserFromSession();
 		return ok(index.render(Model.getInstance().getUserAdvertList(
-				getUserFromSession().getUserID())));
+				getUserFromSession().getUserID()), user));
 	}
 
 	public static Result anmelden() {
@@ -133,9 +140,9 @@ public class Application extends Controller {
 				addUserToSession(user);
 
 				System.out.println("anmelden hat funktioniert");
-
+				
 				return ok(index.render(Model.getInstance().getUserAdvertList(
-						getUserFromSession().getUserID())));
+						getUserFromSession().getUserID()), user));
 
 			}
 			System.out.println("geht nicht");
@@ -144,6 +151,20 @@ public class Application extends Controller {
 
 		// return ok(login.render());
 		return ok(fehler.render());
+	}
+	
+	public static Result getAngebotList(){
+		DynamicForm dynamicForm = Form.form().bindFromRequest();
+		String category = dynamicForm.get("category");
+		List<Advert> list = Model.getInstance().getAdvertList(category);
+		return ok(angebote.render(list));
+	}
+	
+	public static Result getGesuchList(){
+		DynamicForm dynamicForm = Form.form().bindFromRequest();
+		String category = dynamicForm.get("category");
+		List<Advert> list = Model.getInstance().getAdvertList(category);
+		return ok (gesuche.render(list));
 	}
 
 	public static Result createUser() {
@@ -177,10 +198,10 @@ public class Application extends Controller {
 					
 					System.out.println("addUser: " + session().get("USER")
 							+ " User from Session");
-
+					
 					return ok(index
 							.render(Model.getInstance().getUserAdvertList(
-									getUserFromSession().getUserID())));
+									getUserFromSession().getUserID()), user));
 				} 
 			}
 			return ok(fehler.render());
@@ -191,11 +212,30 @@ public class Application extends Controller {
 
 	}
 
-	public static Result deleteUser(int userId) {
-		Model.getInstance().deleteUser(userId);
-		session().clear();
-		return ok(login.render());
+
+	public static Result account(){
+		return ok(account.render());
 	}
+	
+//	public static Result loeschen(){
+//		DynamicForm dynamicForm = Form.form().bindFromRequest();
+//
+//		String email = dynamicForm.get("email");
+//		String password = dynamicForm.get("password");
+//
+//		for (User user : Model.getInstance().getUserList()) {
+//			if (email.equals(user.getEmail())
+//					&& BCrypt.checkpw(password, user.getPassword())) {
+//				Model.getInstance().deleteUser(user.getEmail(), user.getPassword());
+//				session().clear();
+//				return ok(login.render());
+//
+//			}
+//			System.out.println("geht nicht Zeile 234");
+//
+//		}
+//		return ok(fehler.render());
+//	}
 
 	public static boolean isUserInSession() {
 		User user = getUserFromSession();

@@ -20,7 +20,7 @@ public class User {
 	private String email;
 	private String password;
 	private int userID;
-
+	
 	public String getFirstname() {
 		return firstname;
 	}
@@ -56,7 +56,6 @@ public class User {
 	public String getFullName() {
 		return firstname + " " + lastname;
 	}
-
 	public int getUserID() {
 		return userID;
 	}
@@ -64,5 +63,4 @@ public class User {
 	public void setUserID(int userID) {
 		this.userID = userID;
 	}
-
 }

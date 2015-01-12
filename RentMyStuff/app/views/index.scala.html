@@ -1,4 +1,4 @@
-@(UserAdvertList :List[Advert])
+@(UserAdvertList :List[Advert], UserName :User)
 @()
 @main("Index"){
 
@@ -9,8 +9,11 @@
 		<div class="row">
 
 			<div class="col-md-6 firstbox ">
+			
+			<h1>Hallo <font style="color:#FF8C00">@UserName.getFirstname().toUpperCase()</font>!</h1>
+			
 
-				<h1>Worum geht es hier eigentlich?</h1>
+				<h2>Worum geht es hier eigentlich?</h2>
 				<p>Jeder kennt es vermutlich. Man zieht in eine neue Stadt um
 					dort zu studieren oder eben aus anderen Gründen.</p>
 				<p>Doch spätestens beim Aufbau der Möbel stößt man auf die
@@ -21,6 +24,9 @@
 					Anbietet ausleihen kann.</p>
 				<p>Genau das soll das "RentMyStuff" - Portal ermöglichen.</p>
 
+				<a href="@routes.Application.account">Account löschen</a>
+				
+				
 			</div>
 
 			<div class="col-md-2  secondbox">
