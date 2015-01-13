@@ -14,6 +14,7 @@ public class Model {
 	private static Model instance;
 
 	private Model() {
+		connection = DB.getConnection();
 	}
 
 	public static Model getInstance() {
@@ -23,7 +24,7 @@ public class Model {
 		return Model.instance;
 	}
 
-	private Connection connection = DB.getConnection();
+	private Connection connection;
 	private List<User> userList = new ArrayList<User>();
 	private List<Advert> advertList = new ArrayList<Advert>();
 	private List<Advert> userAdvertList = new ArrayList<Advert>();
@@ -154,6 +155,7 @@ public class Model {
 				advert.setUser(getUserById(resultset.getString("AdvertUserID")));
 				advert.setDescription(resultset.getString("Description"));
 				advert.setId(resultset.getInt("AdvertID"));
+				advert.setAddress(getAddress(advert.getId()));
 				advertList.add(advert);			
 			}
 		} catch (SQLException e) {
