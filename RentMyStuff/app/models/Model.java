@@ -115,7 +115,7 @@ public class Model {
 		advertList.clear();
 
 		try {
-			String statement = "SELECT * FROM Advert";
+			String statement = "SELECT * FROM Advert Order BY AdvertId DESC";
 			PreparedStatement preparedStatement = connection
 					.prepareStatement(statement);
 			ResultSet resultset = preparedStatement.executeQuery();
@@ -144,7 +144,7 @@ public class Model {
 		advertList.clear();
 		
 		try {
-			String statement = "SELECT * FROM Advert WHERE Category = ?";
+			String statement = "SELECT * FROM Advert WHERE Category = ? Order BY AdvertId DESC";
 			PreparedStatement preparedStatement = connection.prepareStatement(statement);
 			preparedStatement.setString(1, category);
 			ResultSet resultset = preparedStatement.executeQuery();
@@ -194,7 +194,7 @@ public class Model {
 		userAdvertList.clear();
 
 		try {
-			String statement = "SELECT * FROM Advert WHERE AdvertUserID = ?";
+			String statement = "SELECT * FROM Advert WHERE AdvertUserID = ? Order BY AdvertId DESC";
 			PreparedStatement preparedStatement = connection
 					.prepareStatement(statement);
 			preparedStatement.setInt(1, userId);
