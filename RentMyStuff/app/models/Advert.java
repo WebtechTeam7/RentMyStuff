@@ -23,6 +23,7 @@ public class Advert {
 	private boolean file_existing;
 	private User user;
 	private Address address;
+	private String date;
 	
 	public String getKind() {
 		return kind;
@@ -71,6 +72,14 @@ public class Advert {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 	
 	

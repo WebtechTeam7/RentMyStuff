@@ -5,7 +5,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import play.db.DB;
@@ -22,6 +24,7 @@ public class Model {
 	private final String advert = "CREATE TABLE Advert("
 			+ "AdvertID INTEGER PRIMARY KEY AUTOINCREMENT,"
 			+ "AdvertUserID INTEGER NOT NULL," + "Kind TEXT NOT NULL,"
+			+ "Date TEXT NOT NULL,"
 			+ "Category TEXT NOT NULL," + "Description TEXT NOT NULL,"
 			+ "FOREIGN KEY (AdvertUserID) REFERENCES User(USERID)" + ");";
 	private final String address = "CREATE TABLE Address("
@@ -151,6 +154,7 @@ public class Model {
 				advert.setDescription(resultset.getString("Description"));
 				advert.setId(resultset.getInt("AdvertID"));
 				advert.setAddress(getAddress(advert.getId()));
+				advert.setDate(resultset.getString("Date"));
 				advertList.add(advert);
 			}
 		} catch (SQLException e) {
@@ -181,6 +185,7 @@ public class Model {
 				advert.setDescription(resultset.getString("Description"));
 				advert.setId(resultset.getInt("AdvertID"));
 				advert.setAddress(getAddress(advert.getId()));
+				advert.setDate(resultset.getString("Date"));
 				advertList.add(advert);
 			}
 		} catch (SQLException e) {
@@ -231,6 +236,7 @@ public class Model {
 				advert.setUser(getUserById(resultset.getString("AdvertUserID")));
 				advert.setDescription(resultset.getString("Description"));
 				advert.setId(resultset.getInt("AdvertID"));
+				advert.setDate(resultset.getString("Date"));
 				userAdvertList.add(advert);
 			}
 		} catch (SQLException e) {
@@ -300,14 +306,15 @@ public class Model {
 
 	private int advert(User user, String optradio, String kategorie,
 			String comment) throws SQLException {
-		String statement = "INSERT INTO Advert (AdvertUserID, Kind, Category, Description)"
-				+ "VALUES(?,?,?,?)";
+		String statement = "INSERT INTO Advert (AdvertUserID, Date, Kind, Category, Description)"
+				+ "VALUES(?,?,?,?,?)";
 		PreparedStatement preparedStatement = connection
 				.prepareStatement(statement);
 		preparedStatement.setInt(1, getUserIdByEmail(user));
-		preparedStatement.setString(2, optradio);
-		preparedStatement.setString(3, kategorie);
-		preparedStatement.setString(4, comment);
+		preparedStatement.setString(2, createCurrentDate());
+		preparedStatement.setString(3, optradio);
+		preparedStatement.setString(4, kategorie);
+		preparedStatement.setString(5, comment);
 		preparedStatement.executeUpdate();
 
 		// now return the ID
@@ -321,6 +328,13 @@ public class Model {
 		}
 		return 0;
 
+	}
+
+	private String createCurrentDate() {
+		GregorianCalendar calendar = new GregorianCalendar();
+		DateFormat df = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM);
+		System.out.println(df.format(calendar.getTime()));
+		return df.format(calendar.getTime());
 	}
 
 	/**
