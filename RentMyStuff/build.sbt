@@ -13,5 +13,6 @@ javaEbean,
 cache,
 javaWs,
 ws,
-"org.xerial" % "sqlite-jdbc" % "3.7.15-M1"
+"org.xerial" % "sqlite-jdbc" % "3.7.15-M1",
+"org.mindrot" % "jbcrypt" % "0.3m"
 )

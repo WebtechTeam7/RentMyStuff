@@ -1,4 +1,4 @@
-@(AdvertList :List[Advert])
+@(UserAdvertList :List[Advert], UserName :User)
 @()
 @main("Index"){
 
@@ -9,8 +9,11 @@
 		<div class="row">
 
 			<div class="col-md-6 firstbox ">
+			
+			<h1>Hallo <font style="color:#FF8C00">@UserName.getFirstname().toUpperCase()</font>!</h1>
+			
 
-				<h1>Worum geht es hier eigentlich?</h1>
+				<h2>Worum geht es hier eigentlich?</h2>
 				<p>Jeder kennt es vermutlich. Man zieht in eine neue Stadt um
 					dort zu studieren oder eben aus anderen Gründen.</p>
 				<p>Doch spätestens beim Aufbau der Möbel stößt man auf die
@@ -21,21 +24,21 @@
 					Anbietet ausleihen kann.</p>
 				<p>Genau das soll das "RentMyStuff" - Portal ermöglichen.</p>
 
+				<a href="@routes.Application.account">Account löschen</a>
+				
+				
 			</div>
 
 			<div class="col-md-2  secondbox">
 				<h3>Angebote:</h3>
-				@for(advert <- AdvertList){
+				@for(advert <- UserAdvertList){
 					@if(advert.getKind().equals("Angebot")){
 
-					<div class="box">
-						<h3>@advert.getKind von @advert.getUser().getFullName()</h3>
-						<div>
-							<!-- <img class="rasemaeher" src=@routes.Assets.at( "images/Rasenmaeher.jpg") /> -->
-							<span class="kind">Kategorie: @advert.getCategory()</span><br> <span
-								class="kind">@advert.getDescription()</span> <br> <label>mailto:</label><span
-								class="kind">@advert.getUser().getEmail()</span>
-						</div>
+					<div class="box">						
+						<!-- <img class="rasemaeher" src=@routes.Assets.at( "images/Rasenmaeher.jpg") /> -->
+						<span class="kind">Kategorie: @advert.getCategory()</span><br> 
+						<span class="kind">@advert.getDescription()</span>
+						<a href="@routes.Application.deleteAdvert(advert.getId(), advert.getUser().getUserID())"><i class="fa fa-trash"></i></a>
 						<hr>
 					</div>
 					} 					
@@ -46,17 +49,20 @@
 
 				<h3>Gesuche:</h3>
 
-				@for(advert <- AdvertList){
+				@for(advert <- UserAdvertList){
 					@if(advert.getKind().equals("Gesuch")){
 
 					<div class="box">
-						<h3>@advert.getKind von @advert.getUser().getFullName()</h3>
 						<div class = "gesuche">
 							<!-- <img class="rasemaeher" src=@routes.Assets.at( "images/Rasenmaeher.jpg") /> -->
 							<span class="kind">Kategorie: @advert.getCategory()</span><br> 
+
 							<span class="time">Eingestellt am: @advert.getDate()</span><br>
 							<span class="kind">@advert.getDescription()</span> <br> <label>mailto:</label><span
 								class="kind">@advert.getUser().getEmail()</span>
+							<span class="kind">@advert.getDescription()</span>
+							<a href="@routes.Application.deleteAdvert(advert.getId(), advert.getUser().getUserID())"><i class="fa fa-trash"></i></a>
+
 						</div>
 						<hr>
 					</div>

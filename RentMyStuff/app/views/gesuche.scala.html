@@ -1,54 +1,69 @@
-@(AdvertList :List[Advert])
-@main("Gesuche"){
+@(AdvertList :List[Advert]) @main("Gesuche"){
 <p>
-
-	<section class="boxformat">
 		<article>
-			<h2>
-				Gesuche
-				<button type="button" class="btn btn-warning"
-					onclick="popup('@routes.Application.inserat()')">Gesuch
-					erstellen</button>
-			</h2>
-
-			<p>
-			<div class="row">
-				<div class="col-xs-6 col-sm-3">
-					<div class="btn-group-vertical" role="group" aria-label="...">
-
-						<button type="button" class="btn btn-default">Werkzeuge</button>
-						<button type="button" class="btn btn-default">Fahrzeuge</button>
-						<button type="button" class="btn btn-default">Gartengeräte</button>
-						<button type="button" class="btn btn-default">Dienstleistungen</button>
-						<button type="button" class="btn btn-default">Elektronik</button>
-						<button type="button" class="btn btn-default">Sonstiges</button>
-
+			<div class="Indexcontainer">
+				<div class="row">
+					<div class="col-md-3">
+						<button type="button" class="btn btn-warning"
+							onclick="popup('@routes.Application.inserat()')">Gesuch
+							erstellen</button>
 					</div>
-
+					<div class="col-md-9">
+						<img src=@routes.Assets.at(
+							"images/Gesuche.png") alt="Gesuche_Logo">
+					</div>
 				</div>
-				<div class="col-md-6">
-					@for(advert <- AdvertList){
+				<div class="row">
+					<form method="Post" action="getGesuchList">
+						<div class="col-xs-6 col-sm-3">
+							<div class="btn-group-vertical" role="group" aria-label="...">
+
+								<button type="submit" class="btn btn-default" name="category"
+									value="Werkzeuge">Werkzeuge</button>
+								<button type="submit" class="btn btn-default" name="category"
+									value="Fahrzeuge">Fahrzeuge</button>
+								<button type="submit" class="btn btn-default" name="category"
+									value="Gartengeräte">Gartengeräte</button>
+								<button type="submit" class="btn btn-default" name="category"
+									value="Dienstleistungen">Dienstleistungen</button>
+								<button type="submit" class="btn btn-default" name="category"
+									value="Elektronik">Elektronik</button>
+								<button type="submit" class="btn btn-default" name="category"
+									value="Sonstiges">Sonstiges</button>
+
+							</div>
+						</div>
+					</form>
+					<div class="col-md-6">
+						@for(advert <- AdvertList){
 						@if(advert.getKind().equals("Gesuch")){
 
 						<div class="box">
 							<h3>@advert.getKind von @advert.getUser().getFullName()</h3>
-							<div class = "gesuche">
 								<!-- <img class="rasemaeher" src=@routes.Assets.at( "images/Rasenmaeher.jpg") /> -->
 								<span class="kind">Kategorie: @advert.getCategory()</span><br>
+
 								<span class="time">Eingestellt am: @advert.getDate()</span><br> <span
 									class="kind">@advert.getDescription()</span> <br> <label>mailto:</label><span
 									class="kind">@advert.getUser().getEmail()</span>
 							</div>
+								<span class="kind">@advert.getDescription()</span> <br>
+								<a class="btn btn-default btn-sm" href="mailto:@advert.getUser.getEmail()?subject=Ihre Anzeige bei RentMyStuff">
+  									<i class="fa fa-envelope"></i> Nachricht senden
+  								</a>
+								
+  								<a class="btn btn-default btn-sm" href="@routes.Application.map(advert.getAddress().getStreet(),advert.getAddress().getCity(),advert.getAddress().getPostcode(),advert.getAddress().getCountry())">
+  									<i class="fa fa-map-marker"></i> Standort anzeigen
+  								</a>  							
+
 							<hr>
 						</div>
-						} 
-					}
+						} }
+					</div>
+
+					<div class="col-xs-6 col-sm-3"></div>
 				</div>
 
-				<div class="col-xs-6 col-sm-3"></div>
 			</div>
-
-			<p>
 		</article>
-	</section>
 	}
