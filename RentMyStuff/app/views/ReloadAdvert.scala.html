@@ -1,0 +1,13 @@
+@(AdvertList :List[Advert]) @for(advert <- AdvertList){
+@if(advert.getKind().equals("Angebot")){
+
+<div class="box">
+	<h3>@advert.getKind von @advert.getUser().getFullName()</h3>
+	<div>
+		<span class="kind">Kategorie: @advert.getCategory()</span><br> <span
+			class="kind">@advert.getDescription()</span> <br> <label>mailto:</label><span
+			class="kind">@advert.getUser().getEmail()</span>
+	</div>
+	<hr>
+</div>
+} }
