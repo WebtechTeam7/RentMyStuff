@@ -30,7 +30,7 @@
 			</div>
 
 			<div class="col-md-2  secondbox">
-				<h3>Angebote:</h3>
+				<h4>Meine Angebote:</h4>
 				@for(advert <- UserAdvertList){
 					@if(advert.getKind().equals("Angebot")){
 
@@ -47,7 +47,7 @@
 
 			<div class="col-md-2 col-md-offset-1  secondbox">
 
-				<h3>Gesuche:</h3>
+				<h4>Meine Gesuche:</h4>
 
 				@for(advert <- UserAdvertList){
 					@if(advert.getKind().equals("Gesuch")){
