@@ -29,25 +29,25 @@
 				
 			</div>
 
-			<div class="col-md-2  secondbox">
-				<h3>Angebote:</h3>
+			<div class="col-md-3  secondbox">
+				<h3>Eigene Angebote:</h3>
 				@for(advert <- UserAdvertList){
 					@if(advert.getKind().equals("Angebot")){
-
 					<div class="box">						
 						<!-- <img class="rasemaeher" src=@routes.Assets.at( "images/Rasenmaeher.jpg") /> -->
-						<span class="kind">Kategorie: @advert.getCategory()</span><br> 
-						<span class="kind">@advert.getDescription()</span>
+						<span class="kind"><b>Kategorie:</b> @advert.getCategory()</span><br> 
+						<span class="time"><b>Eingestellt am:</b> @advert.getDate()</span><br>
+						<span class="kind"><b>Beschreibung:</b> @advert.getDescription()</span>
+						
 						<a href="@routes.Application.deleteAdvert(advert.getId(), advert.getUser().getUserID())"><i class="fa fa-trash"></i></a>
 						<hr>
 					</div>
 					} 					
 				}			
 			</div>
+			<div class="col-md-3  secondbox">
 
-			<div class="col-md-2 col-md-offset-1  secondbox">
-
-				<h3>Gesuche:</h3>
+				<h3>Eigene Gesuche:</h3>
 
 				@for(advert <- UserAdvertList){
 					@if(advert.getKind().equals("Gesuch")){
@@ -55,9 +55,13 @@
 					<div class="box">
 						<div class = "gesuche">
 							<!-- <img class="rasemaeher" src=@routes.Assets.at( "images/Rasenmaeher.jpg") /> -->
-							<span class="kind">Kategorie: @advert.getCategory()</span><br> 
+							<span class="kind"><b>Kategorie:</b> @advert.getCategory()</span><br> 
+							<span class="time"><b>Eingestellt am:</b> @advert.getDate()</span><br>
+							<span class="kind"><b>Beschreibung:</b> @advert.getDescription()</span> <br> <label>mailto:</label><span
+								class="kind">@advert.getUser().getEmail()</span>
 							<span class="kind">@advert.getDescription()</span>
 							<a href="@routes.Application.deleteAdvert(advert.getId(), advert.getUser().getUserID())"><i class="fa fa-trash"></i></a>
+
 						</div>
 						<hr>
 					</div>
