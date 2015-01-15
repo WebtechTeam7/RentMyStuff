@@ -21,7 +21,7 @@ box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
 }
 
 .secondbox{
-	text-align: center;
+	
 }
 
 .img-preview{
@@ -81,4 +81,7 @@ box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
 	position: center;
 	width: 300px;
 	height: 300px;
+}
+#EigeneGesucheAngeboteBox{
+	text-align: left;
 }
