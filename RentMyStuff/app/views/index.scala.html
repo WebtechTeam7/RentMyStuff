@@ -29,14 +29,14 @@
 
 		</div>
 		<div class="col-md-3  secondbox">
-			<h3>Eigene Angebote:</h3>
+			<h4>Eigene Angebote:</h4>
 			@for(advert <- UserAdvertList){
 			@if(advert.getKind().equals("Angebot")){
 			<div class="box">
 				<!-- <img class="rasemaeher" src=@routes.Assets.at( "images/Rasenmaeher.jpg") /> -->
 				<span class="kind"><b>Kategorie:</b> @advert.getCategory()</span><br>
 				<span class="time"><b>Eingestellt am:</b> @advert.getDate()</span><br>
-				<span class="kind"><b>Beschreibung:</b>
+				<span class="kind"><b>Beschreibung:<br></b>
 					@advert.getDescription()</span> <a
 					href="@routes.Application.deleteAdvert(advert.getId(), advert.getUser().getUserID())"><i
 					class="fa fa-trash"></i></a>
@@ -46,7 +46,7 @@
 		</div>
 		<div class="col-md-3  secondbox">
 
-			<h3>Eigene Gesuche:</h3>
+			<h4>Eigene Gesuche:</h4>
 			@for(advert <- UserAdvertList){
 			@if(advert.getKind().equals("Gesuch")){
 
@@ -55,9 +55,7 @@
 					<!-- <img class="rasemaeher" src=@routes.Assets.at( "images/Rasenmaeher.jpg") /> -->
 					<span class="kind"><b>Kategorie:</b> @advert.getCategory()</span><br>
 					<span class="time"><b>Eingestellt am:</b> @advert.getDate()</span><br>
-					<span class="kind"><b>Beschreibung:</b>
-						@advert.getDescription()</span> <br> <label>mailto:</label><span
-						class="kind">@advert.getUser().getEmail()</span> <span
+					<span class="kind"><b>Beschreibung:</b><br>	@advert.getDescription()</span> <br>  <span
 						class="kind">@advert.getDescription()</span> <a
 						href="@routes.Application.deleteAdvert(advert.getId(), advert.getUser().getUserID())"><i
 						class="fa fa-trash"></i></a>

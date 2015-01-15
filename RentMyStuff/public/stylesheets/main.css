@@ -1,80 +1,81 @@
-header {background-color: grey;}
-body{background-color: #BDBDBD;}
+header {
+	background-color: grey;
+}
+
+body {
+	background-color: #BDBDBD;
+	padding-top: 60px;
+}
+
 img {
 	max-width: 100%;
 	height: auto;
 	margin: auto;
-    text-align: center;
+	text-align: center;
 }
 
-.navbar{
-
--webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
--moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+.navbar {
+	-webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
-.Indexcontainer{
+.Indexcontainer {
 	margin-top: 170px;
 	margin-left: 50px;
 	margin-right: 50px;
 }
 
-.secondbox{
-	
-}
-
-.img-preview{
+.img-preview {
 	max-width: 80%;
 	height: auto;
-	}
-
-
-#footertext{
-	text-align: center;
-	color:white;
-	}
-	
-#footerbox{
-	background-color: #222222;
-	margin-top: 70px;	
 }
 
-.boxformat{	
+#footertext {
+	text-align: center;
+	color: white;
+}
+
+#footerbox {
+	background-color: #222222;
+	margin-top: 70px;
+}
+
+.boxformat {
 	margin-top: 300px;
 	margin-left: 200px;
-	}
-	
-#angebote{	
+}
+
+#angebote {
 	margin-top: 500px;
 	margin-left: 70px;
-	}
-	
-	
-#popup{
+}
+
+#popup {
 	margin-top: 50px;
 	margin-left: 20px;
 	margin-right: 20px;
 	margin-bottom: 50px;
 }
-.panel{
-	-webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
--moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+
+.panel {
+	-webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
-.contact{
+.contact {
 	margin-top: 230px;
 	margin-left: 50px;
 	margin-right: 50px;
 }
 
-#anmeldung{
+#anmeldung {
 	background-color: #222222;
 }
 
-#fehlermeldung{
-	color:red;
+#fehlermeldung {
+	color: red;
 }
 
 #map-canvas {
@@ -82,6 +83,7 @@ box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
 	width: 300px;
 	height: 300px;
 }
-#EigeneGesucheAngeboteBox{
+
+#EigeneGesucheAngeboteBox {
 	text-align: left;
 }
