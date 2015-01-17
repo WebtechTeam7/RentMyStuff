@@ -1,7 +1,5 @@
 @(UserAdvertList :List[Advert], UserName :User) @() @main("Index"){
 
-<<<<<<< HEAD
-
 <!-- Content -->
 
 <div class="Indexcontainer">
@@ -56,9 +54,7 @@
 					<span class="kind"><b>Kategorie:</b> @advert.getCategory()</span><br>
 					<span class="time"><b>Eingestellt am:</b> @advert.getDate()</span><br>
 					<span class="kind"><b>Beschreibung:</b>
-						@advert.getDescription()</span> <br> <label>mailto:</label><span
-						class="kind">@advert.getUser().getEmail()</span> <span
-						class="kind">@advert.getDescription()</span> <a
+						@advert.getDescription()</span><a
 						href="@routes.Application.deleteAdvert(advert.getId(), advert.getUser().getUserID())"><i
 						class="fa fa-trash"></i></a>
 
