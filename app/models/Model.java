@@ -104,7 +104,9 @@ public class Model {
 			preparedStatement.setString(3, email);
 			preparedStatement.setString(4, password);
 			preparedStatement.executeUpdate();
+			System.out.println("Folgender User wurde in DB erstelle: " + firstname + " " + lastname);
 		} catch (SQLException e) {
+			System.out.println("User: " + firstname + " " +lastname + " konnte nicht erstellt werden!!");
 			e.printStackTrace();
 		}
 	}
@@ -267,7 +269,9 @@ public class Model {
 			int addressID = address(street, postcode, city, country);
 			int advertID = advert(user, optradio, kategorie, comment);
 			advertAddress(addressID, advertID);
+			System.out.println("Folgendes Angebot wurde erstellt " + user.getFirstname() + "  " + street);
 		} catch (SQLException e) {
+			System.out.println("Fehler beim erstellen");
 			e.printStackTrace();
 		}
 	}
