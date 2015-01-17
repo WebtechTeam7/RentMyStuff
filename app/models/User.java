@@ -8,13 +8,6 @@ public class User {
 
 	}
 
-	public User(String firstname, String lastname, String email, String pw) {
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.email = email;
-		this.password = pw;
-	}
-
 	private String firstname;
 	private String lastname;
 	private String email;
