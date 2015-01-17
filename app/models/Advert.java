@@ -20,7 +20,6 @@ public class Advert {
 	private String kind;
 	private	String category;
 	private String description;
-	private boolean file_existing;
 	private User user;
 	private Address address;
 	private String date;
@@ -42,12 +41,6 @@ public class Advert {
 	}
 	public void setDescription(String description) {
 		this.description = description;
-	}
-	public boolean isFile_existing() {
-		return file_existing;
-	}
-	public void setFile_existing(boolean file_existing) {
-		this.file_existing = file_existing;
 	}
 
 	public User getUser() {
