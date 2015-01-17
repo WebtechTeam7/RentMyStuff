@@ -1,7 +1,6 @@
 @(UserAdvertList :List[Advert], UserName :User) @() @main("Index"){
 
-<<<<<<< HEAD
-
+<meta charset="utf-8">
 <!-- Content -->
 
 <div class="Indexcontainer">
@@ -22,14 +21,13 @@
 			<p>Da wäre es doch sinnvoll eine Plattform zu haben, auf der man
 				das benötigte Werkzeug suchen kann und es von jemandem der es
 				Anbietet ausleihen kann.</p>
-			<p>Genau das soll das "RentMyStuff" - Portal ermöglichen.</p>
+			<p>Genau das ermöglicht das <b>"RentMyStuff"</b> - Portal!</p>
 
 			<a href="@routes.Application.account">Account löschen</a>
-
-
 		</div>
+		
 		<div class="col-md-3  secondbox">
-			<h4>Eigene Angebote:</h4>
+			<img src=@routes.Assets.at("images/DeineAngebote.png") alt="Eigene Angebote">
 			@for(advert <- UserAdvertList){
 			@if(advert.getKind().equals("Angebot")){
 			<div class="box">
@@ -44,9 +42,9 @@
 			</div>
 			} }
 		</div>
-		<div class="col-md-3  secondbox">
 
-			<h4>Eigene Gesuche:</h4>
+		<div class="col-md-3  secondbox">
+			<img src=@routes.Assets.at("images/DeineGesuche.png") alt="Eigene Angebote">
 			@for(advert <- UserAdvertList){
 			@if(advert.getKind().equals("Gesuch")){
 
@@ -55,22 +53,16 @@
 					<!-- <img class="rasemaeher" src=@routes.Assets.at( "images/Rasenmaeher.jpg") /> -->
 					<span class="kind"><b>Kategorie:</b> @advert.getCategory()</span><br>
 					<span class="time"><b>Eingestellt am:</b> @advert.getDate()</span><br>
-					<span class="kind"><b>Beschreibung:</b><br>	@advert.getDescription()</span> <br>  <span
-						class="kind">@advert.getDescription()</span> <a
+					<span class="kind"><b>Beschreibung:</b><br>	@advert.getDescription()</span> <br>  <a
 						href="@routes.Application.deleteAdvert(advert.getId(), advert.getUser().getUserID())"><i
 						class="fa fa-trash"></i></a>
-
 				</div>
 				<hr>
 			</div>
 			} }
 		</div>
-
-
-
 	</div>
 </div>
 </body>
 </html>
-
 }
