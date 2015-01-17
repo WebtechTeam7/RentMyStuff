@@ -82,6 +82,11 @@ Verwendete Technologien
  
 Probleme
 ==============
+
+Während der der gesamten Projektphase gab es keine Schwerwiegenden Probleme mit dem Projekt an sich und ebenso wenig gab es untereinander Probleme. Unsere größten Probleme waren meist doch Kleinigkeiten,
+die wir meist in Griff bekamen. Ein längeres Problem bestand bei der Datenbank. Da wir zu Beginn mit dem Problem kämpfen, dass wir keine Angebote anlegen konnten, weil die Datenbank-File gesperrt war. Nachdem wir 
+unsere Model-Klasse als ein Singelton implementierten dachten wir das Problem sei gelöst. Doch das Problem stieß uns in unregelmäßigen Abständen wieder auf. Dieser Bugfix beanspruchte eine ganze Weile, da das Problem für uns 
+nie klar Verständlich war. Schlussendlich haben wir es bis zum jetzigen Zeitpunkt gefixt. 
  
 Was haben wir gelernt?/Fazit
 ==============
