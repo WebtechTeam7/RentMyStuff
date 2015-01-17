@@ -1,13 +1,3 @@
-function popup(url) {
-
-		fenster = window.open(url, "Inserat erstellen",
-				"width=400,height=400, resizable=yes");
-		fenster.focus();
-	
-	return false;
-}
-
-
 //get the address values
 var city = getArg('city');
 var country = getArg('country');

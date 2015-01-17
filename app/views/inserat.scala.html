@@ -19,14 +19,13 @@
 	function optionValue() {
 
 		select = $('#kategorie').val();
-		
+
 		if (select != "") {
 			$('#speichern').attr("disabled", false);
 		} else {
 			$('#speichern').attr("disabled", true);
 		}
 	}
-
 </script>
 
 </head>
@@ -36,15 +35,16 @@
 	<div class="popup" id="popup">
 		<form action="newAdvert" method="Get">
 			<h2>Inserat erstellen</h2>
-			
-			<div id = "option" name="option">
-				<label class="radio-inline">
-				<input type="radio"	name="optradio" value ="Angebot" checked>Angebot</label> 
-				<label class="radio-inline">
-				<input type="radio" name="optradio" value="Gesuch">Gesuch</label>
+
+			<div id="option" name="option">
+				<label class="radio-inline"> <input type="radio"
+					name="optradio" value="Angebot" checked>Angebot
+				</label> <label class="radio-inline"> <input type="radio"
+					name="optradio" value="Gesuch">Gesuch
+				</label>
 			</div>
 
- 			<div class="row">
+			<div class="row">
 				<div class="col-xs-6 col-md-4">
 
 					<select class="form-control" id="kategorie" name="kategorie"
@@ -68,36 +68,35 @@
 				<div class="col-md-6">
 					<div class="form-group">
 
-						<textarea class="form-control" rows="5" id="comment" name="comment"
-							placeholder="Beschreibung"></textarea>
+						<textarea class="form-control" rows="5" id="comment"
+							name="comment" placeholder="Beschreibung" required></textarea>
 					</div>
 				</div>
 				<div class="col-md-6"></div>
 			</div>
-			
+
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
-						<input type="text" name="street" placeholder="Ihre Strasse" required>
-						<input type="text" name="postcode" placeholder="Ihre Postleitzahl" required>
-						<input type="text" name="city" placeholder="Ihre Stadt" required>
+						<input type="text" name="street" placeholder="Ihre Strasse"
+							required> <input type="text" name="postcode"
+							placeholder="Ihre Postleitzahl" required> <input
+							type="text" name="city" placeholder="Ihre Stadt" required>
 						<input type="text" name="country" placeholder="Ihr Land" required>
 					</div>
 				</div>
 				<div class="col-md-6"></div>
 			</div>
 			<div class="row">
-				<div class="col-xs-6 col-md-4">
-					<button type="button" class="btn btn-default"
-						onclick="window.close();">Abbrechen</button>
-				</div>
-				<div class="col-xs-6 col-md-4"></div>
-				<div class="col-xs-6 col-md-4">
-					<button type="submit" class="btn btn-warning" id="speichern" onsubmit="window.close(); alert('Ihre Daten wurden gespeichert');">Speichern</button>
-				</div>
+				<div class="col-md-2">
+					
+				<button type="button" class="btn btn-default" onClick="history.back()">Abbrechen</button>
+				<button type="submit" class="btn btn-warning" id="speichern"
+						onsubmit="window.close(); alert('Ihre Daten wurden gespeichert');">Speichern</button></div>
 			</div>
+		
 
 		</form>
-		</div>
+	</div>
 </body>
 </html>

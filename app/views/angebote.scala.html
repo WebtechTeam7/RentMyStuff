@@ -1,12 +1,13 @@
 @(AdvertList :List[Advert]) @main("Angebote"){
+
 <p>
 	<article>
 		<div class="Indexcontainer">
 			<div class="row">
 				<div class="col-md-3">
-					<button type="button" class="btn btn-warning"
-						onclick="popup('@routes.Application.inserat()')">Angebot
-						erstellen</button>
+				<form action="@routes.Application.inserat()">
+					<button type="submit" class="btn btn-warning" value="Angebot erstellen">Angebot erstellen</button>
+				</form>
 				</div>
 				<div class="col-md-9">
 					<img src=@routes.Assets.at(
