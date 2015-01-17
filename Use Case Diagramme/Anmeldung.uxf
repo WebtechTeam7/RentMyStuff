@@ -43,7 +43,7 @@ bg=blue</panel_attributes>
       <w>120</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>Anmeldung
+    <panel_attributes>anmelden
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -55,7 +55,7 @@ bg=blue</panel_attributes>
       <w>120</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>Registrierung
+    <panel_attributes>registrieren
 </panel_attributes>
     <additional_attributes/>
   </element>

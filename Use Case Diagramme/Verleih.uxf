@@ -7,7 +7,7 @@
       <x>170</x>
       <y>100</y>
       <w>210</w>
-      <h>230</h>
+      <h>180</h>
     </coordinates>
     <panel_attributes>Verleihen</panel_attributes>
     <additional_attributes/>
@@ -15,24 +15,12 @@
   <element>
     <type>com.umlet.element.UseCase</type>
     <coordinates>
-      <x>210</x>
-      <y>220</y>
-      <w>120</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>Bild hochladen
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.UseCase</type>
-    <coordinates>
-      <x>210</x>
+      <x>180</x>
       <y>180</y>
-      <w>120</w>
+      <w>190</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>Text Erstellen
+    <panel_attributes>Beschreibung hinzufügen
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -51,8 +39,8 @@
   <element>
     <type>com.umlet.element.UseCase</type>
     <coordinates>
-      <x>200</x>
-      <y>270</y>
+      <x>190</x>
+      <y>230</y>
       <w>150</w>
       <h>40</h>
     </coordinates>
@@ -87,33 +75,22 @@
     <coordinates>
       <x>90</x>
       <y>160</y>
-      <w>140</w>
+      <w>110</w>
       <h>60</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>30;30;120;40</additional_attributes>
+    <additional_attributes>30;30;90;40</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>90</x>
       <y>160</y>
-      <w>140</w>
-      <h>100</h>
+      <w>120</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>30;30;120;80</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>90</x>
-      <y>160</y>
-      <w>130</w>
-      <h>150</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>30;30;110;130</additional_attributes>
+    <additional_attributes>30;30;100;90</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Actor</type>
@@ -135,18 +112,6 @@
       <h>230</h>
     </coordinates>
     <panel_attributes>Ausleihen</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.UseCase</type>
-    <coordinates>
-      <x>190</x>
-      <y>370</y>
-      <w>180</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>Nach Angeboten suchen
-</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -250,5 +215,17 @@
     </coordinates>
     <panel_attributes/>
     <additional_attributes>30;140;110;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>190</x>
+      <y>370</y>
+      <w>180</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Angebote anzeigen
+</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>
