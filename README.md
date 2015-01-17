@@ -59,7 +59,8 @@ Mockup-Screens
 **4.2 Gesuch erstellen**
 ![Gesuch erstellen] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/mockups/4.2_Gesuch_erstellen_Popup.PNG)
 
- **2. UseCase-Diagramme**
+UseCase-Diagramme
+ ==============
  
  Der Nutzer kann sich am System, also dem RentmyStuff Portal registrieren und nachdem die Daten in der Datenbank gespeichert wurden am System anmelden.
  
@@ -73,15 +74,19 @@ Mockup-Screens
  
  ![Ausleihen] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/Use%20Case%20Diagramme/Ausleihen.PNG)
  
- ** 3. Klassendiagramme **
+Klassendiagramme
+==============
  
- ** 4. Verwendete Technologien **
+Verwendete Technologien
+==============
  
- ** 5. Probleme **
+Probleme
+==============
  
- ** 6. Was haben wir gelernt?/Fazit **
+Was haben wir gelernt?/Fazit
+==============
  
-Angefangen von der PortalIdee über die Anforderungen bis hin zur Umsetzung der Technolgien bereicherte das RentmyStuff Portal unseren Wissenhorizont sehr. Wir lernten die Anforderungen in Arbeitspakete aufzugliedern und diese im Team aufzuteilen und anschließen umzusetzen. Äußerst ansprechend war dabei, dass wir dieses Projekt von der Idee bis zum Deployment begleiten durften. Dabei erlernten wir viele Technolgien und bekamen einen Einblick, in dem was alles hinter der Erstellung eines Portals steckt. Bereits aus dem Studium erlernte Kenntnisse konnten erfoglreich umgesetzt und weiterentwickelt werden. Das Projekt RentmyStuff war für alle Teammitglieder ein voller Erfolg.
+Angefangen von der PortalIdee über die Anforderungen bis hin zur Umsetzung der Technolgien bereicherte das RentmyStuff Portal unseren Wissenhorizont sehr. Wir lernten die Anforderungen in Arbeitspakete aufzugliedern, diese im Team aufzuteilen und anschließen umzusetzen. Äußerst ansprechend war dabei, dass wir dieses Projekt von der Idee bis zum Deployment begleiten durften. Dabei erlernten wir eine Menge an Technolgien und bekamen einen Einblick, in dem was alles hinter der Erstellung eines Portals steckt. Bereits aus dem Studium erlernte Kenntnisse konnten erfoglreich umgesetzt und weiterentwickelt werden. Das Projekt RentmyStuff war für alle Teammitglieder ein voller Erfolg.
  
 
 
