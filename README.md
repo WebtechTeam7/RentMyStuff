@@ -1,5 +1,6 @@
 RentMyStuff
 ===========
+(https://github.com/WebtechTeam7/RentMyStuff/blob/master/public/images/RentMyStuff_Logo.png)
 
 HTWG Konstanz: Web-Technologien Projekt 
 Teammitglieder: Ramona Barth, Dennis Klein und Jan Gaideczka
