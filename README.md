@@ -60,7 +60,7 @@ Mockup-Screens
 ![Gesuch erstellen] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/mockups/4.2_Gesuch_erstellen_Popup.PNG)
 
 UseCase-Diagramme
- ==============
+==============
  
  Der Nutzer kann sich am System, also dem RentmyStuff Portal registrieren und nachdem die Daten in der Datenbank gespeichert wurden am System anmelden.
  
@@ -86,7 +86,7 @@ Probleme
 Was haben wir gelernt?/Fazit
 ==============
  
-Angefangen von der PortalIdee über die Anforderungen bis hin zur Umsetzung der Technolgien bereicherte das RentmyStuff Portal unseren Wissenhorizont sehr. Wir lernten die Anforderungen in Arbeitspakete aufzugliedern, diese im Team aufzuteilen und anschließen umzusetzen. Äußerst ansprechend war dabei, dass wir dieses Projekt von der Idee bis zum Deployment begleiten durften. Dabei erlernten wir eine Menge an Technolgien und bekamen einen Einblick, in dem was alles hinter der Erstellung eines Portals steckt. Bereits aus dem Studium erlernte Kenntnisse konnten erfoglreich umgesetzt und weiterentwickelt werden. Das Projekt RentmyStuff war für alle Teammitglieder ein voller Erfolg.
+Angefangen von der PortalIdee, über die Anforderungen bis hin zur Umsetzung der Technolgien bereicherte das RentMyStuff Portal unseren Wissenhorizont sehr. Wir lernten die Anforderungen in Arbeitspakete aufzugliedern, diese im Team aufzuteilen und anschließen umzusetzen. Äußerst ansprechend war dabei, dass wir dieses Projekt von der Idee bis zum Deployment begleiten durften. Dabei erlernten wir eine Menge an Technolgien und bekamen einen Einblick, in dem was alles hinter der Erstellung eines Portals steckt. Bereits aus dem Studium erlernte Kenntnisse konnten erfoglreich umgesetzt und weiterentwickelt werden. Das Projekt RentmyStuff war für alle Teammitglieder ein voller Erfolg.
  
 
 
