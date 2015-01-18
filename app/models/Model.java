@@ -15,24 +15,24 @@ import play.db.DB;
 public class Model {
 
 	private static Model instance;
-
-	private final String user = "CREATE TABLE User( "
+	private boolean dbExist;
+	private final String createUserStatement = "CREATE TABLE User( "
 			+ "UserID INTEGER PRIMARY KEY AUTOINCREMENT,"
 			+ "Firstname TEXT NOT NULL," + "Lastname TEXT NOT NULL,"
 			+ "Email TEXT NOT NULL UNIQUE," + "Password TEXT NOT NULL" + ");";
 
-	private final String advert = "CREATE TABLE Advert("
+	private final String createAdvertStatement = "CREATE TABLE Advert("
 			+ "AdvertID INTEGER PRIMARY KEY AUTOINCREMENT,"
 			+ "AdvertUserID INTEGER NOT NULL," + "Kind TEXT NOT NULL,"
-			+ "Date TEXT NOT NULL,"
-			+ "Category TEXT NOT NULL," + "Description TEXT NOT NULL,"
+			+ "Date TEXT NOT NULL," + "Category TEXT NOT NULL,"
+			+ "Description TEXT NOT NULL,"
 			+ "FOREIGN KEY (AdvertUserID) REFERENCES User(USERID)" + ");";
-	private final String address = "CREATE TABLE Address("
+	private final String createAddressStatement = "CREATE TABLE Address("
 			+ "AddressID INTEGER PRIMARY KEY AUTOINCREMENT,"
 			+ "Street TEXT NOT NULL," + "Postcode TEXT NOT NULL,"
 			+ "City TEXT NOT NULL," + "Country TEXT NOT NULL" + ");";
 
-	private final String advertAddress = "CREATE TABLE AdvertAddress("
+	private final String createAdvertAddressStatement = "CREATE TABLE AdvertAddress("
 			+ "Address INTEGER NOT NULL," + "Advert INTEGER NOT NULL,"
 			+ "FOREIGN KEY (Address) REFERENCES Address(AddressID),"
 			+ "FOREIGN KEY (Advert) REFERENCES Advert(AdvertID),"
@@ -104,7 +104,9 @@ public class Model {
 			preparedStatement.setString(3, email);
 			preparedStatement.setString(4, password);
 			preparedStatement.executeUpdate();
+			System.out.println("Folgender User wurde in DB erstelle: " + firstname + " " + lastname);
 		} catch (SQLException e) {
+			System.out.println("User: " + firstname + " " +lastname + " konnte nicht erstellt werden!!");
 			e.printStackTrace();
 		}
 	}
@@ -195,7 +197,7 @@ public class Model {
 	public List<Advert> getAdvertList() {
 
 		advertList.clear();
-
+		
 		try {
 			String statement = "SELECT * FROM Advert Order BY AdvertId DESC";
 			PreparedStatement preparedStatement = connection
@@ -250,6 +252,28 @@ public class Model {
 		return advertList;
 	}
 
+	private Address getAddress(int advertID) {
+
+		String statement = "SELECT ad.Street, ad.Postcode, ad.City, ad.Country, aa.Address FROM Address ad, AdvertAddress aa WHERE aa.Advert = ? AND aa.Address = ad.AddressID";
+		try {
+			PreparedStatement preparedStatement = connection
+					.prepareStatement(statement);
+			preparedStatement.setInt(1, advertID);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				Address address = new Address();
+				address.setStreet(resultSet.getString("Street"));
+				address.setPostcode(resultSet.getString("Postcode"));
+				address.setCity(resultSet.getString("City"));
+				address.setCountry(resultSet.getString("Country"));
+				return address;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
 	/**
 	 * 
 	 * @param userId
@@ -299,77 +323,15 @@ public class Model {
 			int addressID = address(street, postcode, city, country);
 			int advertID = advert(user, optradio, kategorie, comment);
 			advertAddress(addressID, advertID);
+			System.out.println("Folgendes Angebot wurde erstellt " + user.getFirstname() + "  " + street);
 		} catch (SQLException e) {
+			System.out.println("Fehler beim erstellen");
 			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Loescht die Anzeige aus der Datenbank
-	 * 
-	 * @param id
-	 * @param userID
-	 * @author Jan
-	 * 
-	 */
-	public void deleteAdvert(int id, int userID) {
-		boolean allowed = false;
-		try {
-			allowed = checkAuthorization(id, userID);
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-		if (allowed) {
-			try {
-				int addressID = getAddressID(id);
-				// delete the advert
-				String statement = "DELETE FROM Advert WHERE AdvertID = ?";
-				PreparedStatement preparedStatement = connection
-						.prepareStatement(statement);
-				preparedStatement.setInt(1, id);
-				preparedStatement.executeUpdate();
-	
-				// delete AdvertAddress
-				statement = "DELETE FROM AdvertAddress WHERE Advert = ?";
-				preparedStatement = connection.prepareStatement(statement);
-				preparedStatement.setInt(1, id);
-				preparedStatement.executeUpdate();
-	
-				// delete Address
-				statement = "DELETE FROM Address WHERE AddressID = ?";
-				preparedStatement = connection.prepareStatement(statement);
-				preparedStatement.setInt(1, addressID);
-				preparedStatement.executeUpdate();
-	
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		} else {
-			System.out.println("User not authorized");
 		}
 	}
 
 	public static void setAdvertList(List<Advert> advertList) {
 		Model.getInstance().advertList = advertList;
-	}
-
-	private Address getAddress(int advertID) throws SQLException {
-
-		String statement = "SELECT ad.Street, ad.Postcode, ad.City, ad.Country, aa.Address FROM Address ad, AdvertAddress aa WHERE aa.Advert = ? AND aa.Address = ad.AddressID";
-		PreparedStatement preparedStatement = connection
-				.prepareStatement(statement);
-		preparedStatement.setInt(1, advertID);
-		ResultSet resultSet = preparedStatement.executeQuery();
-		while (resultSet.next()) {
-			Address address = new Address();
-			address.setStreet(resultSet.getString("Street"));
-			address.setPostcode(resultSet.getString("Postcode"));
-			address.setCity(resultSet.getString("City"));
-			address.setCountry(resultSet.getString("Country"));
-			return address;
-		}
-
-		return null;
 	}
 
 	private void advertAddress(int addressID, int advertID) throws SQLException {
@@ -436,11 +398,57 @@ public class Model {
 
 	private String createCurrentDate() {
 		GregorianCalendar calendar = new GregorianCalendar();
-		DateFormat df = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM);
+		DateFormat df = DateFormat.getDateTimeInstance(DateFormat.SHORT,
+				DateFormat.MEDIUM);
 		System.out.println(df.format(calendar.getTime()));
 		return df.format(calendar.getTime());
 	}
 
+	/**
+	 * Loescht die Anzeige aus der Datenbank
+	 * 
+	 * @param id
+	 * @param userID
+	 * @author Jan
+	 * 
+	 */
+	public void deleteAdvert(int id, int userID) {
+		boolean allowed = false;
+		try {
+			allowed = checkAuthorization(id, userID);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		if (allowed) {
+			try {
+				int addressID = getAddressID(id);
+				// delete the advert
+				String statement1 = "DELETE FROM Advert WHERE AdvertID = ?";
+				PreparedStatement preparedStatement1 = connection
+						.prepareStatement(statement1);
+				preparedStatement1.setInt(1, id);
+				preparedStatement1.executeUpdate();
+
+				// delete AdvertAddress
+				String statement2 = "DELETE FROM AdvertAddress WHERE Advert = ?";
+				PreparedStatement preparedStatement2 = connection.prepareStatement(statement2);
+				preparedStatement2.setInt(1, id);
+				preparedStatement2.executeUpdate();
+
+				// delete Address
+				String statement3 = "DELETE FROM Address WHERE AddressID = ?";
+				PreparedStatement preparedStatement3 = connection.prepareStatement(statement3);
+				preparedStatement3.setInt(1, addressID);
+				preparedStatement3.executeUpdate();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} else {
+			System.out.println("User not authorized");
+		}
+	}
+	
 	private int getAddressID(int id) throws SQLException {
 		String statement = "SELECT Address FROM AdvertAddress WHERE Advert = ?";
 		PreparedStatement preparedStatement = connection
@@ -454,37 +462,7 @@ public class Model {
 		return 0;
 	}
 
-	/**
-	 * Create the tables
-	 * @param tablename
-	 */
-	private void initTables(String tablename) {
-
-		try {
-			PreparedStatement preparedStatement = connection
-					.prepareStatement(tablename);
-			preparedStatement.executeUpdate();
-			System.out.println("Create " + tablename + " in given Database");
-		} catch (SQLException e) {
-			System.out.println("tables already exist");
-		}
-	}
-
-	/**
-	 * Create our Database
-	 */
-	public void initDatabase() {
-		File file = new File("@routes.Assets.at('')");
-		if (!file.exists()) {
-			System.out.println("Call initTables()");
-			initTables(user);
-			initTables(advert);
-			initTables(address);
-			initTables(advertAddress);
-		} else {
-			System.out.println("Database already exists!");
-		}
-	}
+	
 
 	/**
 	 * 
@@ -507,7 +485,60 @@ public class Model {
 		} else {
 			return false;
 		}
-	
+
+	}
+
+
+	/**
+	 * Create our Database
+	 */
+	public void initDatabase() {
+
+		try {
+			PreparedStatement preparedStatement = connection
+					.prepareStatement("SELECT * FROM User");
+			PreparedStatement preparedStatement2 = connection
+					.prepareStatement("SELECT * FROM Advert");
+			PreparedStatement preparedStatement3 = connection
+					.prepareStatement("SELECT * FROM Address");
+			PreparedStatement preparedStatement4 = connection.prepareStatement("SELECT * FROM AdvertAddress");
+			preparedStatement.execute();
+			preparedStatement2.execute();
+			preparedStatement3.execute();
+			preparedStatement4.execute();
+			System.out.println(dbExist);
+			dbExist = true;
+		} catch (SQLException e) {
+			dbExist = false;
+		}
+
+		if (!dbExist) {
+			System.out.println("Call initTables()");
+			initTables(createUserStatement);
+			initTables(createAdvertStatement);
+			initTables(createAddressStatement);
+			initTables(createAdvertAddressStatement);
+			dbExist = true;
+		} else {
+			System.out.println("Database already exists!");
+		}
+	}
+
+	/**
+	 * Create the tables
+	 * 
+	 * @param tablename
+	 */
+	private void initTables(String tablename) {
+
+		try {
+			PreparedStatement preparedStatement = connection
+					.prepareStatement(tablename);
+			preparedStatement.executeUpdate();
+			System.out.println("Create " + tablename + " in given Database");
+		} catch (SQLException e) {
+			System.out.println("tables already exist");
+		}
 	}
 
 }
