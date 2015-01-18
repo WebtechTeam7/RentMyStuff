@@ -9,9 +9,7 @@
 					<button type="submit" class="btn btn-warning" value="Angebot erstellen">Angebot erstellen</button>
 				</form>
 				</div>
-				<div class="col-md-9">
-					<img src=@routes.Assets.at("images/Angebote.png") alt="Angebote_Logo">
-				</div>
+				
 			</div>
 			<div class="row">
 				<form method="Post" action="getAngebotList">
@@ -29,12 +27,13 @@
 							<button type="submit" class="btn btn-default" name="category"
 								value="Elektronik">Elektronik</button>
 							<button type="submit" class="btn btn-default" name="category"
-								value="Sonstiges">Sonstiges</button>
+								value="Sonstiges">Sonstiges</button><br>
 
 						</div>
 					</div>
 				</form>
 				<div class="col-md-6">
+				<img src=@routes.Assets.at("images/Angebote.png") alt="Angebote_Logo">
 					<p>
 						<span id="Angebote"></span>
 					</p>
