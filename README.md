@@ -76,12 +76,24 @@ UseCase-Diagramme
  
 Klassendiagramme
 ==============
+
+In folgender Grafik ist unser Klassendiagramm zu sehen. 
+
+![Klassendiagramm] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/Klassendiagramm/rentmystuff_klassendiagramm.JPG)
  
 Verwendete Technologien
 ==============
  
 Probleme
 ==============
+
+Während der der gesamten Projektphase gab es keine Schwerwiegenden Probleme mit dem Projekt an sich und ebenso wenig gab es innerhalb des Teams Probleme. Unsere größten Probleme waren meistens Kleinigkeiten,
+die wir in Griff bekamen. Eines der wenigen größeren Probleme trat bei der Datenbank auf. Da wir zu Beginn mit dem Problem kämpften, dass wir keine Angebote anlegen konnten, weil die Datenbank-File gesperrt wurde. Nachdem wir 
+unsere Model-Klasse als ein Singelton implementierten und somit garantierten, dass es nur eine Verbindung zur Datenbank besteht. Dachten wir das Problem sei gelöst. Doch das Problem stieß uns in unregelmäßigen Abständen wieder auf. Dieser Bugfix beanspruchte eine ganze Weile, da das Problem für uns 
+nie klar Verständlich und ebenso wenig reproduzierbar war. Schlussendlich haben wir es bis zum jetzigen Zeitpunkt gefixt. 
+Ein weiteres kleines Problem war, dass man auf die verschiedenen Browser achten muss, so funktionieren teilweise funktionen im Google Chrome ohne Probleme, aber im Internet Explorer oder sogar Firefox machen sie Probleme. Dies betrifft vorallem Javascript. 
+Wie in nahezu jedem Projekt war auch dieses mal am Ende die Zeit sehr knapp. Das Ergebnis lässt sich trotz Termindruck und Prüfungsstress sehen. Wir konnten unsere Anforderungen alle umsetzen.
+
  
 Was haben wir gelernt?/Fazit
 ==============
