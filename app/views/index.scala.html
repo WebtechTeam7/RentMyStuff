@@ -9,9 +9,9 @@
 
 		<div class="col-md-6 firstbox ">
 
-			<h1>
-				Hallo <font style="color: #FF8C00">@UserName.getFirstname().toUpperCase()</font>!
-			</h1>
+			<h2>
+				Hallo <font style="color: #FF8C00">@UserName.getFirstname()</font>!
+			</h2>
 
 			<h2>Worum geht es hier eigentlich?</h2>
 			<p>Jeder kennt es vermutlich. Man zieht in eine neue Stadt um
@@ -23,7 +23,7 @@
 				Anbietet ausleihen kann.</p>
 			<p>Genau das ermöglicht das <b>"RentMyStuff"</b> - Portal!</p>
 
-			<a href="@routes.Application.account">Account löschen</a>
+			<a href="@routes.Application.account" id="orangefont">Account löschen</a>
 		</div>
 		
 		<div class="col-md-3  secondbox">
@@ -53,9 +53,8 @@
 					<!-- <img class="rasemaeher" src=@routes.Assets.at( "images/Rasenmaeher.jpg") /> -->
 					<span class="kind"><b>Kategorie:</b> @advert.getCategory()</span><br>
 					<span class="time"><b>Eingestellt am:</b> @advert.getDate()</span><br>
-					<span class="kind"><b>Beschreibung:</b><br>	@advert.getDescription()</span> <br>  <a
-						href="@routes.Application.deleteAdvert(advert.getId(), advert.getUser().getUserID())"><i
-						class="fa fa-trash"></i></a>
+					<span class="kind"><b>Beschreibung:</b><br>	@advert.getDescription()</span>
+					 <a	href="@routes.Application.deleteAdvert(advert.getId(), advert.getUser().getUserID())"><i class="fa fa-trash"></i></a>
 				</div>
 				<hr>
 			</div>
