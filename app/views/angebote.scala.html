@@ -1,5 +1,30 @@
 @(AdvertList :List[Advert]) @main("Angebote"){
 <meta charset="utf-8">
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+	reloadAdverts("");
+});
+
+function getCat(id){
+	var g = document.getElementById(id).getAttribute('value');
+	reloadAdverts(g);
+}
+
+function reloadAdverts(g) {
+	var requestObj = new XMLHttpRequest();	
+	requestObj.onreadystatechange = function() {
+		if (requestObj.readyState == 4 && requestObj.status == 200) {
+			document.getElementById("angebote").innerHTML = requestObj.responseText;
+			requestObj = null;
+		}
+	}
+	requestObj.open("GET","getAngebotList?g="+g, true);
+	requestObj.send();
+}
+</script>
+
 <p>
 	<article>
 		<div class="Indexcontainer">
@@ -12,32 +37,30 @@
 				
 			</div>
 			<div class="row">
-				<form method="Post" action="getAngebotList">
+				<form>
 					<div class="col-md-3">
 						<div class="btn-group-vertical" role="group" aria-label="...">
-
-							<button type="submit" class="btn btn-default" name="category"
-								value="Werkzeuge">Werkzeuge</button>
-							<button type="submit" class="btn btn-default" name="category"
-								value="Fahrzeuge">Fahrzeuge</button>
-							<button type="submit" class="btn btn-default" name="category"
-								value="GartengerÃ¤te">Gartengeräte</button>
-							<button type="submit" class="btn btn-default" name="category"
-								value="Dienstleistungen">Dienstleistungen</button>
-							<button type="submit" class="btn btn-default" name="category"
-								value="Elektronik">Elektronik</button>
-							<button type="submit" class="btn btn-default" name="category"
-								value="Sonstiges">Sonstiges</button><br>
-
+							<button type="button" class="btn btn-default-alt" name="category"
+								value="AlleGesuche" id="alleGesuche" onclick="reloadSearch('');">Alle Gesuche</button>
+							<button type="button" class="btn btn-default" name="category"
+								value="Werkzeuge" id="werkzeuge" onclick="getCat(this.id);">Werkzeuge</button>
+							<button type="button" id="fahrzeuge" class="btn btn-default" name="category"
+								value="Fahrzeuge" onclick="getCat(this.id);">Fahrzeuge</button>
+							<button type="button" id="gartengeraete" class="btn btn-default" name="category"
+								value="Gartengeräte" onclick="getCat(this.id);">Gartengeräte</button>
+							<button type="button" id="dienstleistungen" class="btn btn-default" name="category"
+								value="Dienstleistungen" onclick="getCat(this.id);">Dienstleistungen</button>
+							<button type="button" id="elektronik" class="btn btn-default" name="category"
+								value="Elektronik" onclick="getCat(this.id);">Elektronik</button>
+							<button type="button" id="sonstiges" class="btn btn-default" name="category"
+								value="Sonstiges" onclick="getCat(this.id);">Sonstiges</button><br>
 						</div>
 					</div>
 				</form>
+				
 				<div class="col-md-6">
-				<img src=@routes.Assets.at("images/Angebote.png") alt="Angebote_Logo">
-					<p>
-						<span id="Angebote"></span>
-					</p>
-					<button type="button" id="btAngebote" onclick="reloadAdverts()">Lade Angebote</button>
+					<img src=@routes.Assets.at("images/Angebote.png") alt="Angebote_Logo">
+					<span id="angebote"></span>
 				</div>
 
 				<div class="col-xs-6 col-sm-3"></div>

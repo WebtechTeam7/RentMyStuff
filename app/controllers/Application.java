@@ -108,11 +108,13 @@ public class Application extends Controller {
 		return ok(searchAdvert.render(Model.getInstance().getAdvertList()));
 	}
 	
-	public static Result getAngebotList(){
-		DynamicForm dynamicForm = Form.form().bindFromRequest();
-		String category = dynamicForm.get("category");
+	// Für Ajax
+	public static Result getAngebotList(String category){
+		if(category.equals("")){
+			return ok(reloadAdvert.render(Model.getInstance().getAdvertList()));
+		}
 		List<Advert> list = Model.getInstance().getAdvertList(category);
-		return ok(angebote.render(list));
+		return ok(reloadAvert.render(list));
 	}
 	
 	public static Result getGesuchList(String category){
@@ -123,7 +125,8 @@ public class Application extends Controller {
 		List<Advert> list = Model.getInstance().getAdvertList(category);
 		return ok(searchAdvert.render(list));
 	}
-
+	
+	
 	public static Result registrieren() {
 		return ok(registrieren.render());
 	}
