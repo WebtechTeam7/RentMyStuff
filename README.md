@@ -1,5 +1,6 @@
 RentMyStuff
 ===========
+![Logo] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/public/images/RentMyStuff_Logo.png)
 
 HTWG Konstanz: Web-Technologien Projekt 
 Teammitglieder: Ramona Barth, Dennis Klein und Jan Gaideczka
@@ -58,6 +59,47 @@ Mockup-Screens
 **4.2 Gesuch erstellen**
 ![Gesuch erstellen] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/mockups/4.2_Gesuch_erstellen_Popup.PNG)
 
+UseCase-Diagramme
+==============
+ 
+ Der Nutzer kann sich am System, also dem RentmyStuff Portal registrieren und nachdem die Daten in der Datenbank gespeichert wurden am System anmelden.
+ 
+ ![Anmeldung] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/Use%20Case%20Diagramme/Anmeldung.PNG)
+ 
+ Der Nutzer kann einen Artikel als Angebot in das System einstellen. Dieses Angebot umfasst neben der Kategorie, eine Beschreibung sowie eine Adresse.
+ 
+ ![Verleihen] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/Use%20Case%20Diagramme/Ausleihen.PNG)
+ 
+ Nutzer können die eingestellten Angebote anderer Nutzer einsehen, nach Kategorien filtern und mit dem Eigentümer via Mail Kontakt aufnehmen. Des Weiteren kann ein Nutzer ein Gesuch einstellen, welches wiederrum auch von anderen Nutzern eingesehen werden kann. 
+ 
+ ![Ausleihen] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/Use%20Case%20Diagramme/Ausleihen.PNG)
+ 
+Klassendiagramme
+==============
+
+In folgender Grafik ist unser Klassendiagramm zu sehen. 
+
+![Klassendiagramm] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/Klassendiagramm/rentmystuff_klassendiagramm.JPG)
+ 
+Verwendete Technologien
+==============
+ 
+Probleme
+==============
+
+Während der der gesamten Projektphase gab es keine Schwerwiegenden Probleme mit dem Projekt an sich und ebenso wenig gab es innerhalb des Teams Probleme. Unsere größten Probleme waren meistens Kleinigkeiten,
+die wir in Griff bekamen. Eines der wenigen größeren Probleme trat bei der Datenbank auf. Da wir zu Beginn mit dem Problem kämpften, dass wir keine Angebote anlegen konnten, weil die Datenbank-File gesperrt wurde. Nachdem wir 
+unsere Model-Klasse als ein Singelton implementierten und somit garantierten, dass es nur eine Verbindung zur Datenbank besteht. Dachten wir das Problem sei gelöst. Doch das Problem stieß uns in unregelmäßigen Abständen wieder auf. Dieser Bugfix beanspruchte eine ganze Weile, da das Problem für uns 
+nie klar Verständlich und ebenso wenig reproduzierbar war. Schlussendlich haben wir es bis zum jetzigen Zeitpunkt gefixt. 
+Ein weiteres kleines Problem war, dass man auf die verschiedenen Browser achten muss, so funktionieren teilweise funktionen im Google Chrome ohne Probleme, aber im Internet Explorer oder sogar Firefox machen sie Probleme. Dies betrifft vorallem Javascript. 
+Wie in nahezu jedem Projekt war auch dieses mal am Ende die Zeit sehr knapp. Das Ergebnis lässt sich trotz Termindruck und Prüfungsstress sehen. Wir konnten unsere Anforderungen alle umsetzen.
+
+ 
+Was haben wir gelernt?/Fazit
+==============
+ 
+Angefangen von der PortalIdee, über die Anforderungen bis hin zur Umsetzung der Technolgien bereicherte das RentMyStuff Portal unseren Wissenhorizont sehr. Wir lernten die Anforderungen in Arbeitspakete aufzugliedern, diese im Team aufzuteilen und anschließen umzusetzen. Äußerst ansprechend war dabei, dass wir dieses Projekt von der Idee bis zum Deployment begleiten durften. Dabei erlernten wir eine Menge an Technolgien und bekamen einen Einblick, in dem was alles hinter der Erstellung eines Portals steckt. Bereits aus dem Studium erlernte Kenntnisse konnten erfoglreich umgesetzt und weiterentwickelt werden. Das Projekt RentmyStuff war für alle Teammitglieder ein voller Erfolg.
+ 
 
 
 

@@ -1,0 +1,23 @@
+@(AdvertList :List[Advert]) @for(advert <- AdvertList){
+@if(advert.getKind().equals("Gesuch")){
+
+<div class="box" id="EigeneGesucheAngeboteBox">
+	<h3>@advert.getKind von @advert.getUser().getFullName()</h3>
+	<span class="kind"><b>Kategorie:</b> @advert.getCategory()</span><br>
+	<span class="time"><b>Eingestellt am:</b> @advert.getDate()</span><br>
+	<span class="kind"><b>Beschreibung:</b> @advert.getDescription()</span>
+</div>
+<br>
+<a class="btn btn-default btn-sm"
+	href="mailto:@advert.getUser.getEmail()?subject=Ihre Anzeige bei RentMyStuff">
+	<i class="fa fa-envelope"></i> Nachricht senden
+</a>
+
+<a class="btn btn-default btn-sm"
+	href="@routes.Application.map(advert.getAddress().getStreet(),advert.getAddress().getCity(),advert.getAddress().getPostcode(),advert.getAddress().getCountry())">
+	<i class="fa fa-map-marker"></i> Standort anzeigen
+</a>
+<hr>
+} }
+
+

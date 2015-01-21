@@ -1,0 +1,66 @@
+@(AdvertList :List[Advert]) @main("Gesuche"){
+<meta charset="utf-8">
+<p>
+	<article>
+		<div class="Indexcontainer">
+			<div class="row">
+				<div class="col-md-3">
+					<form action="@routes.Application.inserat()">
+					<button type="submit" class="btn btn-warning" value="Gesuch erstellen">Gesuch erstellen</button>
+				</form>
+				</div>
+			</div>
+			<div class="row">
+				<form method="Post" action="getGesuchList">
+					<div class="col-md-3">
+						<div class="btn-group-vertical" role="group" aria-label="...">
+
+							<button type="submit" class="btn btn-default" name="category"
+								value="Werkzeuge">Werkzeuge</button>
+							<button type="submit" class="btn btn-default" name="category"
+								value="Fahrzeuge">Fahrzeuge</button>
+							<button type="submit" class="btn btn-default" name="category"
+								value="GartengerÃ¤te">Gartengeräte</button>
+							<button type="submit" class="btn btn-default" name="category"
+								value="Dienstleistungen">Dienstleistungen</button>
+							<button type="submit" class="btn btn-default" name="category"
+								value="Elektronik">Elektronik</button>
+							<button type="submit" class="btn btn-default" name="category"
+								value="Sonstiges">Sonstiges</button><br>
+						</div>
+
+					</div>
+				</form>
+				<div class="col-md-6">					
+					<!-- 
+					<p><span id="Gesuche"></span></p>
+					<button type="button" id="btSuche" onclick="reloadSearch()">LadeGesuche</button>
+					 -->
+					 <img src=@routes.Assets.at("images/Gesuche.png") alt="Gesuche_Logo">
+					 @for(advert <- AdvertList){
+						@if(advert.getKind().equals("Gesuch")){
+
+						<div class="box">
+							<h3>@advert.getKind von @advert.getUser().getFullName()</h3>
+							<div class="gesuche">
+								<span class="kind"><b>Kategorie:</b> @advert.getCategory()</span><br>
+								<span class="time"><b>Eingestellt am:</b> @advert.getDate()</span><br>
+								<span class="kind"><b>Beschreibung:</b> @advert.getDescription()</span><br> 
+								<br> <a class="btn btn-default btn-sm" href="mailto:@advert.getUser.getEmail()?subject=Ihre Anzeige bei RentMyStuff">
+								<i class="fa fa-envelope"></i> Nachricht senden
+								</a> <a class="btn btn-default btn-sm" href="@routes.Application.map(advert.getAddress().getStreet(),advert.getAddress().getCity(),advert.getAddress().getPostcode(),advert.getAddress().getCountry())">
+								<i class="fa fa-map-marker"></i> Standort anzeigen</a>
+						<hr>
+						</div>
+						} }
+					 
+					 
+					
+				</div>
+
+				<div class="col-xs-6 col-sm-3"></div>
+			</div>
+
+		</div>
+	</article>
+	}

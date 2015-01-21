@@ -1,0 +1,29 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Application.login()
+GET		/index						controllers.Application.index()
+GET		/angebote					controllers.Application.angebote()
+GET		/gesuche					controllers.Application.gesuche()
+GET		/impressum					controllers.Application.impressum()
+GET		/kontakt					controllers.Application.kontakt()
+GET		/inserat					controllers.Application.inserat()
+GET		/registrieren				controllers.Application.registrieren()
+GET		/newAdvert					controllers.Application.newAdvert(optradio,kategorie,comment,street,postcode,city,country)
+GET		/map						controllers.Application.map(street,city,postcode,country)
+GET		/fehler						controllers.Application.fehler()
+GET		/getAdvertList				controllers.Application.getAdvertList()
+GET		/getSearchList				controllers.Application.getSearchList()
+POST	/anmelden					controllers.Application.anmelden()
+POST	/createUser					controllers.Application.createUser()
+POST	/getAngebotList				controllers.Application.getAngebotList()
+POST	/getGesuchList				controllers.Application.getGesuchList()
+#POST	/loeschen					controllers.Application.loeschen()
+
+GET		/deleteAdvert				controllers.Application.deleteAdvert(id: Integer, userId: Integer)
+#GET	/deleteUser					controllers.Application.deleteUser(userId: Integer)
+GET		/account					controllers.Application.account()
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
