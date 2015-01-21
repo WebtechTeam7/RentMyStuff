@@ -101,13 +101,26 @@ public class Application extends Controller {
 		return ok(inserat.render());
 	}
 
-	public static Result getAdvertList() {
-		return ok(ReloadAdvert.render(Model.getInstance().getAdvertList()));
+	// Für Ajax
+	
+	public static Result getAngebotList(String category){
+		if(category.equals("")){
+			return ok(reloadAdvert.render(Model.getInstance().getAdvertList()));
+		}
+		List<Advert> list = Model.getInstance().getAdvertList(category);
+		return ok(reloadAdvert.render(list));
 	}
-	public static Result getSearchList() {
-		return ok(searchAdvert.render(Model.getInstance().getAdvertList()));
+	
+	public static Result getGesuchList(String category){
+		System.out.println(category);
+		if(category.equals("")){
+			return ok(searchAdvert.render(Model.getInstance().getAdvertList()));
+		}
+		List<Advert> list = Model.getInstance().getAdvertList(category);
+		return ok(searchAdvert.render(list));
 	}
-
+	
+	
 	public static Result registrieren() {
 		return ok(registrieren.render());
 	}
@@ -161,20 +174,6 @@ public class Application extends Controller {
 		return ok(fehler.render());
 	}
 	
-	public static Result getAngebotList(){
-		DynamicForm dynamicForm = Form.form().bindFromRequest();
-		String category = dynamicForm.get("category");
-		List<Advert> list = Model.getInstance().getAdvertList(category);
-		return ok(angebote.render(list));
-	}
-	
-	public static Result getGesuchList(){
-		DynamicForm dynamicForm = Form.form().bindFromRequest();
-		String category = dynamicForm.get("category");
-		List<Advert> list = Model.getInstance().getAdvertList(category);
-		return ok (gesuche.render(list));
-	}
-
 	public static Result createUser() {
 
 		DynamicForm dynamicForm = Form.form().bindFromRequest();

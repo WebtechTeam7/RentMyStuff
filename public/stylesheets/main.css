@@ -1,7 +1,6 @@
 header {
 	background-color: grey;
 }
-
 body {
 	background-color: #BDBDBD;
 	padding-top: 60px;
@@ -14,7 +13,7 @@ img {
 	max-width: 100%;
 	height: auto;
 	margin: auto;
-	text-align: center;
+	align: center;
 }
 
 .navbar {
@@ -90,3 +89,4 @@ img {
 #EigeneGesucheAngeboteBox {
 	text-align: left;
 }
+

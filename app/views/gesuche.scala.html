@@ -1,5 +1,30 @@
 @(AdvertList :List[Advert]) @main("Gesuche"){
 <meta charset="utf-8">
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+	reloadSearch("");
+});
+
+function getCat(id){
+	var g = document.getElementById(id).getAttribute('value');
+	reloadSearch(g);
+}
+
+function reloadSearch(g) {
+	var requestObj = new XMLHttpRequest();	
+	requestObj.onreadystatechange = function() {
+		if (requestObj.readyState == 4 && requestObj.status == 200) {
+			document.getElementById("gesuche").innerHTML = requestObj.responseText;
+			requestObj = null;
+		}
+	}
+	requestObj.open("GET","getGesuchList?g="+g, true);
+	requestObj.send();
+}
+</script>
+
 <p>
 	<article>
 		<div class="Indexcontainer">
@@ -11,51 +36,30 @@
 				</div>
 			</div>
 			<div class="row">
-				<form method="Post" action="getGesuchList">
+				<form>
 					<div class="col-md-3">
+						<h4>Kategorieauswahl: </h4>
 						<div class="btn-group-vertical" role="group" aria-label="...">
-
-							<button type="submit" class="btn btn-default" name="category"
-								value="Werkzeuge">Werkzeuge</button>
-							<button type="submit" class="btn btn-default" name="category"
-								value="Fahrzeuge">Fahrzeuge</button>
-							<button type="submit" class="btn btn-default" name="category"
-								value="GartengerÃ¤te">Gartengeräte</button>
-							<button type="submit" class="btn btn-default" name="category"
-								value="Dienstleistungen">Dienstleistungen</button>
-							<button type="submit" class="btn btn-default" name="category"
-								value="Elektronik">Elektronik</button>
-							<button type="submit" class="btn btn-default" name="category"
-								value="Sonstiges">Sonstiges</button><br>
+							<button type="button" class="btn btn-default" name="category"
+								value="AlleGesuche" id="alleGesuche" onclick="reloadSearch('');"><b>Alle Gesuche</b></button>
+							<button type="button" class="btn btn-default" name="category"
+								value="Werkzeuge" id="werkzeuge" onclick="getCat(this.id);">Werkzeuge</button>
+							<button type="button" id="fahrzeuge" class="btn btn-default" name="category"
+								value="Fahrzeuge" onclick="getCat(this.id);">Fahrzeuge</button>
+							<button type="button" id="gartengeraete" class="btn btn-default" name="category"
+								value="Gartengeräte" onclick="getCat(this.id);">Gartengeräte</button>
+							<button type="button" id="dienstleistungen" class="btn btn-default" name="category"
+								value="Dienstleistungen" onclick="getCat(this.id);">Dienstleistungen</button>
+							<button type="button" id="elektronik" class="btn btn-default" name="category"
+								value="Elektronik" onclick="getCat(this.id);">Elektronik</button>
+							<button type="button" id="sonstiges" class="btn btn-default" name="category"
+								value="Sonstiges" onclick="getCat(this.id);">Sonstiges</button><br>
 						</div>
-
 					</div>
 				</form>
-				<div class="col-md-6">					
-					<!-- 
-					<p><span id="Gesuche"></span></p>
-					<button type="button" id="btSuche" onclick="reloadSearch()">LadeGesuche</button>
-					 -->
-					 <img src=@routes.Assets.at("images/Gesuche.png") alt="Gesuche_Logo">
-					 @for(advert <- AdvertList){
-						@if(advert.getKind().equals("Gesuch")){
-
-						<div class="box">
-							<h3>@advert.getKind von @advert.getUser().getFullName()</h3>
-							<div class="gesuche">
-								<span class="kind"><b>Kategorie:</b> @advert.getCategory()</span><br>
-								<span class="time"><b>Eingestellt am:</b> @advert.getDate()</span><br>
-								<span class="kind"><b>Beschreibung:</b> @advert.getDescription()</span><br> 
-								<br> <a class="btn btn-default btn-sm" href="mailto:@advert.getUser.getEmail()?subject=Ihre Anzeige bei RentMyStuff">
-								<i class="fa fa-envelope"></i> Nachricht senden
-								</a> <a class="btn btn-default btn-sm" href="@routes.Application.map(advert.getAddress().getStreet(),advert.getAddress().getCity(),advert.getAddress().getPostcode(),advert.getAddress().getCountry())">
-								<i class="fa fa-map-marker"></i> Standort anzeigen</a>
-						<hr>
-						</div>
-						} }
-					 
-					 
-					
+				<div class="col-md-6">
+					<img src=@routes.Assets.at("images/Gesuche.png") alt="Gesuche_Logo">				
+					<span id="gesuche"></span> 
 				</div>
 
 				<div class="col-xs-6 col-sm-3"></div>
