@@ -14,5 +14,6 @@ cache,
 javaWs,
 ws,
 "postgresql" % "postgresql" % "9.1-901-1.jdbc4",
+"org.xerial" % "sqlite-jdbc" % "3.7.15-M1",
 "org.mindrot" % "jbcrypt" % "0.3m"
 )
