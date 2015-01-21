@@ -8,6 +8,13 @@ body {
 #orangefont{
 	color:#ff8040;
 }
+.opacity{
+	background-color: blue;
+    opacity: 0.5;       /* modern browser */  
+    -moz-opacity: 0.5;  /* older Mozilla browser */  
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"; /* IE8 in Standard Compliant Mode */  
+    filter:alpha(opacity=50); /* IE5.x -7.0 */  
+}
 
 img {
 	max-width: 100%;
