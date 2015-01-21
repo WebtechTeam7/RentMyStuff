@@ -20,7 +20,7 @@ POST	/anmelden					controllers.Application.anmelden()
 POST	/createUser					controllers.Application.createUser()
 POST	/getAngebotList				controllers.Application.getAngebotList()
 POST	/getGesuchList				controllers.Application.getGesuchList()
-#POST	/loeschen					controllers.Application.loeschen()
+POST	/loeschen					controllers.Application.loeschen()
 
 GET		/deleteAdvert				controllers.Application.deleteAdvert(id: Integer, userId: Integer)
 #GET	/deleteUser					controllers.Application.deleteUser(userId: Integer)

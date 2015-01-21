@@ -223,25 +223,26 @@ public class Application extends Controller {
 		return ok(account.render());
 	}
 	
-//	public static Result loeschen(){
-//		DynamicForm dynamicForm = Form.form().bindFromRequest();
-//
-//		String email = dynamicForm.get("email");
-//		String password = dynamicForm.get("password");
-//
-//		for (User user : Model.getInstance().getUserList()) {
-//			if (email.equals(user.getEmail())
-//					&& BCrypt.checkpw(password, user.getPassword())) {
-//				Model.getInstance().deleteUser(user.getEmail(), user.getPassword());
-//				session().clear();
-//				return ok(login.render());
-//
-//			}
-//			System.out.println("geht nicht Zeile 234");
-//
-//		}
-//		return ok(fehler.render());
-//	}
+	public static Result loeschen(){
+		DynamicForm dynamicForm = Form.form().bindFromRequest();
+
+		String email = dynamicForm.get("email");
+		String password = dynamicForm.get("password");
+
+		for (User user : Model.getInstance().getUserList()) {
+			if (email.equals(user.getEmail())
+					&& BCrypt.checkpw(password, user.getPassword())) {
+				Model.getInstance().deleteUser(user.getEmail(), user.getPassword());
+				session().clear();
+				System.out.println("Removed following user: " + user.getFullName());
+				return ok(login.render());
+
+			}
+			System.out.println("geht nicht Zeile 234");
+
+		}
+		return ok(fehler.render());
+	}
 
 	public static boolean isUserInSession() {
 		User user = getUserFromSession();
