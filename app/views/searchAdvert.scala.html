@@ -1,4 +1,5 @@
-@(AdvertList :List[Advert]) @for(advert <- AdvertList){
+@(AdvertList :List[Advert])
+@for(advert <- AdvertList){
 @if(advert.getKind().equals("Gesuch")){
 
 <div class="box" id="EigeneGesucheAngeboteBox">
