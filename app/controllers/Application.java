@@ -101,20 +101,14 @@ public class Application extends Controller {
 		return ok(inserat.render());
 	}
 
-	public static Result getAdvertList() {
-		return ok(ReloadAdvert.render(Model.getInstance().getAdvertList()));
-	}
-	public static Result getSearchList() {
-		return ok(searchAdvert.render(Model.getInstance().getAdvertList()));
-	}
-	
 	// Für Ajax
+	
 	public static Result getAngebotList(String category){
 		if(category.equals("")){
 			return ok(reloadAdvert.render(Model.getInstance().getAdvertList()));
 		}
 		List<Advert> list = Model.getInstance().getAdvertList(category);
-		return ok(reloadAvert.render(list));
+		return ok(reloadAdvert.render(list));
 	}
 	
 	public static Result getGesuchList(String category){

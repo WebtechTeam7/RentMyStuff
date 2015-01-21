@@ -1,5 +1,6 @@
 @(street: String, city: String, postcode: String, country: String)
 @main("Map"){
+<meta charset="utf-8">
 
 <script type="text/javascript">
 	var latLng = new google.maps.LatLng(47.6667, 9.18333);
@@ -12,7 +13,7 @@
 	var contentString = '<h3>Standort der Anzeige</h3>'
 			+ '<p>Der Artikel kann unter der folgenden Adresse abgeholt werden. '
 			+ street + ' ' + city + ' ' + postcode + '</p>';
-
+			
 	function initialize() {
 
 		mapCanvas = document.getElementById('map-canvas');
@@ -52,10 +53,12 @@
 					position : latLng
 				});
 			}
+			document.getElementById('street').innerHTML(street);
 		});
 	}
 
 	google.maps.event.addDomListener(window, 'load', initialize);
+	
 </script>
 
 <div class="Indexcontainer">
@@ -63,7 +66,12 @@
 		
 	</div>
 	<div class="col-md-6">
-	<h2>Standort</h2>
+	<h2>Standort:</h2><hr>
+	<p><b>Straße: </b>@street</p>
+	<p><b>Postleitzahl: </b>@postcode</p> 
+	<p><b>Ort: </b>@city</p> 
+	
+	
 		<div id="map-canvas"></div>
 		<a class="btn btn-default btn-sm"
 			href="javascript:history.go(-1)"> <i class="fa fa-backward"></i>
