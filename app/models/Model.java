@@ -60,6 +60,7 @@ public class Model {
 	 */
 	public List<User> getUserList() {
 
+		userList.clear();
 		try {
 
 			String statement = "SELECT * FROM User";
@@ -94,16 +95,17 @@ public class Model {
 	 */
 	public void createUser(String firstname, String lastname, String email,
 			String password) {
+		String statement = "INSERT INTO User(Firstname, Lastname, Email, Password)"
+				+ "VALUES(?,?,?,?)";
 		try {
-			String statement = "INSERT INTO User(Firstname, Lastname, Email, Password)"
-					+ "VALUES(?,?,?,?)";
+			
 			PreparedStatement preparedStatement = connection
 					.prepareStatement(statement);
 			preparedStatement.setString(1, firstname);
 			preparedStatement.setString(2, lastname);
 			preparedStatement.setString(3, email);
 			preparedStatement.setString(4, password);
-			preparedStatement.executeUpdate();
+			preparedStatement.execute();
 			System.out.println("Folgender User wurde in DB erstelle: " + firstname + " " + lastname);
 		} catch (SQLException e) {
 			System.out.println("User: " + firstname + " " +lastname + " konnte nicht erstellt werden!!");
