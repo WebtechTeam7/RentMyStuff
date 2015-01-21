@@ -1,9 +1,14 @@
  @main("Account löschen"){
 <script type="text/javascript">
 
-$( document ).ready(function() {
-
+$(document).ready(function() {
+	clearFields();
 });
+
+function clearFields(){
+	$("input[type='email']").val('Bitte E-Mail Adresse eingeben!');
+	$("input[type='password']").val('Bitte Passwort eingeben!');
+}
 
 </script>
 <div class="row">
@@ -16,16 +21,15 @@ $( document ).ready(function() {
 
 			<div class="Indexcontainer anmeldung">
 				<form class="form-signin" role="form" action="loeschen"
-					method="Post" name="loeschenForm">
+					method="Post" name="loeschenForm" id="loschenForm">
 					<p>Bitte gib dein EMail Adresse sowie dein Passwort ein. Dann
 						kannst du deinen Account löschen!</p>
 					<input type="email" id="email" name="email" class="form-control"
 						placeholder="Email-Adresse" required> <input id="password"
 						name="password" type="password" class="form-control"
 						placeholder="Passwort" required>
-
-					<!-- <button class="btn btn-lg btn-danger btn-block" id="loeschen"
-						type="submit">Account löschen!</button> -->
+					 <button class="btn btn-lg btn-danger btn-block" id="loeschen"
+						type="submit">Account löschen!</button>
 				</form>
 			</div>
 
