@@ -2,7 +2,7 @@
 @for(advert <- AdvertList){
 @if(advert.getKind().equals("Angebot")){
 
-<div class="box" id="EigeneGesucheAngeboteBox">
+<div class="box" id="EigeneGesucheAngeboteBox" >
 	<h3>@advert.getKind von @advert.getUser().getFullName()</h3>
 	<span class="kind"><b>Kategorie:</b> @advert.getCategory()</span><br>
 	<span class="time"><b>Eingestellt am:</b> @advert.getDate()</span><br>
