@@ -238,8 +238,6 @@ public class Application extends Controller {
 				return ok(login.render());
 
 			}
-			System.out.println("geht nicht Zeile 234");
-
 		}
 		return ok(fehler.render());
 	}
