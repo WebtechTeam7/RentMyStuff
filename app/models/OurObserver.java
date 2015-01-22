@@ -13,6 +13,7 @@ public class OurObserver {
 		if (observers.contains(observer)) {
 			System.out.println("Observer bereits in Collection!");
 		} else {
+			System.out.println("Observer in Liste eingefügt!");
 			observers.add(observer);
 		}
 	}

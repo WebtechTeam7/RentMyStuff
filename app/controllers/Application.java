@@ -1,21 +1,35 @@
 package controllers;
 
-import org.mindrot.jbcrypt.*;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import play.*;
+import models.Advert;
+import models.Model;
+import models.User;
+
+import org.mindrot.jbcrypt.BCrypt;
+
 import play.data.DynamicForm;
 import play.data.Form;
-import play.mvc.*;
-import views.html.*;
-import models.*;
-import akka.actor.*;
-import play.libs.F.*;
+import play.libs.F.Callback;
+import play.libs.F.Callback0;
+import play.mvc.Controller;
+import play.mvc.Result;
 import play.mvc.WebSocket;
-import play.mvc.WebSocket.In;
-import play.mvc.WebSocket.Out;
+import views.html.account;
+import views.html.angebote;
+import views.html.fehler;
+import views.html.gesuche;
+import views.html.impressum;
+import views.html.index;
+import views.html.inserat;
+import views.html.kontakt;
+import views.html.login;
+import views.html.map;
+import views.html.registrieren;
+import views.html.reloadAdvert;
+import views.html.searchAdvert;
 
 public class Application extends Controller implements Observer {
 
@@ -55,14 +69,16 @@ public class Application extends Controller implements Observer {
 
 		if (isUserInSession()) {
 			User user = getUserFromSession();
-			return ok(index.render(Model.getInstance().getUserAdvertList(getUserFromSession().getUserID()), user));
+			return ok(index.render(
+					Model.getInstance().getUserAdvertList(
+							getUserFromSession().getUserID()), user));
 		} else {
 			return ok(login.render());
 		}
 	}
 
 	public static Result login() {
-		
+
 		Model.getInstance().initDatabase();
 		if (isUserInSession()) {
 			session().clear();
@@ -107,49 +123,51 @@ public class Application extends Controller implements Observer {
 	}
 
 	// Für Ajax
-	
-	public static Result getAngebotList(String category){
-		if(category.equals("")){
+
+	public static Result getAngebotList(String category) {
+		if (category.equals("")) {
 			return ok(reloadAdvert.render(Model.getInstance().getAdvertList()));
 		}
 		List<Advert> list = Model.getInstance().getAdvertList(category);
 		return ok(reloadAdvert.render(list));
 	}
-	
-	public static Result getGesuchList(String category){
+
+	public static Result getGesuchList(String category) {
 		System.out.println(category);
-		if(category.equals("")){
+		if (category.equals("")) {
 			return ok(searchAdvert.render(Model.getInstance().getAdvertList()));
 		}
 		List<Advert> list = Model.getInstance().getAdvertList(category);
 		return ok(searchAdvert.render(list));
 	}
-	
-	
+
 	public static Result registrieren() {
 		return ok(registrieren.render());
 	}
-	
-	public static Result map(String street, String city, String postcode, String country){
+
+	public static Result map(String street, String city, String postcode,
+			String country) {
 		return ok(map.render(street, city, postcode, country));
 	}
 
-
 	public static Result newAdvert(String optradio, String kategorie,
-			String comment, String street, String postcode, String city, String country) {
+			String comment, String street, String postcode, String city,
+			String country) {
 
 		User user = getUserFromSession();
-		Model.getInstance().createAdvert(optradio, kategorie, comment, user, street, postcode, city, country);
-		return ok(index.render(Model.getInstance().getUserAdvertList(
-				user.getUserID()), user));
+		Model.getInstance().createAdvert(optradio, kategorie, comment, user,
+				street, postcode, city, country);
+		return ok(index.render(
+				Model.getInstance().getUserAdvertList(user.getUserID()), user));
 
 	}
 
 	public static Result deleteAdvert(int id, int userId) {
 		Model.getInstance().deleteAdvert(id, userId);
 		User user = getUserFromSession();
-		return ok(index.render(Model.getInstance().getUserAdvertList(
-				getUserFromSession().getUserID()), user));
+		return ok(index.render(
+				Model.getInstance().getUserAdvertList(
+						getUserFromSession().getUserID()), user));
 	}
 
 	public static Result anmelden() {
@@ -166,9 +184,10 @@ public class Application extends Controller implements Observer {
 				addUserToSession(user);
 
 				System.out.println("anmelden hat funktioniert");
-				
-				return ok(index.render(Model.getInstance().getUserAdvertList(
-						getUserFromSession().getUserID()), user));
+
+				return ok(index.render(
+						Model.getInstance().getUserAdvertList(
+								getUserFromSession().getUserID()), user));
 
 			}
 			System.out.println("geht nicht");
@@ -178,7 +197,7 @@ public class Application extends Controller implements Observer {
 		// return ok(login.render());
 		return ok(fehler.render());
 	}
-	
+
 	public static Result createUser() {
 
 		DynamicForm dynamicForm = Form.form().bindFromRequest();
@@ -206,13 +225,13 @@ public class Application extends Controller implements Observer {
 
 					System.out.println("addUser: " + session().get("USER")
 							+ " User from Session");
-					
-					return ok(index
-							.render(Model.getInstance().getUserAdvertList(
 
-									getUserFromSession().getUserID()), user));
-				} 
-				
+					return ok(index.render(Model.getInstance()
+							.getUserAdvertList(
+
+							getUserFromSession().getUserID()), user));
+				}
+
 			}
 			return ok(fehler.render());
 
@@ -222,12 +241,11 @@ public class Application extends Controller implements Observer {
 
 	}
 
-
-	public static Result account(){
+	public static Result account() {
 		return ok(account.render());
 	}
-	
-	public static Result loeschen(){
+
+	public static Result loeschen() {
 		DynamicForm dynamicForm = Form.form().bindFromRequest();
 
 		String email = dynamicForm.get("email");
@@ -236,9 +254,11 @@ public class Application extends Controller implements Observer {
 		for (User user : Model.getInstance().getUserList()) {
 			if (email.equals(user.getEmail())
 					&& BCrypt.checkpw(password, user.getPassword())) {
-				Model.getInstance().deleteUser(user.getEmail(), user.getPassword());
+				Model.getInstance().deleteUser(user.getEmail(),
+						user.getPassword());
 				session().clear();
-				System.out.println("Removed following user: " + user.getFullName());
+				System.out.println("Removed following user: "
+						+ user.getFullName());
 				return ok(login.render());
 
 			}
@@ -256,36 +276,51 @@ public class Application extends Controller implements Observer {
 		}
 
 	}
-	
-	public static WebSocket<String> refresh(){
-		WebSocket<String> ws = null;
-		ws = new WebSocket<String>() {
-			
+
+	public static WebSocket<String> refresh() {
+		
+//		return WebSocket.withActor(new Function<ActorRef, Props>() {
+//			
+//			public Props apply(ActorRef out) throws Throwable {
+//				System.out.println("refresh() - Method");
+//				Model.add(new Application());
+//				return MyWebSocketActor.props(out);
+//			}
+//		});
+		
+		return new WebSocket<String>(){
+
 			@Override
-			public void onReady(In<String> in, Out<String> out) {
+			public void onReady(play.mvc.WebSocket.In<String> in,
+					final play.mvc.WebSocket.Out<String> out) {
+				
 				in.onMessage(new Callback<String>() {
 					
 					public void invoke(String arg0) throws Throwable {
-						System.out.println("in.onMessage()");
 						Model.add(new Application());
+						System.out.println("invoke- Method " + arg0);
+						out.write(arg0 +  " out.write");
 					}
 				});
 				
 				in.onClose(new Callback0() {
 					
 					public void invoke() throws Throwable {
-						Model.add(new Application());
-						System.out.println("in.onClose()");
+						Model.delete(new Application());
+						System.out.println("invoke- Method");
+						
 					}
 				});
-			}
+				
+				out.write("Hello you are connected!");
+				
+			} 
 		};
-		return ws;
 	}
 
 	public void update(Observable observable, Object object) {
 		Advert advert = (Advert) object;
-		//ToDo - was passiert beim Update?!
+		// ToDo - was passiert beim Update?!;
 		System.out.println(advert.getCategory());
 	}
 
