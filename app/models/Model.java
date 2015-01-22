@@ -1,6 +1,5 @@
 package models;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +11,7 @@ import java.util.List;
 
 import play.db.DB;
 
-public class Model {
+public class Model extends OurObserver {
 
 	private static Model instance;
 	private boolean dbExist;
@@ -323,10 +322,10 @@ public class Model {
 	
 		try {
 			int addressID = address(street, postcode, city, country);
-			int advertID = advert(user, optradio, kategorie, comment);
-			advertAddress(addressID, advertID);
-			System.out.println("Folgendes Angebot wurde erstellt " + user.getFirstname() + "  " + street);
-		} catch (SQLException e) {
+			Advert advert = advert(user, optradio, kategorie, comment);
+			advertAddress(addressID, advert.getId());
+			notify(advert);
+		} catch (Exception e) {
 			System.out.println("Fehler beim erstellen");
 			e.printStackTrace();
 		}
@@ -336,65 +335,84 @@ public class Model {
 		Model.getInstance().advertList = advertList;
 	}
 
-	private void advertAddress(int addressID, int advertID) throws SQLException {
+	private void advertAddress(int addressID, int advertID) {
 		String statement = "INSERT INTO AdvertAddress(Address, Advert)"
 				+ "VALUES(?,?)";
-		PreparedStatement preparedStatement = connection
-				.prepareStatement(statement);
-		preparedStatement.setInt(1, addressID);
-		preparedStatement.setInt(2, advertID);
-		preparedStatement.executeUpdate();
+		PreparedStatement preparedStatement;
+		try {
+			preparedStatement = connection
+					.prepareStatement(statement);
+			preparedStatement.setInt(1, addressID);
+			preparedStatement.setInt(2, advertID);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 
 	}
 
 	private int address(String street, String postcode, String city,
-			String country) throws SQLException {
+			String country) {
 		String statement = "INSERT INTO ADDRESS (Street, Postcode, City, Country)"
 				+ "VALUES(?,?,?,?)";
-		PreparedStatement preparedStatement = connection
-				.prepareStatement(statement);
-		preparedStatement.setString(1, street);
-		preparedStatement.setString(2, postcode);
-		preparedStatement.setString(3, city);
-		preparedStatement.setString(4, country);
-		preparedStatement.executeUpdate();
+		try {
+			PreparedStatement preparedStatement = connection
+					.prepareStatement(statement);
+			preparedStatement.setString(1, street);
+			preparedStatement.setString(2, postcode);
+			preparedStatement.setString(3, city);
+			preparedStatement.setString(4, country);
+			preparedStatement.executeUpdate();
 
-		// now return the ID
-		int id;
-		statement = "SELECT * FROM Address ORDER BY AddressID DESC LIMIT 1";
-		preparedStatement = connection.prepareStatement(statement);
-		ResultSet resultset = preparedStatement.executeQuery();
-		while (resultset.next()) {
-			id = resultset.getInt("AddressID");
-			return id;
+			// now return the ID
+			int id;
+			statement = "SELECT * FROM Address ORDER BY AddressID DESC LIMIT 1";
+			preparedStatement = connection.prepareStatement(statement);
+			ResultSet resultset = preparedStatement.executeQuery();
+			while (resultset.next()) {
+				id = resultset.getInt("AddressID");
+				return id;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return 0;
 
 	}
 
-	private int advert(User user, String optradio, String kategorie,
-			String comment) throws SQLException {
+	private Advert advert(User user, String optradio, String kategorie,
+			String comment) {
 		String statement = "INSERT INTO Advert (AdvertUserID, Date, Kind, Category, Description)"
 				+ "VALUES(?,?,?,?,?)";
-		PreparedStatement preparedStatement = connection
-				.prepareStatement(statement);
-		preparedStatement.setInt(1, getUserIdByEmail(user));
-		preparedStatement.setString(2, createCurrentDate());
-		preparedStatement.setString(3, optradio);
-		preparedStatement.setString(4, kategorie);
-		preparedStatement.setString(5, comment);
-		preparedStatement.executeUpdate();
+		try {
+			PreparedStatement preparedStatement = connection
+					.prepareStatement(statement);
+			preparedStatement.setInt(1, getUserIdByEmail(user));
+			preparedStatement.setString(2, createCurrentDate());
+			preparedStatement.setString(3, optradio);
+			preparedStatement.setString(4, kategorie);
+			preparedStatement.setString(5, comment);
+			preparedStatement.executeUpdate();
 
-		// now return the ID
-		int id;
-		statement = "SELECT * FROM Advert ORDER BY AdvertID DESC LIMIT 1";
-		preparedStatement = connection.prepareStatement(statement);
-		ResultSet resultset = preparedStatement.executeQuery();
-		while (resultset.next()) {
-			id = resultset.getInt("AdvertID");
-			return id;
+			// now return the ID
+			int id;
+			statement = "SELECT * FROM Advert ORDER BY AdvertID DESC LIMIT 1";
+			preparedStatement = connection.prepareStatement(statement);
+			ResultSet resultset = preparedStatement.executeQuery();
+			while (resultset.next()) {
+				//id = resultset.getInt("AdvertID");
+				Advert advert = new Advert();
+				advert.setId(resultset.getInt("AdvertID"));
+				advert.setCategory(resultset.getString("Category"));
+				advert.setDate(resultset.getString("Date"));
+				advert.setDescription(resultset.getString("Description"));
+				return advert;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		return 0;
+		return null;
 
 	}
 

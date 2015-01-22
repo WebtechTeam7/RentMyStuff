@@ -2,6 +2,9 @@ package controllers;
 
 import org.mindrot.jbcrypt.*;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
+
 import play.*;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -11,11 +14,10 @@ import models.*;
 import akka.actor.*;
 import play.libs.F.*;
 import play.mvc.WebSocket;
+import play.mvc.WebSocket.In;
+import play.mvc.WebSocket.Out;
 
-public class Application extends Controller {
-
-	// static Boolean angemeldet = false;
-	// private static User currentUser;
+public class Application extends Controller implements Observer {
 
 	public static User getUserFromSession() {
 		String userCode = "";
@@ -253,6 +255,38 @@ public class Application extends Controller {
 			return true;
 		}
 
+	}
+	
+	public static WebSocket<String> refresh(){
+		WebSocket<String> ws = null;
+		ws = new WebSocket<String>() {
+			
+			@Override
+			public void onReady(In<String> in, Out<String> out) {
+				in.onMessage(new Callback<String>() {
+					
+					public void invoke(String arg0) throws Throwable {
+						System.out.println("in.onMessage()");
+						Model.add(new Application());
+					}
+				});
+				
+				in.onClose(new Callback0() {
+					
+					public void invoke() throws Throwable {
+						Model.add(new Application());
+						System.out.println("in.onClose()");
+					}
+				});
+			}
+		};
+		return ws;
+	}
+
+	public void update(Observable observable, Object object) {
+		Advert advert = (Advert) object;
+		//ToDo - was passiert beim Update?!
+		System.out.println(advert.getCategory());
 	}
 
 }
