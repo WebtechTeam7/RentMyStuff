@@ -3,10 +3,12 @@ RentMyStuff
 ![Logo] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/public/images/RentMyStuff_Logo.png)
 
 HTWG Konstanz: Web-Technologien Projekt 
+
+https://rentmystuff.herokuapp.com/
+
 Teammitglieder: 
-	- Ramona Barth 286752 
-	- Dennis Klein 286082
-	- Jan Gaideczka 286572
+
+Ramona Barth 286752, Dennis Klein 286082, Jan Gaideczka 286572
 
 Einleitung
 ==========
