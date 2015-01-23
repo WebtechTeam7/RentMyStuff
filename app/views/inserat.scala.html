@@ -12,7 +12,7 @@
 <link rel="stylesheet" href=@routes.Assets.at("stylesheets/main.css")>
 <script type="text/javascript">
 	var select = "";
-	var webSocket;
+	//var webSocket;
 	$(document).ready(function() {
 		$('#speichern').attr("disabled", true);
 	});
@@ -28,14 +28,16 @@
 		}
 	}
 	
-	$(function(){
+	/*$(function(){
 		var WS = window["MozWebSocket"] ? MozWebSocket : WebSocket;
-		webSocket = new WS("@routes.Application.refresh().webSocketURL(request)");
+		
+		//das "at" vor routes wurde entfernt da sonst ein Fehler beim Compilieren auftritt
+		webSocket = new WS("routes.Application.refresh().webSocketURL(request)");
 	
 	})
 	function sendAdvert(){
 		webSocket.send("new Advert");
-	}
+	}*/
 	
 </script>
 

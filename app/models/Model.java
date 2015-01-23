@@ -328,17 +328,17 @@ public class Model extends OurObserver {
 			int addressID = address(street, postcode, city, country);
 			advert = advert(user, optradio, kategorie, comment);
 			advertAddress(addressID, advert.getId());
-			notify(advert);
 		} catch (Exception e) {
 			System.out.println("Fehler beim erstellen");
 			e.printStackTrace();
 		}
 		
-		if(advert!=null){
-			notify(advert);
-		} else {
-			System.out.println("Advert == null in createAdvert-Method");
-		}
+		
+//		if(advert!=null){
+//			notify(advert);
+//		} else {
+//			System.out.println("Advert == null in createAdvert-Method");
+//		}
 	}
 
 	public static void setAdvertList(List<Advert> advertList) {
@@ -556,10 +556,6 @@ public class Model extends OurObserver {
 		} catch (SQLException e) {
 			System.out.println("tables already exist");
 		}
-	}
-
-	public void newAdvert(Advert advert) {
-
 	}
 
 }

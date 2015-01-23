@@ -280,39 +280,38 @@ public class Application extends Controller implements Observer {
 
 	}
 
-	public static WebSocket<String> refresh() {
-				
-		return new WebSocket<String>(){
-
-			@Override
-			public void onReady(WebSocket.In<String> in,
-					final WebSocket.Out<String> out) {
-				
-				out1 = out;
-				in.onMessage(new Callback<String>() {
-					
-					public void invoke(String arg0) throws Throwable {
-						Model.add(new Application());
-						System.out.println("invoke- Method " + arg0);
-						out.write(arg0 +  " out.write");
-					}
-				});
-				
-				in.onClose(new Callback0() {
-					
-					public void invoke() throws Throwable {
-						//Model.delete(new Application());
-						System.out.println("invoke- Method -->in.onClose Function");			
-					}
-				});				
-			} 
-		};
-	}
+//	public static WebSocket<String> refresh() {
+//				
+//		return new WebSocket<String>(){
+//
+//			@Override
+//			public void onReady(WebSocket.In<String> in,
+//					final WebSocket.Out<String> out) {
+//				
+//				out1 = out;
+//				in.onMessage(new Callback<String>() {
+//					
+//					public void invoke(String arg0) throws Throwable {
+//						Model.add(new Application());
+//						System.out.println("invoke- Method " + arg0);
+//						out.write(arg0 +  " out.write");
+//					}
+//				});
+//				
+//				in.onClose(new Callback0() {
+//					
+//					public void invoke() throws Throwable {
+//						//Model.delete(new Application());
+//						System.out.println("invoke- Method -->in.onClose Function");			
+//					}
+//				});				
+//			} 
+//		};
+//	}
 	
 	public void update(Observable observable, Object object) {
-		Advert advert = (Advert) object;
-		// ToDo - was passiert beim Update?!;
-		out1.write("HEllo");
+//		Advert advert = (Advert) object;
+//		out1.write("new Advert");
 	}
 
 }
