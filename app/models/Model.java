@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -34,7 +35,8 @@ public class Model {
 			+ "City TEXT NOT NULL," + "Country TEXT NOT NULL" + ");";
 
 	private final String createAdvertAddressStatement = "CREATE TABLE AdvertAddress("
-			+ "Address INTEGER NOT NULL," + "Advert INTEGER NOT NULL,"
+			+ "Address INTEGER NOT NULL,"
+			+ "Advert INTEGER NOT NULL,"
 			+ "FOREIGN KEY (Address) REFERENCES Address(AddressID),"
 			+ "FOREIGN KEY (Advert) REFERENCES Advert(AdvertID),"
 			+ "PRIMARY KEY (Address, Advert)" + ");";
@@ -42,7 +44,6 @@ public class Model {
 	private Model() {
 		connection = DB.getConnection();
 	}
-
 
 	public static Model getInstance() {
 		if (Model.instance == null) {
@@ -100,7 +101,7 @@ public class Model {
 		String statement = "INSERT INTO User(Firstname, Lastname, Email, Password)"
 				+ "VALUES(?,?,?,?)";
 		try {
-			
+
 			PreparedStatement preparedStatement = connection
 					.prepareStatement(statement);
 			preparedStatement.setString(1, firstname);
@@ -108,9 +109,11 @@ public class Model {
 			preparedStatement.setString(3, email);
 			preparedStatement.setString(4, password);
 			preparedStatement.execute();
-			System.out.println("Folgender User wurde in DB erstelle: " + firstname + " " + lastname);
+			System.out.println("Folgender User wurde in DB erstelle: "
+					+ firstname + " " + lastname);
 		} catch (SQLException e) {
-			System.out.println("User: " + firstname + " " +lastname + " konnte nicht erstellt werden!!");
+			System.out.println("User: " + firstname + " " + lastname
+					+ " konnte nicht erstellt werden!!");
 			e.printStackTrace();
 		}
 	}
@@ -122,15 +125,34 @@ public class Model {
 	 * @param password
 	 */
 	public void deleteUser(String email, String password) {
+		User user = new User();
+		user.setEmail(email);
+		int id = 0;
 		try {
-			String statement = "DELETE FROM User WHERE Email = ? AND Password = ?";
-			PreparedStatement preparedStatement = connection
-					.prepareStatement(statement);
-			preparedStatement.setString(1, email);
-			preparedStatement.setString(2, password);
-			preparedStatement.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			id = getUserIdByEmail(user);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		user.setUserID(id);
+
+		List<Advert> userAdvert = getUserAdvertList(id);
+		for (Advert advert : userAdvert) {
+			deleteAdvert(advert.getId(), user.getUserID());
+			System.out.println("Loscht Anzeige des Users: "
+					+ advert.getCategory());
+		}
+		if (id != 0) {
+
+			try {
+				String statement = "DELETE FROM User WHERE Email = ? AND Password = ?";
+				PreparedStatement preparedStatement = connection
+						.prepareStatement(statement);
+				preparedStatement.setString(1, email);
+				preparedStatement.setString(2, password);
+				preparedStatement.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -166,7 +188,7 @@ public class Model {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	
+
 		return null;
 	}
 
@@ -176,7 +198,7 @@ public class Model {
 	 * @return UserID wird über die E-Mail Adresse gefunden
 	 * @throws SQLException
 	 */
-	
+
 	public int getUserIdByEmail(User user) throws SQLException {
 		String statement = "SELECT UserID FROM User WHERE Email = ?";
 		int id = 0;
@@ -199,7 +221,7 @@ public class Model {
 	public List<Advert> getAdvertList() {
 
 		advertList.clear();
-		
+
 		try {
 			String statement = "SELECT * FROM Advert Order BY AdvertId DESC";
 			PreparedStatement preparedStatement = connection
@@ -281,15 +303,16 @@ public class Model {
 
 		return null;
 	}
+
 	/**
 	 * 
 	 * @param userId
 	 * @return dem User zugehoerige Angebote/Gesuche
 	 */
 	public List<Advert> getUserAdvertList(int userId) {
-	
+
 		userAdvertList.clear();
-	
+
 		try {
 			String statement = "SELECT * FROM Advert WHERE AdvertUserID = ? Order BY AdvertId DESC";
 			PreparedStatement preparedStatement = connection
@@ -309,7 +332,7 @@ public class Model {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	
+
 		return userAdvertList;
 	}
 
@@ -325,12 +348,13 @@ public class Model {
 	public void createAdvert(String optradio, String kategorie, String comment,
 			User user, String street, String postcode, String city,
 			String country) {
-	
+
 		try {
 			int addressID = address(street, postcode, city, country);
 			int advertID = advert(user, optradio, kategorie, comment);
 			advertAddress(addressID, advertID);
-			System.out.println("Folgendes Angebot wurde erstellt " + user.getFirstname() + "  " + street);
+			System.out.println("Folgendes Angebot wurde erstellt "
+					+ user.getFirstname() + "  " + street);
 		} catch (SQLException e) {
 			System.out.println("Fehler beim erstellen");
 			e.printStackTrace();
@@ -376,7 +400,7 @@ public class Model {
 		return 0;
 
 	}
-	
+
 	/**
 	 * Erzeugt eine neue Anzeige in der Datenbank.
 	 * 
@@ -414,7 +438,6 @@ public class Model {
 
 	}
 
-	
 	/**
 	 * 
 	 * @return das Datum an dem die Anzeige erstellt wurde
@@ -453,13 +476,15 @@ public class Model {
 
 				// delete AdvertAddress
 				String statement2 = "DELETE FROM AdvertAddress WHERE Advert = ?";
-				PreparedStatement preparedStatement2 = connection.prepareStatement(statement2);
+				PreparedStatement preparedStatement2 = connection
+						.prepareStatement(statement2);
 				preparedStatement2.setInt(1, id);
 				preparedStatement2.executeUpdate();
 
 				// delete Address
 				String statement3 = "DELETE FROM Address WHERE AddressID = ?";
-				PreparedStatement preparedStatement3 = connection.prepareStatement(statement3);
+				PreparedStatement preparedStatement3 = connection
+						.prepareStatement(statement3);
 				preparedStatement3.setInt(1, addressID);
 				preparedStatement3.executeUpdate();
 
@@ -470,7 +495,7 @@ public class Model {
 			System.out.println("User not authorized");
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param id
@@ -490,8 +515,6 @@ public class Model {
 		return 0;
 	}
 
-	
-
 	/**
 	 * 
 	 * @param id
@@ -500,7 +523,7 @@ public class Model {
 	 * @throws SQLException
 	 */
 	public boolean checkAuthorization(int id, int userID) throws SQLException {
-	
+
 		String statement = "SELECT * FROM Advert WHERE AdvertId = ? AND AdvertUserID = ?";
 		PreparedStatement preparedStatement = connection
 				.prepareStatement(statement);
@@ -515,7 +538,6 @@ public class Model {
 
 	}
 
-
 	/**
 	 * Create our Database
 	 */
@@ -528,8 +550,8 @@ public class Model {
 					.prepareStatement("SELECT * FROM Advert");
 			PreparedStatement preparedStatement3 = connection
 					.prepareStatement("SELECT * FROM Address");
-			PreparedStatement preparedStatement4 = connection.
-					prepareStatement("SELECT * FROM AdvertAddress");
+			PreparedStatement preparedStatement4 = connection
+					.prepareStatement("SELECT * FROM AdvertAddress");
 			preparedStatement.execute();
 			preparedStatement2.execute();
 			preparedStatement3.execute();
@@ -553,7 +575,6 @@ public class Model {
 		}
 	}
 
-	
 	/**
 	 * Generate DummyData
 	 */
@@ -563,12 +584,17 @@ public class Model {
 		user.setLastname("User");
 		user.setEmail("user.user@gmail.com");
 		user.setPassword(BCrypt.hashpw("user", BCrypt.gensalt()));
-		createUser(user.getFirstname(), user.getLastname(), user.getEmail(), user.getPassword());
-		
+		createUser(user.getFirstname(), user.getLastname(), user.getEmail(),
+				user.getPassword());
+
 		System.out.println("Dummy user Created: " + user.getEmail());
-		
-		createAdvert("Gesuch", "Gartengeräte", "Ich suche einen Rasenmäher", user, "Brauneggerstrasse 55", "78462", "Konstanz", "Deutschland");
-		createAdvert("Angebot", "Fahrzeuge", "Ich biete meinen VW Bus an. Wenn jemand umziehen möchte", user, "Rheingutstrasse 4", "78462", "Konstanz", "Deutschland");
+
+		createAdvert("Gesuch", "Gartengeräte", "Ich suche einen Rasenmäher",
+				user, "Brauneggerstrasse 55", "78462", "Konstanz",
+				"Deutschland");
+		createAdvert("Angebot", "Fahrzeuge",
+				"Ich biete meinen VW Bus an. Wenn jemand umziehen möchte",
+				user, "Rheingutstrasse 4", "78462", "Konstanz", "Deutschland");
 		System.out.println("Dummy advert created:");
 	}
 
