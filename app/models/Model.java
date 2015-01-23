@@ -1,6 +1,5 @@
 package models;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,6 +8,8 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
+
+import org.mindrot.jbcrypt.BCrypt;
 
 import play.db.DB;
 
@@ -41,6 +42,7 @@ public class Model {
 	private Model() {
 		connection = DB.getConnection();
 	}
+
 
 	public static Model getInstance() {
 		if (Model.instance == null) {
@@ -144,7 +146,6 @@ public class Model {
 	 * 
 	 * @param id
 	 * @return user passend zur ID
-	 * @author Jan
 	 * 
 	 */
 	public User getUserById(String id) {
@@ -174,7 +175,6 @@ public class Model {
 	 * @param user
 	 * @return UserID wird über die E-Mail Adresse gefunden
 	 * @throws SQLException
-	 * @author Jan
 	 */
 	
 	public int getUserIdByEmail(User user) throws SQLException {
@@ -254,6 +254,11 @@ public class Model {
 		return advertList;
 	}
 
+	/**
+	 * 
+	 * @param advertID
+	 * @return die zur advertID gehoerige Adresse
+	 */
 	private Address getAddress(int advertID) {
 
 		String statement = "SELECT ad.Street, ad.Postcode, ad.City, ad.Country, aa.Address FROM Address ad, AdvertAddress aa WHERE aa.Advert = ? AND aa.Address = ad.AddressID";
@@ -371,6 +376,17 @@ public class Model {
 		return 0;
 
 	}
+	
+	/**
+	 * Erzeugt eine neue Anzeige in der Datenbank.
+	 * 
+	 * @param user
+	 * @param optradio
+	 * @param kategorie
+	 * @param comment
+	 * @return die ID der Anzeige
+	 * @throws SQLException
+	 */
 
 	private int advert(User user, String optradio, String kategorie,
 			String comment) throws SQLException {
@@ -398,6 +414,11 @@ public class Model {
 
 	}
 
+	
+	/**
+	 * 
+	 * @return das Datum an dem die Anzeige erstellt wurde
+	 */
 	private String createCurrentDate() {
 		GregorianCalendar calendar = new GregorianCalendar();
 		DateFormat df = DateFormat.getDateTimeInstance(DateFormat.SHORT,
@@ -411,7 +432,6 @@ public class Model {
 	 * 
 	 * @param id
 	 * @param userID
-	 * @author Jan
 	 * 
 	 */
 	public void deleteAdvert(int id, int userID) {
@@ -451,6 +471,12 @@ public class Model {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return die ID der Addresse
+	 * @throws SQLException
+	 */
 	private int getAddressID(int id) throws SQLException {
 		String statement = "SELECT Address FROM AdvertAddress WHERE Advert = ?";
 		PreparedStatement preparedStatement = connection
@@ -471,7 +497,6 @@ public class Model {
 	 * @param id
 	 * @param userID
 	 * @return true wenn User seine eigenen Angebote/Gesuche löscht
-	 * @author Jan
 	 * @throws SQLException
 	 */
 	public boolean checkAuthorization(int id, int userID) throws SQLException {
@@ -503,7 +528,8 @@ public class Model {
 					.prepareStatement("SELECT * FROM Advert");
 			PreparedStatement preparedStatement3 = connection
 					.prepareStatement("SELECT * FROM Address");
-			PreparedStatement preparedStatement4 = connection.prepareStatement("SELECT * FROM AdvertAddress");
+			PreparedStatement preparedStatement4 = connection.
+					prepareStatement("SELECT * FROM AdvertAddress");
 			preparedStatement.execute();
 			preparedStatement2.execute();
 			preparedStatement3.execute();
@@ -520,10 +546,30 @@ public class Model {
 			initTables(createAdvertStatement);
 			initTables(createAddressStatement);
 			initTables(createAdvertAddressStatement);
+			createDummyData();
 			dbExist = true;
 		} else {
 			System.out.println("Database already exists!");
 		}
+	}
+
+	
+	/**
+	 * Generate DummyData
+	 */
+	private void createDummyData() {
+		User user = new User();
+		user.setFirstname("User");
+		user.setLastname("User");
+		user.setEmail("user.user@gmail.com");
+		user.setPassword(BCrypt.hashpw("user", BCrypt.gensalt()));
+		createUser(user.getFirstname(), user.getLastname(), user.getEmail(), user.getPassword());
+		
+		System.out.println("Dummy user Created: " + user.getEmail());
+		
+		createAdvert("Gesuch", "Gartengeräte", "Ich suche einen Rasenmäher", user, "Brauneggerstrasse 55", "78462", "Konstanz", "Deutschland");
+		createAdvert("Angebot", "Fahrzeuge", "Ich biete meinen VW Bus an. Wenn jemand umziehen möchte", user, "Rheingutstrasse 4", "78462", "Konstanz", "Deutschland");
+		System.out.println("Dummy advert created:");
 	}
 
 	/**
