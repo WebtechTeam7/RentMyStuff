@@ -35,7 +35,8 @@ Der Nutzer kann nach erfolgreicher Registrierung sein Profil pflegen. Unter ande
  
 ####4. Kategorisierung
  
- Der Nutzer kann in der Eingabemaske zwischen verschiedenen Kategorien auswählen. Dies dient der einfacheren Verwaltung der Daten. Ebenso kann in der Suche nur eine Kategorie angegeben werden. Wir haben uns auf sechs Kategorien beschränken, diese lauten wie folgt: Werkzeuge, Elektronik, Fahrzeuge, Gartengeräte, Dienstleistungen sowie Sonstiges.
+ Der Nutzer kann in der Eingabemaske zwischen verschiedenen Kategorien auswählen. Dies dient der einfacheren Verwaltung der Daten. Ebenso kann in der Suche nur eine Kategorie angegeben werden. Wir haben uns auf sechs Kategorien beschränkt, diese lauten wie folgt: Werkzeuge, Elektronik, Fahrzeuge, Gartengeräte, Dienstleistungen sowie Sonstiges.
+
 
 Nicht funktionale Anforderungen
 -------------------------------
@@ -101,15 +102,21 @@ Eingesetzt wird es zusammen mit HTML und XML und wird ständig weiterentwickelt 
 ####Responsive Webdesign mit Bootstrap
 
 Bootstrap ist ein CSS-Framework mit HTML, CSS und JS, mit dem responsive Webdesign realisiert werden kann.
-Mit Responsive Webdesign wird ermöglicht,dass sich der strukturelle Aufbau einer Webseite der Bildschirmauflösung des mobilen Endgeräts anpasst.
+Mit Responsive Webdesign wird ermöglicht, dass sich der strukturelle Aufbau einer Webseite der Bildschirmauflösung des mobilen Endgeräts anpasst. 
+Die Anpassung auf die verschiedenen Auflösungen wurde mit Hilfe des Grid Systems von Bootstrap realisiert.
+
+In nachfolgender Abbildung wird das responsive Webdesign des RentmyStuff Projektes, hinsichtlich verschiedener Endgeräte, dargestellt:
 
  ![Responsive Webdesign] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/bilder/Responsive_RmS.PNG)
+ 
+Des Weiteren wurde Bootstrap bei der Anpassung der Navigation genutzt. Bei geringeren Auflösungen, wie sie auf mobilen Endgeräten vorkommen, wird die Navigation dann wie folgt dargestellt:
+ 
+ ![Navigation] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/bilder/Responsive_Nav.PNG)
 
 ####Javascript und jQuery
 
 Javascript ist eine Skriptsprache, die es ermöglicht, objektorientierte Anwendungen in Internetseiten zu Implementieren. 
-Es wird in unserem Portal verwendet, um Kategorien mit Ajax auswählen zu können. 
-Ebenfalls wird es für die Validierung von Formularen verwendet und um Adressen für die Google maps API auszulesen.
+In diesem Projekt wird es für die Validierung von Formularen verwendet und um Adressen für die Google maps API auszulesen.
 Durch jQuery wird das Scripting für Webseiten vereinfacht. Es glättet die Unterschiede zwischen verschiedenen Browsern und füllt viele Lücken von Javascript.
 
 **Google Maps API**
@@ -120,6 +127,14 @@ Durch jQuery wird das Scripting für Webseiten vereinfacht. Es glättet die Unte
 **Validierung von Kategorien - Der Submit-Button kann erst geklickt werden, wenn eine Kategorie ausgewählt wurde**
 
  ![jQuery] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/bilder/jQuery.PNG)
+ 
+ **AJAX**
+ 
+ Des Weiteren wurde Ajax für die  Ausgabe der Angebote und Gesuche, hinsichtlich der Filterung nach Kategorien, verwendet.
+ AJAX ermöglicht es einzelne Bereiche einer Webseite abhängig von der Nutzeraktion mit Daten und Inhalte auszutauschen ohne dabei die komplette Seite neu zuladen.
+ In nachfolgender Abbildung wird die Variable g mit dem Wert, also der jeweiligen Kategorie, gefüttert sowie die Funktion getAngebotList mit dem Paramter g aufgerufen und die Angebote in den <span> tag mit der id="angebote" geladen. Die selbe Vorgehensweise ist bei den Gesuchen implementiert.
+ 
+ ![Ajax] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/bilder/Ajax.PNG) 
  
 
 ####Java und PlayFramework
@@ -186,10 +201,11 @@ ganze Weile, da das Problem für uns nie klar verständlich und ebenso wenig rep
 Das nächste Problem war der Zeitdruck. So reichte es für uns nicht mehr die Websockets nach unseren Vorstellungen umzusetzen. Da wir dabei auf mehr Probleme als gedacht stießen sind die Websockets zum Abgabe Zeitpunkt nicht funktionsfähig. 
 Um die Systemfunktionalität nicht negativ zu beeinflussen haben wir die Websockets auskommentiert. So ist die Plattform ohne Einschränkungen nutzbar.
 
+
 Was haben wir gelernt?/Fazit
 ==============
  
-Angefangen von der Portal-Idee, über die Anforderungen bis hin zur Umsetzung der Technolgien bereicherte das RentMyStuff Portal unseren Wissenhorizont sehr. Wir lernten die Anforderungen in Arbeitspakete aufzugliedern, diese im Team aufzuteilen und anschließen umzusetzen. Äußerst ansprechend war dabei, dass wir dieses Projekt von der Idee bis zum Deployment begleiten durften. Dabei erlernten wir eine Menge an Technolgien und bekamen einen Einblick, in dem was alles hinter der Erstellung eines Portals steckt. Bereits aus dem Studium erlernte Kenntnisse konnten erfoglreich umgesetzt und weiterentwickelt werden. Das Projekt RentmyStuff war für alle Teammitglieder ein voller Erfolg.
+Angefangen von der Portal-Idee, über die Anforderungen bis hin zur Umsetzung der Technologien bereicherte das RentMyStuff Portal unseren Wissenhorizont sehr. Wir lernten die Anforderungen in Arbeitspakete aufzugliedern, diese im Team aufzuteilen und anschließen umzusetzen. Äußerst ansprechend war dabei, dass wir dieses Projekt von der Idee bis zum Deployment begleiten durften. Dabei erlernten wir eine Menge an Technologien und bekamen einen Einblick, in dem was alles hinter der Erstellung eines Portals steckt. Bereits aus dem Studium erlernte Kenntnisse konnten erfolgreich umgesetzt und weiterentwickelt werden. Das Projekt RentmyStuff war für alle Teammitglieder ein voller Erfolg.
  
 
 
