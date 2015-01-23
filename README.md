@@ -32,7 +32,7 @@ Funktionale Anforderungen
  
 ####4. Kategorisierung
  
- Der Nutzer kann in der Eingabemaske zwischen verschiedenen Kategorien auswählen. Dies dient der einfacheren Verwaltung der Daten. Ebenso kann in der Suche nur eine Kategorie angegeben werden. Zu beginn werden wir uns auf 6 Kategorien beschränken, diese lauten wie folgt: Werkzeuge, Elektronik, Kraftfahrzeug, Gartengeräte, Dienstleistungen sowie Sonstiges.
+ Der Nutzer kann in der Eingabemaske zwischen verschiedenen Kategorien auswählen. Dies dient der einfacheren Verwaltung der Daten. Ebenso kann in der Suche nur eine Kategorie angegeben werden. Zu Beginn werden wir uns auf 6 Kategorien beschränken, diese lauten wie folgt: Werkzeuge, Elektronik, Kraftfahrzeug, Gartengeräte, Dienstleistungen sowie Sonstiges.
 
 Nicht funktionale Anforderungen
 -------------------------------
@@ -97,15 +97,21 @@ Eingesetzt wird es zusammen mit HTML und XML und wird ständig weiterentwickelt 
 ####Responsive Webdesign mit Bootstrap
 
 Bootstrap ist ein CSS-Framework mit HTML, CSS und JS, mit dem responsive Webdesign realisiert werden kann.
-Mit Responsive Webdesign wird ermöglicht,dass sich der strukturelle Aufbau einer Webseite der Bildschirmauflösung des mobilen Endgeräts anpasst.
+Mit Responsive Webdesign wird ermöglicht, dass sich der strukturelle Aufbau einer Webseite der Bildschirmauflösung des mobilen Endgeräts anpasst. 
+Die Anpassung auf die verschiedenen Auflösungen wurde mit Hilfe des Grid Systems von Bootstrap realisiert.
+
+In nachfolgender Abbildung wird das responsive Webdesign des RentmyStuff Projektes, hinsichtlich verschiedener Endgeräte, dargestellt:
 
  ![Responsive Webdesign] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/bilder/Responsive_RmS.PNG)
+ 
+Des Weiteren wurde Bootstrap bei der Anpassung der Navigation genutzt. Bei geringeren Auflösungen, wie sie auf mobilen Endgeräten vorkommen, wird die Navigation dann wie folgt dargestellt:
+ 
+ ![Navigation] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/bilder/Responsive_Nav.PNG)
 
 ####Javascript und jQuery
 
 Javascript ist eine Skriptsprache, die es ermöglicht, objektorientierte Anwendungen in Internetseiten zu Implementieren. 
-Es wird in unserem Portal verwendet, um Kategorien mit Ajax auswählen zu können. 
-Ebenfalls wird es für die Validierung von Formularen verwendet und um Adressen für die Google maps API auszulesen.
+In diesem Projekt wird es für die Validierung von Formularen verwendet und um Adressen für die Google maps API auszulesen.
 Durch jQuery wird das Scripting für Webseiten vereinfacht. Es glättet die Unterschiede zwischen verschiedenen Browsern und füllt viele Lücken von Javascript.
 
 **Google Maps API**
@@ -116,6 +122,14 @@ Durch jQuery wird das Scripting für Webseiten vereinfacht. Es glättet die Unte
 **Validierung von Kategorien - Der Submit-Button kann erst geklickt werden, wenn eine Kategorie ausgewählt wurde**
 
  ![jQuery] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/bilder/jQuery.PNG)
+ 
+ **AJAX**
+ 
+ Des Weiteren wurde Ajax für die  Ausgabe der Angebote und Gesuche, hinsichtlich der Filterung nach Kategorien, verwendet.
+ AJAX ermöglicht es einzelne Bereiche einer Webseite abhängig von der Nutzeraktion mit Daten und Inhalte auszutauschen ohne dabei die komplette Seite neu zuladen.
+ In nachfolgender Abbildung wird die Variable g mit dem Wert, also der jeweiligen Kategorie, gefüttert sowie die Funktion getAngebotList mit dem Paramter g aufgerufen und die Angebote in den <span> tag mit der id="angebote" geladen. Die selbe Vorgehensweise ist bei den Gesuchen implementiert.
+ 
+ ![Ajax] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/bilder/Ajax.PNG) 
  
 
 ####Java und PlayFramework
@@ -170,14 +184,14 @@ Während der der gesamten Projektphase gab es keine schwerwiegenden Probleme mit
 die wir in Griff bekamen. Eines der wenigen größeren Probleme trat bei der Datenbank auf. Da wir zu Beginn mit dem Problem kämpften, dass wir keine Angebote anlegen konnten, weil die Datenbank-File gesperrt wurde. Nachdem wir 
 unsere Model-Klasse als ein Singelton implementierten und somit garantierten, dass es nur eine Verbindung zur Datenbank besteht, dachten wir das Problem sei gelöst. Doch das Problem stieß uns in unregelmäßigen Abständen wieder auf. Dieser Bugfix beanspruchte eine ganze Weile, da das Problem für uns 
 nie klar verständlich und ebenso wenig reproduzierbar war. Schlussendlich haben wir es bis zum jetzigen Zeitpunkt gefixt. 
-Ein weiteres kleines Problem war, dass man auf die verschiedenen Browser achten muss, so funktionieren teilweise funktionen im Google Chrome ohne Probleme, aber im Internet Explorer oder sogar Firefox machen sie Probleme. Dies betrifft vor allem Javascript. 
-Wie in nahezu jedem Projekt war auch dieses mal die Zeit zum Ende hin sehr knapp. Das Ergebnis lässt sich trotz Termindruck und Prüfungsstress sehen. Wir konnten unsere Anforderungen alle umsetzen.
+Ein weiteres kleines Problem war, dass man auf die verschiedenen Browser achten muss, so Funktionieren teilweise funktionen im Google Chrome ohne Probleme, aber im Internet Explorer oder sogar Firefox machen sie Probleme. Dies betrifft vor allem Javascript. 
+Wie in nahezu jedem Projekt war auch dieses Mal die Zeit zum Ende hin sehr knapp. Das Ergebnis lässt sich trotz Termindruck und Prüfungsstress sehen. Wir konnten unsere Anforderungen alle umsetzen.
 
  
 Was haben wir gelernt?/Fazit
 ==============
  
-Angefangen von der Portal-Idee, über die Anforderungen bis hin zur Umsetzung der Technolgien bereicherte das RentMyStuff Portal unseren Wissenhorizont sehr. Wir lernten die Anforderungen in Arbeitspakete aufzugliedern, diese im Team aufzuteilen und anschließen umzusetzen. Äußerst ansprechend war dabei, dass wir dieses Projekt von der Idee bis zum Deployment begleiten durften. Dabei erlernten wir eine Menge an Technolgien und bekamen einen Einblick, in dem was alles hinter der Erstellung eines Portals steckt. Bereits aus dem Studium erlernte Kenntnisse konnten erfoglreich umgesetzt und weiterentwickelt werden. Das Projekt RentmyStuff war für alle Teammitglieder ein voller Erfolg.
+Angefangen von der Portal-Idee, über die Anforderungen bis hin zur Umsetzung der Technologien bereicherte das RentMyStuff Portal unseren Wissenhorizont sehr. Wir lernten die Anforderungen in Arbeitspakete aufzugliedern, diese im Team aufzuteilen und anschließen umzusetzen. Äußerst ansprechend war dabei, dass wir dieses Projekt von der Idee bis zum Deployment begleiten durften. Dabei erlernten wir eine Menge an Technologien und bekamen einen Einblick, in dem was alles hinter der Erstellung eines Portals steckt. Bereits aus dem Studium erlernte Kenntnisse konnten erfolgreich umgesetzt und weiterentwickelt werden. Das Projekt RentmyStuff war für alle Teammitglieder ein voller Erfolg.
  
 
 
