@@ -10,12 +10,10 @@ $(document).ready(function() {
 $(function(){
 	var WS = window["MozWebSocket"] ? MozWebSocket : WebSocket;
 	webSocket = new WS("@routes.Application.refresh().webSocketURL(request)");
-	
 	webSocket.onmessage = receiveEvent;
 })
 
 function receiveEvent(event){
-	alert(event);
 	reloadAdverts('');
 }
 

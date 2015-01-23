@@ -8,7 +8,7 @@ import java.util.Observer;
 public class OurObserver {
 
 	private static Collection<Observer> observers = new ArrayList<Observer>();
-
+	
 	public static void add(Observer observer) {
 		if (observers.contains(observer)) {
 			System.out.println("Observer bereits in Collection!");
@@ -28,7 +28,6 @@ public class OurObserver {
 	public static void notify(Object object){
 		for(Observer o : observers){
 			o.update(new Observable(), object);
-			System.out.println("Notify Observer ");
 		}
 	}
 

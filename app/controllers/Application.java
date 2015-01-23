@@ -6,6 +6,7 @@ import java.util.Observer;
 
 import models.Advert;
 import models.Model;
+import models.OurObserver;
 import models.User;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -33,6 +34,8 @@ import views.html.searchAdvert;
 
 public class Application extends Controller implements Observer {
 
+	public static WebSocket.Out<String> out1;
+	
 	public static User getUserFromSession() {
 		String userCode = "";
 		userCode = session("USER");
@@ -278,22 +281,14 @@ public class Application extends Controller implements Observer {
 	}
 
 	public static WebSocket<String> refresh() {
-		
-//		return WebSocket.withActor(new Function<ActorRef, Props>() {
-//			
-//			public Props apply(ActorRef out) throws Throwable {
-//				System.out.println("refresh() - Method");
-//				Model.add(new Application());
-//				return MyWebSocketActor.props(out);
-//			}
-//		});
-		
+				
 		return new WebSocket<String>(){
 
 			@Override
-			public void onReady(play.mvc.WebSocket.In<String> in,
-					final play.mvc.WebSocket.Out<String> out) {
+			public void onReady(WebSocket.In<String> in,
+					final WebSocket.Out<String> out) {
 				
+				out1 = out;
 				in.onMessage(new Callback<String>() {
 					
 					public void invoke(String arg0) throws Throwable {
@@ -306,22 +301,18 @@ public class Application extends Controller implements Observer {
 				in.onClose(new Callback0() {
 					
 					public void invoke() throws Throwable {
-						Model.delete(new Application());
-						System.out.println("invoke- Method");
-						
+						//Model.delete(new Application());
+						System.out.println("invoke- Method -->in.onClose Function");			
 					}
-				});
-				
-				out.write("Hello you are connected!");
-				
+				});				
 			} 
 		};
 	}
-
+	
 	public void update(Observable observable, Object object) {
 		Advert advert = (Advert) object;
 		// ToDo - was passiert beim Update?!;
-		System.out.println(advert.getCategory());
+		out1.write("HEllo");
 	}
 
 }
