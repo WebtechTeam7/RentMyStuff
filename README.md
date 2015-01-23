@@ -43,15 +43,15 @@ Nicht funktionale Anforderungen
  
 Mockup-Screens
 ==============
-####2 Eigene Einträge
+####1 Eigene Einträge
 
 ![Eigene Einträge] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/mockups/2_Eigene_Eintraege_Startseite.PNG)
 
-####3.1 Angebote
+####2 Angebote
 
 ![Angebote] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/mockups/3.1_Angebote.PNG)
 
-####4.1 Gesuche
+####3 Gesuche
 
 ![Gesuche] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/mockups/4.1_Gesuche.PNG)
 
