@@ -34,7 +34,7 @@ nicht funktionale Anforderungen
 -------------------------------
 
  **1. Technologien**
- Es werden alle verlangten Technologien genutzt. Weitere Infos folgen. 
+ Es werden alle verlangten Technologien genutzt. Weitere Informationen folgen. 
  
 Mockup-Screens
 ==============
@@ -90,7 +90,7 @@ Eingesetzt wird es zusammen mit HTML und XML und wird ständig weiterentwickelt 
 Bootstrap ist ein CSS-Framework mit HTML, CSS und JS, mit dem responsive Webdesign realisiert werden kann.
 Mit Responsive Webdesign wird ermöglicht,dass sich der strukturelle Aufbau einer Webseite der Bildschirmauflösung des mobilen Endgeräts anpasst.
 
- ![Responsive Webdesign] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/bilder/Responsive_RmS.JPG)
+ ![Responsive Webdesign] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/bilder/Responsive_RmS.PNG)
 
 **Javascript und jQuery**
 
@@ -99,12 +99,25 @@ Es wird in unserem Portal verwendet, um Kategorien mit Ajax auswählen zu könne
 Ebenfalls wird es für die Validierung von Formularen verwendet und um Adressen für die Google maps API auszulesen.
 Durch jQuery wird das Scripting für Webseiten vereinfacht. Es glättet die Unterschiede zwischen verschiedenen Browsern und füllt viele Lücken von Javascript.
 
+ ![Javascript] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/bilder/Javascript.PNG)
+ Google Maps API
+ 
+ ![jQuery] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/bilder/jQuery.PNG)
+Validierung von Kategorien - Der Submit-Button kann erst geklickt werden, wenn eine Kategorie ausgewählt wurde.
+
 **Java und PlayFramework**
 
 Unterstützt vom Play Framework wurde das komplette Backend unseres Portals erstellt. Beispielsweise wurde die Anmeldung mit Java realisiert,
 sowie die Hash-Verschlüsselung des Passworts oder das Session handling. Ebenso wurden Datenbankzugriffe um neue Gesuche oder Angebote zu erstellen, in Java geschrieben.
 Play ist ein Web-Applikation Framework. Es wurde in Java und Scala geschrieben und verfolgt die  Model-View-Controller Sicht. Es bietet einen Web-Server, 
 der im Standardumfang mitgeliefert wird und übernimmt viele Routineaufgaben.
+
+ ![Java] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/bilder/jQuery.PNG)
+ Java Beispiel Anmeldung
+ 
+  ![MVC] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/bilder/Play-Framework_MVC.PNG)
+ PlayFramework - Model-View-Controller Sicht
+ https://s3.amazonaws.com/nettuts/613_mvc/diagram.jpg
 
 **SQL Database**
 
@@ -113,9 +126,9 @@ sowie die Anzeigen (Angebote, Gesuche) gespeichert.
 
 **Websockets und JSON**
 
-Mit Websockets ist es möglich, dass der Server Daten direkt an den Client senden kann und umgekehrt. Dies nennt man auch eine "bidirektionale Verbindung" zwichen Server und Client.
-WebSockets fragen also Daten von einem Server ab, nachdem die Website aufgerufen wurde. 
-WebSocket-Anfragen werden in Javascript programmiert. Die Verbindung zum Server bleibt dabei bestehen.
+Mit Websockets ist es möglich, dass der Server Daten direkt an den Client senden kann und umgekehrt. Dies nennt man auch eine "bidirektionale Verbindung" zwischen Server und Client.
+WebSockets fragen also Daten von einem Server ab, nachdem die Website aufgerufen wurde. Die Verbindung zum Server bleibt dabei bestehen. 
+WebSocket-Anfragen werden in Javascript programmiert. 
 Im Portal Rent My Stuff wird der Client dann sofort über Änderungen informiert, wenn ein neues Angebot oder ein neues Gesuch erstellt wird.
 Dieses wird dann bei anderen Nutzern sofort angezeigt.
 JavaScript Object Notation (JSON) ist ein Datenformat das zum Datenaustausch zwischen Anwendungen genutzt wird.
@@ -126,11 +139,17 @@ Heroku, ist eine mehrsprachige Cloud-Anwendungsplattform und ermöglicht es Entw
 Es werden verschiedene Programmiersprachen, wie Ruby on Rails, Node.js, Python und Java unterstützt. Mit Heroku vereinfacht es die Arbeit beim Entwickeln, 
 indem man sich beispielsweise nicht um einen Server kümmern muss, da dieser von Heroku bereitgestellt wird.
 
+ ![Heroku] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/bilder/Heroku.PNG)
+http://www.codecheese.com/wp-content/uploads/heroku-logo.png
+
+Zusätzliche Features
+==============
+
 
 Probleme
 ==============
 
-Während der der gesamten Projektphase gab es keine schwerwiegenden Probleme mit dem Projekt an sich und ebenso wenig gab es innerhalb des Teams Probleme. Unsere größten Probleme waren meistens Kleinigkeiten,
+Während der der gesamten Projektphase gab es keine schwerwiegenden Probleme mit dem Projekt an sich und ebenso wenig gab es innerhalb des Teams Probleme. Unsere Probleme waren meistens Kleinigkeiten,
 die wir in Griff bekamen. Eines der wenigen größeren Probleme trat bei der Datenbank auf. Da wir zu Beginn mit dem Problem kämpften, dass wir keine Angebote anlegen konnten, weil die Datenbank-File gesperrt wurde. Nachdem wir 
 unsere Model-Klasse als ein Singelton implementierten und somit garantierten, dass es nur eine Verbindung zur Datenbank besteht, dachten wir das Problem sei gelöst. Doch das Problem stieß uns in unregelmäßigen Abständen wieder auf. Dieser Bugfix beanspruchte eine ganze Weile, da das Problem für uns 
 nie klar verständlich und ebenso wenig reproduzierbar war. Schlussendlich haben wir es bis zum jetzigen Zeitpunkt gefixt. 
