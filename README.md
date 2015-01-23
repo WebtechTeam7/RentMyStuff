@@ -99,13 +99,12 @@ Es wird in unserem Portal verwendet, um Kategorien mit Ajax auswählen zu könne
 Ebenfalls wird es für die Validierung von Formularen verwendet und um Adressen für die Google maps API auszulesen.
 Durch jQuery wird das Scripting für Webseiten vereinfacht. Es glättet die Unterschiede zwischen verschiedenen Browsern und füllt viele Lücken von Javascript.
 
+Google Maps API:
  ![Javascript] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/bilder/Javascript.PNG)
  
- Google Maps API
- 
+Validierung von Kategorien - Der Submit-Button kann erst geklickt werden, wenn eine Kategorie ausgewählt wurde:
  ![jQuery] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/bilder/jQuery.PNG)
  
-Validierung von Kategorien - Der Submit-Button kann erst geklickt werden, wenn eine Kategorie ausgewählt wurde.
 
 **Java und PlayFramework**
 
@@ -114,14 +113,12 @@ sowie die Hash-Verschlüsselung des Passworts oder das Session handling. Ebenso 
 Play ist ein Web-Applikation Framework. Es wurde in Java und Scala geschrieben und verfolgt die  Model-View-Controller Architektur. Es bietet einen Web-Server, 
 der im Standardumfang mitgeliefert wird und übernimmt viele Routineaufgaben.
 
+Java Beispiel Anmeldung:
  ![Java] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/bilder/jQuery.PNG)
  
- Java Beispiel Anmeldung
- 
+ PlayFramework - Model-View-Controller Architektur:
   ![MVC] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/bilder/Play-Framework_MVC.PNG)
   
- PlayFramework - Model-View-Controller Architektur
- 
  https://s3.amazonaws.com/nettuts/613_mvc/diagram.jpg
 
 **SQL Database**
