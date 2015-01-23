@@ -11,8 +11,7 @@ import models.*;
 
 public class Application extends Controller {
 
-	// static Boolean angemeldet = false;
-	// private static User currentUser;
+	
 
 	public static User getUserFromSession() {
 		String userCode = "";
@@ -166,11 +165,10 @@ public class Application extends Controller {
 						getUserFromSession().getUserID()), user));
 
 			}
-			System.out.println("geht nicht");
+			System.out.println("Passwort oder Benutzername falsch!");
 
 		}
 
-		// return ok(login.render());
 		return ok(fehler.render());
 	}
 	
@@ -185,7 +183,7 @@ public class Application extends Controller {
 		String password_confirmation = dynamicForm.get("password_confirmation");
 
 		if (password.equals(password_confirmation)) {
-			// User user = new User(firstname, lastname, email, password);
+			
 
 			String hashPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 

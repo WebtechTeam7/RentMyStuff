@@ -10,9 +10,7 @@
 	var marker;
 	var infowindow;
 	var image = "@routes.Assets.at("images/favicon.png")";
-	var contentString = '<h3>Standort der Anzeige</h3>'
-			+ '<p>Der Artikel kann unter der folgenden Adresse abgeholt werden. '
-			+ street + ' ' + city + ' ' + postcode + '</p>';
+	
 			
 	function initialize() {
 
@@ -37,14 +35,6 @@
 					position : results[0].geometry.location
 				});
 
-				//infowindow = new google.maps.InfoWindow({
-				//    content : contentString,
-				//    maxWidth: 200
-				//});
-
-				//google.maps.event.addListener(marker, 'click', function() {
-				//	infowindow.open(map, marker);
-				//});
 			} else {
 				alert('Geocode konnte nicht aufgelöst werden');
 				marker = new google.maps.Marker({
