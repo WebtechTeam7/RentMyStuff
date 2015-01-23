@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import play.db.DB;
 
 public class Model {
@@ -503,7 +505,8 @@ public class Model {
 					.prepareStatement("SELECT * FROM Advert");
 			PreparedStatement preparedStatement3 = connection
 					.prepareStatement("SELECT * FROM Address");
-			PreparedStatement preparedStatement4 = connection.prepareStatement("SELECT * FROM AdvertAddress");
+			PreparedStatement preparedStatement4 = connection.
+					prepareStatement("SELECT * FROM AdvertAddress");
 			preparedStatement.execute();
 			preparedStatement2.execute();
 			preparedStatement3.execute();
@@ -520,10 +523,30 @@ public class Model {
 			initTables(createAdvertStatement);
 			initTables(createAddressStatement);
 			initTables(createAdvertAddressStatement);
+			createDummyData();
 			dbExist = true;
 		} else {
 			System.out.println("Database already exists!");
 		}
+	}
+
+	
+	/**
+	 * Generate DummyData
+	 */
+	private void createDummyData() {
+		User user = new User();
+		user.setFirstname("User");
+		user.setLastname("User");
+		user.setEmail("user.user@gmail.com");
+		user.setPassword(BCrypt.hashpw("user", BCrypt.gensalt()));
+		createUser(user.getFirstname(), user.getLastname(), user.getEmail(), user.getPassword());
+		
+		System.out.println("Dummy user Created: " + user.getEmail());
+		
+		createAdvert("Gesuch", "Gartengeräte", "Ich suche einen Rasenmäher", user, "Brauneggerstrasse 55", "78462", "Konstanz", "Deutschland");
+		createAdvert("Angebot", "Fahrzeuge", "Ich biete meinen VW Bus an. Wenn jemand umziehen möchte", user, "Rheingutstrasse 4", "78462", "Konstanz", "Deutschland");
+		System.out.println("Dummy advert created:");
 	}
 
 	/**

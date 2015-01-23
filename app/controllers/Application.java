@@ -58,11 +58,11 @@ public class Application extends Controller {
 
 	public static Result login() {
 		
-		Model.getInstance().initDatabase();
 		if (isUserInSession()) {
 			session().clear();
 			System.out.println("abmelden hat funktioniert");
 		}
+		Model.getInstance().initDatabase();
 		return ok(login.render());
 	}
 
