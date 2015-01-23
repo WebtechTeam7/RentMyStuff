@@ -18,33 +18,41 @@ Im folgenden Absatz werden unsere funktionalen Anforderungen sowie unsere nicht 
 Funktionale Anforderungen
 -------------------------
 
-**1. Registrierung**
+####1. Registrierung
+
 	 Der Nutzer muss sich einmalig am System registrieren um die Angebote einsehen zu können beziehungsweise um selbst Angebote erstellen zu können. Der Nutzer wählt dabei einen Usernamen sowie sein Passwort. Die Werte werden in der Datenbank gespeichert. 
 	 
- **2. Profil pflegen OPTIONAL**
+####2. Profil pflegen OPTIONAL
+
  Der Nutzer kann nach erfolgreicher Registrierung sein Profil pflegen. Unter anderem mit seiner Telefonnummer, E-Mail und ggf. auch mit seiner Adresse. 
  
-**3. Gesuch vs. Angebot**
+####3. Gesuch vs. Angebot
+
  In dem Portal kann man nach erfolgreicher Anmeldung auf der Startseite zwischen "Angebote" und "Gesuch aufgeben" unterscheiden. Per default werden eigens angelegte Angebote sowie Gesuche gelistet. Wird "Angebote" gewählt, erscheint eine neue Seite mit allen Angebote. Diese können mit verschiedenen Filtern beschränkt werden. Wird "Gesuche" gewählt, so öffnet sich eine Eingabemaske, die es dem Nutzer ermöglicht seinen Artikel bzw. seine Dienstleistung online zu stellen. 
  
- **4. Kategorisierung**
+####4. Kategorisierung
+ 
  Der Nutzer kann in der Eingabemaske zwischen verschiedenen Kategorien auswählen. Dies dient der einfacheren Verwaltung der Daten. Ebenso kann in der Suche nur eine Kategorie angegeben werden. Zu beginn werden wir uns auf 6 Kategorien beschränken, diese lauten wie folgt: Werkzeuge, Elektronik, Kraftfahrzeug, Gartengeräte, Dienstleistungen sowie Sonstiges.
 
-nicht funktionale Anforderungen
+Nicht funktionale Anforderungen
 -------------------------------
 
- **1. Technologien**
+ ####1. Technologien
+ 
  Es werden alle verlangten Technologien genutzt. Weitere Informationen folgen. 
  
 Mockup-Screens
 ==============
-**2 Eigene Einträge**
+####2 Eigene Einträge
+
 ![Eigene Einträge] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/mockups/2_Eigene_Eintraege_Startseite.PNG)
 
-**3.1 Angebote**
+####3.1 Angebote
+
 ![Angebote] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/mockups/3.1_Angebote.PNG)
 
-**4.1 Gesuche**
+####4.1 Gesuche
+
 ![Gesuche] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/mockups/4.1_Gesuche.PNG)
 
 
@@ -73,60 +81,65 @@ In folgender Grafik ist unser Klassendiagramm zu sehen.
 Verwendete Technologien
 ==============
 
-**HTML**
+####HTML
 
 Verwendet wurde die aktuelle Version HTML5 von HTML (Hypertext Markup Language).
 HTML wird dazu verwendet, um zu beschreiben, wie eine Seite im Browser ausgegeben werden soll.
 In unserem Projekt ist dies ebenfalls der Fall. HTML wird verwendet um die Inhalte der Seite strukturiert darzustellen.
  
-**CSS**
+####CSS
 
 Mit der neuen Version CSS3 (Cascading Style Sheets) wurde das Design des Portals entworfen. 
 CSS ist für die Darstellung und Formatierung von Webseiten zuständig. 
 Eingesetzt wird es zusammen mit HTML und XML und wird ständig weiterentwickelt um neue Design-Möglichkeiten zu bekommen.
 
-**Responsive Webdesign mit Bootstrap**
+####Responsive Webdesign mit Bootstrap
 
 Bootstrap ist ein CSS-Framework mit HTML, CSS und JS, mit dem responsive Webdesign realisiert werden kann.
 Mit Responsive Webdesign wird ermöglicht,dass sich der strukturelle Aufbau einer Webseite der Bildschirmauflösung des mobilen Endgeräts anpasst.
 
  ![Responsive Webdesign] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/bilder/Responsive_RmS.PNG)
 
-**Javascript und jQuery**
+####Javascript und jQuery
 
 Javascript ist eine Skriptsprache, die es ermöglicht, objektorientierte Anwendungen in Internetseiten zu Implementieren. 
 Es wird in unserem Portal verwendet, um Kategorien mit Ajax auswählen zu können. 
 Ebenfalls wird es für die Validierung von Formularen verwendet und um Adressen für die Google maps API auszulesen.
 Durch jQuery wird das Scripting für Webseiten vereinfacht. Es glättet die Unterschiede zwischen verschiedenen Browsern und füllt viele Lücken von Javascript.
 
-Google Maps API:
+**Google Maps API**
+ 
  ![Javascript] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/bilder/Javascript.PNG)
  
-Validierung von Kategorien - Der Submit-Button kann erst geklickt werden, wenn eine Kategorie ausgewählt wurde:
+
+**Validierung von Kategorien - Der Submit-Button kann erst geklickt werden, wenn eine Kategorie ausgewählt wurde**
+
  ![jQuery] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/bilder/jQuery.PNG)
  
 
-**Java und PlayFramework**
+####Java und PlayFramework
 
 Unterstützt vom Play Framework wurde das komplette Backend unseres Portals erstellt. Beispielsweise wurde die Anmeldung mit Java realisiert,
 sowie die Hash-Verschlüsselung des Passworts oder das Session handling. Ebenso wurden Datenbankzugriffe um neue Gesuche oder Angebote zu erstellen, in Java geschrieben.
 Play ist ein Web-Applikation Framework. Es wurde in Java und Scala geschrieben und verfolgt die  Model-View-Controller Architektur. Es bietet einen Web-Server, 
 der im Standardumfang mitgeliefert wird und übernimmt viele Routineaufgaben.
 
-Java Beispiel Anmeldung:
+**Java Beispiel Anmeldung**
+
  ![Java] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/bilder/jQuery.PNG)
  
- PlayFramework - Model-View-Controller Architektur:
+**PlayFramework - Model-View-Controller Architektur**
+
   ![MVC] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/bilder/Play-Framework_MVC.PNG)
   
  https://s3.amazonaws.com/nettuts/613_mvc/diagram.jpg
 
-**SQL Database**
+####SQL Database
 
 In der SQL Datenbank werden die User, die Adressen, für den Standort, an dem Werkzeuge, Fahrzeuge, Gartengeräte etc. abgeholt werden können,
 sowie die Anzeigen (Angebote, Gesuche) gespeichert.
 
-**Websockets und JSON**
+####Websockets und JSON
 
 Mit Websockets ist es möglich, dass der Server Daten direkt an den Client senden kann und umgekehrt. Dies nennt man auch eine "bidirektionale Verbindung" zwischen Server und Client.
 WebSockets fragen also Daten von einem Server ab, nachdem die Website aufgerufen wurde. Die Verbindung zum Server bleibt dabei bestehen. 
@@ -135,7 +148,7 @@ Im Portal Rent My Stuff wird der Client dann sofort über Änderungen informiert
 Dieses wird dann bei anderen Nutzern sofort angezeigt.
 JavaScript Object Notation (JSON) ist ein Datenformat das zum Datenaustausch zwischen Anwendungen genutzt wird.
 
-**Heroku**
+####Heroku
 
 Heroku, ist eine mehrsprachige Cloud-Anwendungsplattform und ermöglicht es Entwicklern zu implementieren, zu skalieren und ihre Anwendungen zu verwalten. 
 Es werden verschiedene Programmiersprachen, wie Ruby on Rails, Node.js, Python und Java unterstützt. Mit Heroku vereinfacht es die Arbeit beim Entwickeln, 
