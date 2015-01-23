@@ -20,8 +20,8 @@ Funktionale Anforderungen
 
 ####1. Registrierung
 
-	 Der Nutzer muss sich einmalig am System registrieren um die Angebote einsehen zu können beziehungsweise um selbst Angebote erstellen zu können. Der Nutzer wählt dabei einen Usernamen sowie sein Passwort. Die Werte werden in der Datenbank gespeichert. 
-	 
+ Der Nutzer muss sich einmalig am System registrieren um die Angebote einsehen zu können beziehungsweise um selbst Angebote erstellen zu können. Der Nutzer wählt dabei einen Usernamen sowie sein Passwort. Die Werte werden in der Datenbank gespeichert. 
+
 ####2. Profil pflegen OPTIONAL
 
  Der Nutzer kann nach erfolgreicher Registrierung sein Profil pflegen. Unter anderem mit seiner Telefonnummer, E-Mail und ggf. auch mit seiner Adresse. 
