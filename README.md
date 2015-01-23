@@ -3,43 +3,50 @@ RentMyStuff
 ![Logo] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/public/images/RentMyStuff_Logo.png)
 
 HTWG Konstanz: Web-Technologien Projekt 
-Teammitglieder: Ramona Barth, Dennis Klein und Jan Gaideczka
+Teammitglieder: 
+	- Ramona Barth 286752 
+	- Dennis Klein 286082
+	- Jan Gaideczka 286572
 
 Einleitung
 ==========
 
-Jeder kennt es vermutlich. Man zieht in eine neue Stadt um dort zu studieren oder eben aus anderen Gründen. Doch spätestens beim Aufbau der Möbel stößt man auf die ersten Probleme. Bohrmaschine, Schraubenzieher irgendetwas fehlt immer. Da wäre es doch sinnvoll eine Plattform zu haben, auf der man das benötigte Werkzeug suchen kann und es von jemandem der es Anbietet ausleihen kann. Genau das soll unser "RentMyStuff" -  Portal ermöglichen. 
+Jeder kennt es vermutlich. Man zieht in eine neue Stadt um dort zu studieren oder eben aus anderen Gründen. Doch spätestens beim Aufbau der Möbel stößt man auf die ersten Probleme. Bohrmaschine, Schraubenzieher, irgendetwas fehlt immer. Da wäre es doch sinnvoll eine Plattform zu haben, auf der man das benötigte Werkzeug suchen kann und es von jemandem der es Anbietet ausleihen kann. Genau das soll unser "RentMyStuff" -  Portal ermöglichen. 
 
 Anforderungen
 =============
 
-Im folgenden Absatz werden unsere funktionalen Anforderungen sowie unsere nicht funktionalen Anforderungen an das Portal erläutert. Diese beschränken sich zunächst auf für uns relevante Punkte. Die Anforderungen können im Verlauf des Projektes weiter angepasst werden.
+Im folgenden Absatz werden unsere funktionalen Anforderungen sowie unsere nicht funktionalen Anforderungen an das Portal erläutert. Diese beschränken sich zunächst auf für uns relevante Punkte. Die Anforderungen wurden im Verlauf des Projektes weiter angepasst.
 
 Funktionale Anforderungen
 -------------------------
 
 ####1. Registrierung
 
- Der Nutzer muss sich einmalig am System registrieren um die Angebote einsehen zu können beziehungsweise um selbst Angebote erstellen zu können. Der Nutzer wählt dabei einen Usernamen sowie sein Passwort. Die Werte werden in der Datenbank gespeichert. 
+ Der Nutzer muss sich einmalig am System registrieren um Angebote und Gesuche einsehen zu können beziehungsweise um selbst Angebote und Gesuche erstellen zu können. Der Nutzer verwendet dafür seine E-Mail-Adresse sowie ein Passwort.  Die Werte werden in der Datenbank gespeichert. 
 
 ####2. Profil pflegen OPTIONAL
 
- Der Nutzer kann nach erfolgreicher Registrierung sein Profil pflegen. Unter anderem mit seiner Telefonnummer, E-Mail und ggf. auch mit seiner Adresse. 
+Der Nutzer kann nach erfolgreicher Registrierung sein Profil pflegen. Unter anderem mit seiner Telefonnummer, E-Mail und ggf. auch mit seiner Adresse. 
  
 ####3. Gesuch vs. Angebot
 
- In dem Portal kann man nach erfolgreicher Anmeldung auf der Startseite zwischen "Angebote" und "Gesuch aufgeben" unterscheiden. Per default werden eigens angelegte Angebote sowie Gesuche gelistet. Wird "Angebote" gewählt, erscheint eine neue Seite mit allen Angebote. Diese können mit verschiedenen Filtern beschränkt werden. Wird "Gesuche" gewählt, so öffnet sich eine Eingabemaske, die es dem Nutzer ermöglicht seinen Artikel bzw. seine Dienstleistung online zu stellen. 
+ In dem Portal werden nach erfolgreicher Anmeldung auf der Startseite selbst erstellte Angebote und Gesuche angezeigt. In der Navigation kann ausgewählt werden zwischen "Angebote" und "Gesuche". Man gelangt bei dem Klick auf eines der Navigationselemente auf die jeweilige Seite, auf der alle Angebote sowie Gesuche von allen Usern angezeigt werden. Diese können nach verschiedenen Kategorien gefiltert werden. Ebenfalls können Angebote oder Gesuche erstellt werden.
  
 ####4. Kategorisierung
  
- Der Nutzer kann in der Eingabemaske zwischen verschiedenen Kategorien auswählen. Dies dient der einfacheren Verwaltung der Daten. Ebenso kann in der Suche nur eine Kategorie angegeben werden. Zu beginn werden wir uns auf 6 Kategorien beschränken, diese lauten wie folgt: Werkzeuge, Elektronik, Kraftfahrzeug, Gartengeräte, Dienstleistungen sowie Sonstiges.
+ Der Nutzer kann in der Eingabemaske zwischen verschiedenen Kategorien auswählen. Dies dient der einfacheren Verwaltung der Daten. Ebenso kann in der Suche nur eine Kategorie angegeben werden. Wir haben uns auf sechs Kategorien beschränken, diese lauten wie folgt: Werkzeuge, Elektronik, Fahrzeuge, Gartengeräte, Dienstleistungen sowie Sonstiges.
 
 Nicht funktionale Anforderungen
 -------------------------------
 
-####1. Technologien
- 
- Es werden alle verlangten Technologien genutzt. Weitere Informationen folgen. 
+####1. Darstellung der Webseite
+-Die Webseite soll in einem Responsive Design umgesetzt sein.
+-Die Webseite soll intuitiv für den User bedienbar sein.
+
+####2. Git
+-Die Versionskontrolle soll via GitHub realisiert werden. 
+
  
 Mockup-Screens
 ==============
@@ -60,23 +67,20 @@ Mockup-Screens
 UseCase-Diagramme
 ==============
  
- Der Nutzer kann sich am System, also dem RentmyStuff Portal registrieren und nachdem die Daten in der Datenbank gespeichert wurden am System anmelden.
+Der Nutzer kann sich am System registrieren. Nachdem die Daten in der Datenbank gespeichert wurden kann er sich am System anmelden.
  
  ![Anmeldung] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/Use%20Case%20Diagramme/Anmeldung.PNG)
  
- Der Nutzer kann einen Artikel als Angebot in das System einstellen. Dieses Angebot umfasst neben der Kategorie, eine Beschreibung sowie eine Adresse.
+ Der Nutzer kann einen Artikel als Angebot oder ein Gesuch in das System einstellen. Dieses Angebot umfasst neben der Kategorie, eine Beschreibung sowie eine Adresse.
  
  ![Verleihen] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/Use%20Case%20Diagramme/Ausleihen.PNG)
  
- Nutzer können die eingestellten Angebote anderer Nutzer einsehen, nach Kategorien filtern und mit dem Eigentümer via Mail Kontakt aufnehmen. Des Weiteren kann ein Nutzer ein Gesuch einstellen, welches wiederrum auch von anderen Nutzern eingesehen werden kann. 
+ Nutzer können die eingestellten Angebote und Gesuche anderer Nutzer einsehen, nach Kategorien filtern und mit dem Eigentümer von angebotenen Leihgaben via Mail Kontakt aufnehmen. 
  
  ![Ausleihen] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/Use%20Case%20Diagramme/Ausleihen.PNG)
  
 Klassendiagramm
 ==============
-
-In folgender Grafik ist unser Klassendiagramm zu sehen. 
-
 ![Klassendiagramm] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/Klassendiagramm/rentmystuff_klassendiagramm.JPG)
  
 Verwendete Technologien
@@ -86,7 +90,7 @@ Verwendete Technologien
 
 Verwendet wurde die aktuelle Version HTML5 von HTML (Hypertext Markup Language).
 HTML wird dazu verwendet, um zu beschreiben, wie eine Seite im Browser ausgegeben werden soll.
-In unserem Projekt ist dies ebenfalls der Fall. HTML wird verwendet um die Inhalte der Seite strukturiert darzustellen.
+In unserem Projekt ist dies der Fall. HTML wird verwendet um die Inhalte der Seite strukturiert darzustellen.
  
 ####CSS
 
@@ -145,8 +149,9 @@ sowie die Anzeigen (Angebote, Gesuche) gespeichert.
 Mit Websockets ist es möglich, dass der Server Daten direkt an den Client senden kann und umgekehrt. Dies nennt man auch eine "bidirektionale Verbindung" zwischen Server und Client.
 WebSockets fragen also Daten von einem Server ab, nachdem die Website aufgerufen wurde. Die Verbindung zum Server bleibt dabei bestehen. 
 WebSocket-Anfragen werden in Javascript programmiert. 
-Im Portal Rent My Stuff wird der Client dann sofort über Änderungen informiert, wenn ein neues Angebot oder ein neues Gesuch erstellt wird.
-Dieses wird dann bei anderen Nutzern sofort angezeigt.
+Unsere Idee der Websocket Umsetzung war folgende:
+Im Portal Rent My Stuff wird der Client sofort über Änderungen informiert, wenn ein neues Angebot oder ein neues Gesuch erstellt wird.
+Ist ein anderer Nutzer auf der Gesuch bzw. Angebotsseite dann wird die Website per Ajax nachgeladen. Leider konnten wir unsere Idee nicht umsetzen. Weitere Informationen dazu befinden sich im Kapitel "Probleme".
 JavaScript Object Notation (JSON) ist ein Datenformat das zum Datenaustausch zwischen Anwendungen genutzt wird.
 
 ####Heroku
@@ -162,18 +167,25 @@ http://www.codecheese.com/wp-content/uploads/heroku-logo.png
 Zusätzliche Features
 ==============
 
+####Google Maps:
+Wir entschieden uns dafür auf unserem Portal Google Maps einzubinden. Dies wird genutzt um dem User den Standort der Leihgabe zu zeigen. Dies erhöht die Usability für unsere User, denn wenn dieser ein interessantes Angebot entdeckt, kann er die Adresse des Angebots einsehen. Dies spart Zeit, denn so muss der User nicht dem Anbieter eine Email schreiben um die Adresse zu erhalten. 
+
+![GoogleMaps] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/bilder/googlemaps.PNG)
+
 
 Probleme
 ==============
 
-Während der der gesamten Projektphase gab es keine schwerwiegenden Probleme mit dem Projekt an sich und ebenso wenig gab es innerhalb des Teams Probleme. Unsere Probleme waren meistens Kleinigkeiten,
-die wir in Griff bekamen. Eines der wenigen größeren Probleme trat bei der Datenbank auf. Da wir zu Beginn mit dem Problem kämpften, dass wir keine Angebote anlegen konnten, weil die Datenbank-File gesperrt wurde. Nachdem wir 
-unsere Model-Klasse als ein Singelton implementierten und somit garantierten, dass es nur eine Verbindung zur Datenbank besteht, dachten wir das Problem sei gelöst. Doch das Problem stieß uns in unregelmäßigen Abständen wieder auf. Dieser Bugfix beanspruchte eine ganze Weile, da das Problem für uns 
-nie klar verständlich und ebenso wenig reproduzierbar war. Schlussendlich haben wir es bis zum jetzigen Zeitpunkt gefixt. 
-Ein weiteres kleines Problem war, dass man auf die verschiedenen Browser achten muss, so funktionieren teilweise funktionen im Google Chrome ohne Probleme, aber im Internet Explorer oder sogar Firefox machen sie Probleme. Dies betrifft vor allem Javascript. 
-Wie in nahezu jedem Projekt war auch dieses mal die Zeit zum Ende hin sehr knapp. Das Ergebnis lässt sich trotz Termindruck und Prüfungsstress sehen. Wir konnten unsere Anforderungen alle umsetzen.
+Während der Projektphase kam es zu zwei größeren Problemen in der Entwicklung.
+Eines der Probleme trat bei der Datenbank auf. Da wir zu Beginn mit dem Problem kämpften, dass wir keine Angebote anlegen konnten, weil die Datenbank-File gesperrt wurde. Nachdem wir 
+unsere Model-Klasse als ein Singelton implementierten und somit 
+garantierten, dass es nur eine Verbindung zur Datenbank besteht, 
+dachten wir das Problem sei gelöst. Doch das Problem stieß uns in 
+unregelmäßigen Abständen wieder auf. Dieser Bugfix beanspruchte eine 
+ganze Weile, da das Problem für uns nie klar verständlich und ebenso wenig reproduzierbar war. Schlussendlich haben wir es bis zum jetzigen Zeitpunkt gefixt.
+Das nächste Problem war der Zeitdruck. So reichte es für uns nicht mehr die Websockets nach unseren Vorstellungen umzusetzen. Da wir dabei auf mehr Probleme als gedacht stießen sind die Websockets zum Abgabe Zeitpunkt nicht funktionsfähig. 
+Um die Systemfunktionalität nicht negativ zu beeinflussen haben wir die Websockets auskommentiert. So ist die Plattform ohne Einschränkungen nutzbar.
 
- 
 Was haben wir gelernt?/Fazit
 ==============
  
@@ -183,4 +195,3 @@ Angefangen von der Portal-Idee, über die Anforderungen bis hin zur Umsetzung de
 
 
  
-
