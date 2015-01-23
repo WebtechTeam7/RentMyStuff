@@ -37,12 +37,13 @@ Funktionale Anforderungen
 Nicht funktionale Anforderungen
 -------------------------------
 
- ####1. Technologien
+####1. Technologien
  
  Es werden alle verlangten Technologien genutzt. Weitere Informationen folgen. 
  
 Mockup-Screens
 ==============
+
 ####1 Eigene Einträge
 
 ![Eigene Einträge] (https://github.com/WebtechTeam7/RentMyStuff/blob/master/mockups/2_Eigene_Eintraege_Startseite.PNG)
