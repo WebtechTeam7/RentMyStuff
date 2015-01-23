@@ -1,18 +1,41 @@
 package controllers;
 
-import org.mindrot.jbcrypt.*;
 import java.util.List;
-import play.*;
+import java.util.Observable;
+import java.util.Observer;
+
+import models.Advert;
+import models.Model;
+import models.OurObserver;
+import models.User;
+
+import org.mindrot.jbcrypt.BCrypt;
+
 import play.data.DynamicForm;
 import play.data.Form;
-import play.mvc.*;
-import views.html.*;
-import models.*;
+import play.libs.F.Callback;
+import play.libs.F.Callback0;
+import play.mvc.Controller;
+import play.mvc.Result;
+import play.mvc.WebSocket;
+import views.html.account;
+import views.html.angebote;
+import views.html.fehler;
+import views.html.gesuche;
+import views.html.impressum;
+import views.html.index;
+import views.html.inserat;
+import views.html.kontakt;
+import views.html.login;
+import views.html.map;
+import views.html.registrieren;
+import views.html.reloadAdvert;
+import views.html.searchAdvert;
 
-public class Application extends Controller {
+public class Application extends Controller implements Observer {
 
+	public static WebSocket.Out<String> out1;
 	
-
 	public static User getUserFromSession() {
 		String userCode = "";
 		userCode = session("USER");
@@ -49,14 +72,15 @@ public class Application extends Controller {
 
 		if (isUserInSession()) {
 			User user = getUserFromSession();
-			return ok(index.render(Model.getInstance().getUserAdvertList(getUserFromSession().getUserID()), user));
+			return ok(index.render(
+					Model.getInstance().getUserAdvertList(
+							getUserFromSession().getUserID()), user));
 		} else {
 			return ok(login.render());
 		}
 	}
 
 	public static Result login() {
-		
 		if (isUserInSession()) {
 			session().clear();
 			System.out.println("abmelden hat funktioniert");
@@ -101,49 +125,51 @@ public class Application extends Controller {
 	}
 
 	// Für Ajax
-	
-	public static Result getAngebotList(String category){
-		if(category.equals("")){
+
+	public static Result getAngebotList(String category) {
+		if (category.equals("")) {
 			return ok(reloadAdvert.render(Model.getInstance().getAdvertList()));
 		}
 		List<Advert> list = Model.getInstance().getAdvertList(category);
 		return ok(reloadAdvert.render(list));
 	}
-	
-	public static Result getGesuchList(String category){
+
+	public static Result getGesuchList(String category) {
 		System.out.println(category);
-		if(category.equals("")){
+		if (category.equals("")) {
 			return ok(searchAdvert.render(Model.getInstance().getAdvertList()));
 		}
 		List<Advert> list = Model.getInstance().getAdvertList(category);
 		return ok(searchAdvert.render(list));
 	}
-	
-	
+
 	public static Result registrieren() {
 		return ok(registrieren.render());
 	}
-	
-	public static Result map(String street, String city, String postcode, String country){
+
+	public static Result map(String street, String city, String postcode,
+			String country) {
 		return ok(map.render(street, city, postcode, country));
 	}
 
-
 	public static Result newAdvert(String optradio, String kategorie,
-			String comment, String street, String postcode, String city, String country) {
+			String comment, String street, String postcode, String city,
+			String country) {
 
 		User user = getUserFromSession();
-		Model.getInstance().createAdvert(optradio, kategorie, comment, user, street, postcode, city, country);
-		return ok(index.render(Model.getInstance().getUserAdvertList(
-				user.getUserID()), user));
+		Model.getInstance().createAdvert(optradio, kategorie, comment, user,
+				street, postcode, city, country);
+		return ok(index.render(
+				Model.getInstance().getUserAdvertList(user.getUserID()), user));
 
 	}
 
 	public static Result deleteAdvert(int id, int userId) {
 		Model.getInstance().deleteAdvert(id, userId);
 		User user = getUserFromSession();
-		return ok(index.render(Model.getInstance().getUserAdvertList(
-				getUserFromSession().getUserID()), user));
+		return ok(index.render(
+				Model.getInstance().getUserAdvertList(
+						getUserFromSession().getUserID()), user));
 	}
 
 	public static Result anmelden() {
@@ -160,9 +186,10 @@ public class Application extends Controller {
 				addUserToSession(user);
 
 				System.out.println("anmelden hat funktioniert");
-				
-				return ok(index.render(Model.getInstance().getUserAdvertList(
-						getUserFromSession().getUserID()), user));
+
+				return ok(index.render(
+						Model.getInstance().getUserAdvertList(
+								getUserFromSession().getUserID()), user));
 
 			}
 			System.out.println("Passwort oder Benutzername falsch!");
@@ -171,7 +198,7 @@ public class Application extends Controller {
 
 		return ok(fehler.render());
 	}
-	
+
 	public static Result createUser() {
 
 		DynamicForm dynamicForm = Form.form().bindFromRequest();
@@ -199,13 +226,13 @@ public class Application extends Controller {
 
 					System.out.println("addUser: " + session().get("USER")
 							+ " User from Session");
-					
-					return ok(index
-							.render(Model.getInstance().getUserAdvertList(
 
-									getUserFromSession().getUserID()), user));
-				} 
-				
+					return ok(index.render(Model.getInstance()
+							.getUserAdvertList(
+
+							getUserFromSession().getUserID()), user));
+				}
+
 			}
 			return ok(fehler.render());
 
@@ -215,12 +242,11 @@ public class Application extends Controller {
 
 	}
 
-
-	public static Result account(){
+	public static Result account() {
 		return ok(account.render());
 	}
-	
-	public static Result loeschen(){
+
+	public static Result loeschen() {
 		DynamicForm dynamicForm = Form.form().bindFromRequest();
 
 		String email = dynamicForm.get("email");
@@ -229,9 +255,11 @@ public class Application extends Controller {
 		for (User user : Model.getInstance().getUserList()) {
 			if (email.equals(user.getEmail())
 					&& BCrypt.checkpw(password, user.getPassword())) {
-				Model.getInstance().deleteUser(user.getEmail(), user.getPassword());
+				Model.getInstance().deleteUser(user.getEmail(),
+						user.getPassword());
 				session().clear();
-				System.out.println("Removed following user: " + user.getFullName());
+				System.out.println("Removed following user: "
+						+ user.getFullName());
 				return ok(login.render());
 
 			}
@@ -248,6 +276,40 @@ public class Application extends Controller {
 			return true;
 		}
 
+	}
+
+//	public static WebSocket<String> refresh() {
+//				
+//		return new WebSocket<String>(){
+//
+//			@Override
+//			public void onReady(WebSocket.In<String> in,
+//					final WebSocket.Out<String> out) {
+//				
+//				out1 = out;
+//				in.onMessage(new Callback<String>() {
+//					
+//					public void invoke(String arg0) throws Throwable {
+//						Model.add(new Application());
+//						System.out.println("invoke- Method " + arg0);
+//						out.write(arg0 +  " out.write");
+//					}
+//				});
+//				
+//				in.onClose(new Callback0() {
+//					
+//					public void invoke() throws Throwable {
+//						//Model.delete(new Application());
+//						System.out.println("invoke- Method -->in.onClose Function");			
+//					}
+//				});				
+//			} 
+//		};
+//	}
+	
+	public void update(Observable observable, Object object) {
+//		Advert advert = (Advert) object;
+//		out1.write("new Advert");
 	}
 
 }

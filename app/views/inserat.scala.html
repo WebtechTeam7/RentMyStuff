@@ -12,6 +12,7 @@
 <link rel="stylesheet" href=@routes.Assets.at("stylesheets/main.css")>
 <script type="text/javascript">
 	var select = "";
+	//var webSocket;
 	$(document).ready(function() {
 		$('#speichern').attr("disabled", true);
 	});
@@ -26,6 +27,18 @@
 			$('#speichern').attr("disabled", true);
 		}
 	}
+	
+	/*$(function(){
+		var WS = window["MozWebSocket"] ? MozWebSocket : WebSocket;
+		
+		//das "at" vor routes wurde entfernt da sonst ein Fehler beim Compilieren auftritt
+		webSocket = new WS("routes.Application.refresh().webSocketURL(request)");
+	
+	})
+	function sendAdvert(){
+		webSocket.send("new Advert");
+	}*/
+	
 </script>
 
 </head>
@@ -79,7 +92,7 @@
 						</div>
 						<div class="form-group">
 							<button type="button" class="btn btn-default" onClick="history.back()">Abbrechen</button>
-							<button type="submit" class="btn btn-warning" id="speichern" onsubmit="window.close(); alert('Ihre Daten wurden gespeichert');">Speichern</button></div>
+							<button type="Submit" class="btn btn-warning" id="speichern" onclick="sendAdvert();" onsubmit="window.close(); alert('Ihre Daten wurden gespeichert');">Speichern</button></div>
 						</div>
 				</form>
 			</div>

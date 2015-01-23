@@ -14,7 +14,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import play.db.DB;
 
-public class Model {
+public class Model extends OurObserver {
 
 	private static Model instance;
 	private boolean dbExist;
@@ -359,6 +359,12 @@ public class Model {
 			System.out.println("Fehler beim erstellen");
 			e.printStackTrace();
 		}
+
+		// if(advert!=null){
+		// notify(advert);
+		// } else {
+		// System.out.println("Advert == null in createAdvert-Method");
+		// }
 	}
 
 	public static void setAdvertList(List<Advert> advertList) {
@@ -368,8 +374,8 @@ public class Model {
 	private void advertAddress(int addressID, int advertID) throws SQLException {
 		String statement = "INSERT INTO AdvertAddress(Address, Advert)"
 				+ "VALUES(?,?)";
-		PreparedStatement preparedStatement = connection
-				.prepareStatement(statement);
+		PreparedStatement preparedStatement;
+		preparedStatement = connection.prepareStatement(statement);
 		preparedStatement.setInt(1, addressID);
 		preparedStatement.setInt(2, advertID);
 		preparedStatement.executeUpdate();
@@ -380,6 +386,7 @@ public class Model {
 			String country) throws SQLException {
 		String statement = "INSERT INTO ADDRESS (Street, Postcode, City, Country)"
 				+ "VALUES(?,?,?,?)";
+
 		PreparedStatement preparedStatement = connection
 				.prepareStatement(statement);
 		preparedStatement.setString(1, street);
@@ -397,6 +404,7 @@ public class Model {
 			id = resultset.getInt("AddressID");
 			return id;
 		}
+
 		return 0;
 
 	}
@@ -435,7 +443,6 @@ public class Model {
 			return id;
 		}
 		return 0;
-
 	}
 
 	/**
